@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delete Account</title>
+ <style>
+      body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+      color: white;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    label {
+      margin-bottom: 10px;
+    }
+
+    input[type="text"] {
+      margin-bottom: 20px;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      outline: none;
+    }
+
+    input[type="submit"] {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      background-color: #0072ff;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      outline: none;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #00c6ff;
+    }
+
+    input[type="submit"]:active {
+      transform: scale(0.98);
+    }
+
+ </style>
+</head>
+<body>
+  
+  <form id="deleteForm">
+    <h1>Delete Account</h1>
+    <h5> Payment Details</h5>
+    <label for="id">Account ID:</label>
+    <input type="text" name="id" id="id" required placeholder="ID e.g 656ded5b141aa3060527545f">
+    <br>
+    <button type="submit">Delete Account</button>
+  </form>
+
+  <script>
+    document.getElementById('deleteForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent the form from being submitted normally
+
+      const id = document.getElementById('id').value; // Get the ID from the input field
+
+      // Send a DELETE request to the server
+      fetch('/Account/Delete_Payment_accounts_deatils/' + id, {
+        method: 'DELETE',
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.message) {
+          alert(data.message); // Show a message to the user
+        }
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+    });
+  </script>
+
+</body>
+</html>

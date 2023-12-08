@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account</title>
+</head>
+<style>
+      body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+      color: white;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    label {
+      margin-bottom: 10px;
+    }
+
+    input[type="text"] {
+      margin-bottom: 20px;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      outline: none;
+    }
+
+    input[type="submit"] {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      background-color: #0072ff;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      outline: none;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #00c6ff;
+    }
+
+    input[type="submit"]:active {
+      transform: scale(0.98);
+    }
+
+</style>
+
+<body>
+  <form action="/Account/upload-image" method="POST" enctype="multipart/form-data">
+    <h1>Upload the image</h1>
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name" required>
+    <br>
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email" required>
+    <br>
+    <label for="phone">Phone:</label>
+    <input type="number" name="phone" id="phone" required>
+    <br>
+    <label for="description">Description:</label>
+    <textarea name="description" id="description" rows="5"></textarea>
+    <br>
+    <label for="accountBuyCheck">Account Buy Check:</label>
+    <input type="text" name="accountBuyCheck" id="accountBuyCheck">
+    <br>
+    <div>
+      <label for="accountBuyCheck"> Select Payment Method:</label>
+      <select name="paymentMethod" id="paymentMethod" required>
+        <option value="jazzCash">jazzcsh</option>
+        <option value="crypto">crypto</option>
+        <option value="bankAccount">bankAccount</option>
+
+        <option value="easyPaisa">jazzcsh</option>   
+      </select>
+    </div>
+
+    <label for="earningMoneyCheck">Earning Money Check:</label>
+    <input type="text" name="earningMoneyCheck" id="earningMoneyCheck">
+    <br>
+    <label for="image">Image:</label>
+    <input type="file" name="image" id="image">
+    <br>
+    <button type="submit">Send</button>
+  </form>
+</body>
+
+</html>

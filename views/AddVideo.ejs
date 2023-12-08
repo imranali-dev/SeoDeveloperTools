@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Video</title>
+    <style>
+      h2{
+        text-align: center;
+        font-size: 2rem;
+        text-transform: uppercase;
+        margin-top: 5rem;
+        color: black;
+        letter-spacing: 0.2rem;
+        font-weight: 600;
+      }
+      
+  form {
+      display: flex;
+      flex-direction: column;
+      width: 300px;
+      margin: 20px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      line-height: 2rem;
+      outline: none;
+      transition: 0.3s ease-in-out;
+      cursor: pointer;
+    }
+    form:hover {
+      box-shadow: rgba(238, 233, 233, 0.19) 0px 10px ,  rgba(219, 212, 212, 0.498) 0px 6px 6px;
+    }
+    form select{
+      padding: 0.5rem 1rem;
+      border-radius: 0.2rem;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+    textarea , select:hover{
+      border-color: black;
+    }
+    
+    label {
+      display: block;
+      font-size: 1rem;
+      text-transform: capitalize;
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: black;
+    }
+    select , textarea{
+      border: 2px solid rgba(0, 0, 0, 0.324);
+      transition: 0.3s ease-in-out;
+    }
+    textarea{
+      height: 8rem;
+      width: 100%;
+      resize: none;
+    }
+    
+    input[type="text"] {
+      width: 100%;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+    
+    button[type="submit"] {
+      margin-top: 10px;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+      background-color: #007bff;
+      color: #fff;
+      transition: 0.3s ease-in-out;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+   
+    
+    input[type="text"]:focus {
+      outline: none;
+      border: 2px solid #007bff ;
+    }
+    
+    button[type="submit"]:hover {
+      background-color: #0069d9;
+    }
+    </style>
+</head>
+<body>
+
+<h2>Add Video</h2>
+<form method="POST" action="/social/social-links/addVideo/videos">
+  <div>
+    <label for="videoId">Video ID:</label>
+    <input type="text" name="videoId" id="videoId" required>
+  </div>
+  <div>
+    <label for="videoUrl">Video URL:</label>
+    <input type="text" name="videoUrl" id="videoUrl" required>
+  </div>
+  <div>
+    <label for="socialMedia"> Social Media:</label>
+    <select name="socialMedia" id="socialMedia" required>
+      <option value="Youtube">Youtube</option>
+      
+    </select>
+  </div>
+  <!-- <div>
+    <label for="videoTitle">Video Title:</label>
+    <input type="text" name="videoTitle" id="videoTitle" required>
+  </div> -->
+
+  <!-- <div>
+    <label for="videoDescription">Video Description:</label>
+    <textarea name="videoDescription" id="videoDescription" required></textarea>
+  </div> -->
+  <button type="submit">Add Video</button>
+</form>
+
+</body>
+
+</html>

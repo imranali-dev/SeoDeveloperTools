@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>ViewDetails</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap');
+
+input {
+caret-color: red;
+}
+
+body {
+background: #ecf0f3;
+display: flex;
+align-items: center;
+text-align: center;
+justify-content: center;
+place-items: center;
+place-items: center;
+font-family: poppins;
+}
+
+.container {
+position: relative;
+width: clamp(250px , 100% , 600px);
+height: auto;
+margin-top: 20px;
+border-radius: 20px;
+padding: 10px;
+box-sizing: border-box;
+background: #ecf0f3;
+box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
+}
+.inputs {
+text-align: left;
+margin-top: 10px;
+}
+
+label, input, button , textarea {
+display: block;
+width: 100%;
+padding: 0;
+border: none;
+outline: none;
+box-sizing: border-box;
+}
+
+label {
+margin-bottom: 4px;
+font-size: 15px;
+font-weight: 550;
+letter-spacing: 0.5px;
+}
+
+label:nth-of-type(2) {
+margin-top: 12px;
+}
+
+input::placeholder {
+color: gray;
+}
+
+input , textarea {
+background: #ecf0f3;
+padding: 10px;
+padding-left: 20px;
+height: 50px;
+font-size: 14px;
+border-radius: 50px;
+box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
+}
+
+.small{
+  display: flex;
+  margin-top:30px
+}
+.inout{
+display: flex;
+flex-direction: column;
+}
+textarea{
+  height: 150px;
+border-radius: 2px;
+padding-left: 10px;
+resize: none;
+}
+textarea::placeholder{
+  position:relative ;
+  top:20px;
+  left:10px
+}
+.last{
+margin-top: 20px;
+}
+button {
+color: white;
+margin-top: 20px;
+background: #1DA1F2;
+height: 40px;
+border-radius: 20px;
+cursor: pointer;
+font-weight: 900;
+box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
+transition: 0.5s;
+}
+
+button:hover {
+box-shadow: none;
+}
+
+  </style>
+</head>
+
+<body>
+  <form id="createDetailsForm">
+  <div class="container">
+    <div class="inputs">
+      <label>Account Name</label>
+      <input type="text" id="accountFullname" name="accountFullname" required placeholder="Enter the account fullname"><br/>
+      <label>Account Description</label>
+      <textarea type="text" id="descFull" name="descFull" required  placeholder="Account Description"> </textarea>
+  
+<div class="small">
+  <div class="inout">
+
+    <label>Site Age</label>
+    <input type="number" id="siteAge" name="siteAge"  placeholder="Site Age" />
+  </div>
+  <div class="inout">
+    
+    <label>Monthly Profit</label>
+    <input type="number" id="monthlyProfit" placeholder="Monthly Profit" />
+  </div>
+  <div class="inout">
+    
+    <label>Profit Margin</label>
+    <input type="number" id="profitMargin" name="profitMargin" placeholder="Profit Margin" />
+  </div>
+  </div>
+    <div class="small">
+      <div class="inout">
+        <label>Page views</label>
+        <input type="number" id="pageViews" name="pageViews" placeholder="Page views" />
+    
+      </div>
+    <div class="inout">
+      <label>Profit Multiple</label>
+      <input type="text" id="profitMultiple" name="profitMultiple" placeholder="Profit Multiple" />
+
+    </div>
+    <div class="inout">
+      <label>Revenue Multiple</label>
+      <input type="text" id="revenueMultiple" name="revenueMultiple" placeholder="Revenue Multiple" />
+
+    </div>
+</div>
+    </div>
+    <div class="last">
+      <label >Performance overview Des</label>
+      <textarea type="text" id="performanceOverviewDetails" name="performanceOverviewDetails" placeholder="Account Description"> </textarea>
+      <label >Performance overview img</label>
+      <input type="url" placeholder="Enter Image Url"  id="performanceOverviewimg" name="performanceOverviewimg"  accept="image/gif, image/jpeg, image/png">
+      <label >More Detalis Des</label>
+      <textarea type="text" id="moreDetailsDetails" name="moreDetailsDetails" placeholder="Account Description"> </textarea>
+      <label >More Detalis img</label>
+      <input type="url" placeholder="Enter Image Url"id="moreDetailsimg" name="moreDetailsimg" accept="image/gif, image/jpeg, image/png">
+      <label >Account Analytics Des</label>
+      <textarea type="text" id="accountAnalyticsDetails" name="accountAnalyticsDetails" placeholder="Account Description"> </textarea>
+      <label >Account Analytics img</label>
+      <input type="url" placeholder="Enter Image Url"  id="accountAnalyticsimg" name="accountAnalyticsimg" n accept="image/gif, image/jpeg, image/png">
+      <label >Monthly Reviwnew Desc</label>
+      <textarea type="text" id="monthlyrevenueDetails" name="monthlyrevenueDetails" placeholder="Account Description"> </textarea>
+      <label >Monthly Reviwnew img</label>
+      <input type="url" placeholder="Enter Image Url"id="monthlyrevenueimg" name="monthlyrevenueimg" accept="image/gif, image/jpeg, image/png">
+      <label >Google Analytics Desc</label>
+      <textarea type="text" id="googleAnalyticsDetails" name="googleAnalyticsDetails"  placeholder="Account Description"> </textarea>
+      <label >Google Analytics img</label>
+      <input type="url" placeholder="Enter Image Url" id="googleAnalyticsimg" name="googleAnalyticsimg" accept="image/gif, image/jpeg, image/png">
+    </div>
+    <button type="submit">Submit Form</button>
+  </div>
+  </form>
+</body>
+<script>
+  const createDetailsForm = document.getElementById('createDetailsForm');
+  createDetailsForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const accountFullname = document.getElementById('accountFullname').value;
+    const descFull = document.getElementById('descFull').value;
+    const siteAge = document.getElementById('siteAge').value;
+    const monthlyProfit = document.getElementById('monthlyProfit').value;
+    const profitMargin = document.getElementById('profitMargin').value;
+    const pageViews = document.getElementById('pageViews').value;
+    const profitMultiple = document.getElementById('profitMultiple').value;
+    const revenueMultiple = document.getElementById('revenueMultiple').value;
+    const performanceOverviewimg = document.getElementById('performanceOverviewimg').value;
+    const moreDetailsimg = document.getElementById('moreDetailsimg').value;
+    const monthlyrevenueimg = document.getElementById('monthlyrevenueimg').value;
+    const accountAnalyticsimg = document.getElementById('accountAnalyticsimg').value;
+    const googleAnalyticsimg = document.getElementById('googleAnalyticsimg').value;
+    const moreDetailsDetails = document.getElementById('moreDetailsDetails').value;
+    const monthlyrevenueDetails = document.getElementById('monthlyrevenueDetails').value;
+    const accountAnalyticsDetails = document.getElementById('accountAnalyticsDetails').value;
+    const googleAnalyticsDetails = document.getElementById('googleAnalyticsDetails').value;
+    const performanceOverviewDetails = document.getElementById('performanceOverviewDetails').value;
+    
+    const data = {
+      accountFullname: accountFullname,
+      descFull: descFull,
+      siteAge: siteAge,
+      monthlyProfit: monthlyProfit,
+      profitMargin: profitMargin,
+      pageViews: pageViews,
+      profitMultiple: profitMultiple,
+      revenueMultiple: revenueMultiple,
+      performanceOverviewimg: performanceOverviewimg,
+      moreDetailsimg: moreDetailsimg,
+      monthlyrevenueimg: monthlyrevenueimg,
+      accountAnalyticsimg: accountAnalyticsimg,
+      googleAnalyticsimg: googleAnalyticsimg,
+      moreDetailsDetails: moreDetailsDetails,
+      monthlyrevenueDetails: monthlyrevenueDetails,
+      accountAnalyticsDetails: accountAnalyticsDetails,
+      googleAnalyticsDetails: googleAnalyticsDetails,
+      performanceOverviewDetails:performanceOverviewDetails,
+    };
+
+    fetch('http://localhost:4000/BuyAccounts/create_details_buy_accountsss', {
+      
+      method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+      .then(response => {
+        if (!response.ok) {
+     console.error('Server Error:', response.status, response.statusText);
+     throw new Error('Network response was not ok');
+
+   }
+   return response.json();
+      })
+      .then(data => {
+        console.log(data);
+        alert("Are You Sure You Form Have Been Submit??");
+        createDetailsForm.reset()
+        if (data.message) {
+          alert(data.message);
+        }
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        alert('Error occurred while processing your request');
+      });
+  });
+
+</script>

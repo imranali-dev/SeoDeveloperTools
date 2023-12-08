@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sell </title>
+    <style>
+        body {
+            margin: 0%;
+            padding: 0%;
+            box-sizing: border-box;
+            overflow: scroll;
+        }
+
+        h2 {
+            width: 100%;
+            text-align: center;
+            padding-top: 1rem !important;
+            text-transform: capitalize;
+            font-size: 2rem;
+            letter-spacing: 0.1rem;
+            /* background-color: red; */
+        }
+
+        input {
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 2px solid black;
+            border-radius: 20px;
+            margin-top: 1rem;
+            padding: 0.7rem 3rem 0.7rem 1rem;
+            width: 300px;
+            outline: none;
+            transition: 0.3s ease-in-out;
+        }
+
+        input[type="search"]::placeholder {
+            font-size: 0.9rem;
+        }
+
+        input:focus {
+            border-color: rgba(0, 0, 0, 0.339);
+        }
+
+
+
+        .zigzag {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+
+        .zigzag th,
+        .zigzag td {
+            border: 1px solid #dddddd;
+            text-align: center;
+            padding: 8px;
+        }
+
+
+        .table-row:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+
+        @media (width < 900px) {
+            .zigzag {
+                display: block;
+                width: 100%;
+                overflow-x: auto;
+                background-color: #F1F1F1;
+                margin-top: 5rem;
+            }
+
+            .zigzag thead,
+            .zigzag tbody,
+            .zigzag th,
+            .zigzag td,
+            .zigzag tr {
+                display: block;
+            }
+
+            .zigzag thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
+            .zigzag tr {
+                margin-bottom: 15px;
+            }
+
+            .zigzag td {
+                border: none;
+                border-bottom: 1px solid #ddd;
+                position: relative;
+                padding-left: 40%;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+            }
+
+            .zigzag td:before {
+                position: absolute;
+                left: 6px;
+                padding-right: 10px;
+                white-space: nowrap;
+                content: attr(data-label);
+                font-weight: bold;
+
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <a href="/admin/collection-ensureIndex/kira-yagami-082561-lira-Integrate-page-of-admin-931249/success" style="text-align: center; text-decoration: none; position: relative;
+    left: 47%;" role="button">Go tO Home</a>
+    <h2>sell Form data All user</h2>
+    <input type="search" placeholder="Search User" id="userSearch" oninput="searchUsers()">
+    <h1 style="text-align: center; margin-top: 2rem;"></h1>
+    <table class="zigzag" id="userTable">
+        <thead>
+            <br>
+            <tr>
+            <th class="header">User Email</th>
+            <th class="header">Account Name</th>
+            <th class="header">Account Type</th>
+            <th class="header">Account Age</th>
+            <th class="header">Account Url</th>
+            <th class="header">Account Desccrption</th>
+            <th class="header">Monetization</th>
+            <th class="header">Account Image</th>
+            <th class="header">Number</th>
+            <th class="header">Telegram Username</th>
+            <th class="header">Payment Method</th>
+            <th class="header">information submit time</th>
+            </tr>
+        </thead>
+        <% sells.forEach(function(user) { %>
+            <tr class="table-row">
+                <td class="col col-2" data-label="Acc Name">
+                    <%= user.accountName %>
+                </td>
+                <td class="col col-3" data-label="Acc Type">
+                    <%= user.accountType %>
+                </td>
+                <td class="col col-4" data-label="Acc Age">
+                    <%= user.accountAge %>
+                </td>
+                <td class="col col-5" data-label="Acc Url">
+                    <%= user.accountUrl %>
+                </td>
+                <td class="col col-6" data-label="Acc desc">
+                    <%= user.accountDesc %>
+                </td>
+                <td class="col col-7" data-label="Acc Monetization">
+                    <%= user.monetizationEnabled %>
+                </td>
+                <td class="col col-8" data-label="Acc Img">
+                    <%= user.accountImage %>
+                </td>
+                <td class="col col-11" data-label="Payment Method">
+                    <%= user.paymentMethod %>
+                </td>
+                <td class="col col-1" data-label="User Email">
+                    <%= user.email %>
+                </td>
+                <td class="col col-9" data-label="User Cont No.">
+                    <%= user.contactNumber %>
+                </td>
+                <td class="col col-10" data-label="User Telegram">
+                    <%= user.telegramUsername %>
+                </td>
+
+                <td class="col col-12" data-label="Submit form Time">
+                    <%= user.createdAt %>
+                </td>
+            </tr>
+            <% }); %>
+    </table>
+    <script>
+        function searchUsers() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("userSearch");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("userTable");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 0; i < tr.length; i++) {
+                // Assuming the user's first name is in the first cell, last name in the second, and email in the third
+                tdFirstName = tr[i].getElementsByTagName("td")[0];
+                tdLastName = tr[i].getElementsByTagName("td")[1];
+                tdEmail = tr[i].getElementsByTagName("td")[9]; // Assuming email is in the 10th cell
+
+                if (tdFirstName || tdLastName || tdEmail) {
+                    txtValueFirstName = tdFirstName.textContent || tdFirstName.innerText;
+                    txtValueLastName = tdLastName.textContent || tdLastName.innerText;
+                    txtValueEmail = tdEmail.textContent || tdEmail.innerText;
+
+                    // Check if the input matches any part of first name, last name, or email
+                    if (
+                        txtValueFirstName.toUpperCase().indexOf(filter) > -1 ||
+                        txtValueLastName.toUpperCase().indexOf(filter) > -1 ||
+                        txtValueEmail.toUpperCase().indexOf(filter) > -1
+                    ) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+    <script>
+        // Count the total number of rows in the table
+        var totalAccounts = document.querySelectorAll('.zigzag').length;
+
+        // Update the content of the h1 element with the total count
+        document.querySelector('h1').innerText = 'Total Users from Submit : ' + totalAccounts;
+    </script>
+
+</body>
+
+</html>

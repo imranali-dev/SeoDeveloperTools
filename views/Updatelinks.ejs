@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update Social </title>
+  <style>
+    h2 {
+      text-align: center;
+      font-size: 2rem;
+      text-transform: uppercase;
+      margin-top: 5rem;
+      color: black;
+      letter-spacing: 0.2rem;
+      font-weight: 600;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      width: 300px;
+      margin: 20px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      outline: none;
+      transition: 0.3s ease-in-out;
+      cursor: pointer;
+      line-height: 2rem;
+    }
+
+    form:hover {
+      box-shadow: rgba(238, 233, 233, 0.19) 0px 10px, rgba(219, 212, 212, 0.498) 0px 6px 6px;
+    }
+
+    form select {
+      padding: 0.5rem 1rem;
+      border-radius: 0.2rem;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    textarea,
+    select:hover {
+      border-color: black;
+    }
+
+    label {
+      display: block;
+      font-size: 1rem;
+      text-transform: capitalize;
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: black;
+    }
+
+    select,
+    textarea {
+      border: 2px solid rgba(0, 0, 0, 0.324);
+      transition: 0.3s ease-in-out;
+    }
+
+    textarea {
+      height: 8rem;
+      width: 100%;
+      resize: none;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    button[type="submit"] {
+      margin-top: 10px;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+      background-color: #007bff;
+      color: #fff;
+      transition: 0.3s ease-in-out;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+
+    input[type="text"]:focus {
+      outline: none;
+      border: 2px solid #007bff;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #0069d9;
+    }
+  </style>
+  <style>
+    /* Box Styles */
+    .custom-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 300px;
+      height: 150px;
+      border: 2px solid transparent;
+      border-radius: 24px;
+      padding: 20px;
+      background: var(--bard-color-zero-state-card-background);
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
+    }
+
+    .custom-box-text {
+      font-size: 18px;
+      font-weight: 600;
+      color: transparent;
+      background: linear-gradient(to top,
+          #7f7dd1 0%,
+          #548dd9 100%);
+      background-clip: text;
+      padding: 0;
+      margin: 0;
+      text-align: center;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <form id="updateForm">
+    <label for="videoIdInput">Enter Video ID to Update:</label>
+    <input type="number" id="videoIdInput" name="videoId" placeholder="Enter video ID">
+    <label for="socialMedia">Social Media:</label>
+    <select name="socialMedia" id="socialMedia">
+       <option value="Youtube">Youtube</option>
+      <!-- <option value="Facebook">Facebook</option>
+      <option value="Instagram">Instagram</option>
+      <option value="Twitter">Twitter</option>
+      <option value="TikTok">TikTok</option>
+      <option value="TikTok">Other</option> -->
+    </select>
+    <!-- <label for="videoTitle">Video Title:</label> -->
+    <!-- <input type="text" name="videoTitle" id="videoTitle" placeholder="Enter video title"> -->
+
+    <label for="videoUrl">Video URL:</label>    <input type="text" name="videoUrl" id="videoUrl" placeholder="Enter video URL">
+
+    <!-- <label for="videoDescription">Video Description:</label> <textarea name="videoDescription" id="videoDescription" placeholder="Enter video description"></textarea> -->
+
+    <button type="submit">Update Social Links</button>
+  </form>
+  <script>
+    document.getElementById('updateForm').addEventListener('submit', async function (event) {
+      event.preventDefault();
+      const videoId = document.getElementById('videoIdInput').value;
+      const socialMedia = document.getElementById('socialMedia').value;
+      // const videoTitle = document.getElementById('videoTitle').value;
+      const videoUrl = document.getElementById('videoUrl').value;
+      // const videoDescription = document.getElementById('videoDescription').value;
+
+      const updatedFields = {
+        socialMedia: socialMedia,
+        // title: videoTitle,
+        url: videoUrl,
+        // description: videoDescription
+      };
+
+      try {
+        const response = await fetch(`/social/social-links/updateSocialLinks/videos/${videoId}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(updatedFields)
+        });
+
+        if (response.ok) {
+          window.alert('Video updated successfully'); // Show a dialog box
+          window.location.reload(); // Refresh the page
+        } else {
+          window.alert('Error updating video'); // Show a dialog box for error
+        }
+      } catch (error) {
+        window.alert('Error updating video: ' + error.message); // Show a dialog box with the error message
+      }
+    });
+
+  </script>
+</body>
+
+
+</html>

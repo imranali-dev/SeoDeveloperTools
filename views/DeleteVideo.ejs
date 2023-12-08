@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete  vodeo</title>
+    <style>
+  
+      h1{
+        text-align: center;
+        font-size: 2rem;
+        text-transform: uppercase;
+        margin-top: 5rem;
+        color: black;
+        letter-spacing: 0.2rem;
+        font-weight: 600;
+      }
+      
+  form {
+      display: flex;
+      flex-direction: column;
+      width: 300px;
+      margin: 20px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      line-height: 1rem;
+      outline: none;
+      transition: 0.3s ease-in-out;
+      cursor: pointer;
+    }
+    form:hover {
+      box-shadow: rgba(238, 233, 233, 0.19) 0px 10px ,  rgba(219, 212, 212, 0.498) 0px 6px 6px;
+    }
+    form select{
+      padding: 0.5rem 1rem;
+      border-radius: 0.2rem;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+    textarea , select:hover{
+      border-color: black;
+    }
+    
+    label {
+      display: block;
+      font-size: 1rem;
+      text-transform: capitalize;
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: black;
+    }
+    select , textarea{
+      border: 2px solid rgba(0, 0, 0, 0.324);
+      transition: 0.3s ease-in-out;
+    }
+    textarea{
+      height: 8rem;
+      width: 100%;
+      resize: none;
+    }
+    
+    input[type="text"] {
+      width: 100%;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+    
+    input[type="submit"] {
+      margin-top: 10px;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+      background-color: #007bff;
+      color: #fff;
+      transition: 0.3s ease-in-out;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+   
+    
+    input[type="text"]:focus {
+      outline: none;
+      border: 2px solid #007bff ;
+    }
+    
+    input[type="submit"]:hover {
+      background-color: #0069d9;
+    }
+    </style>
+</head>
+<body>
+
+  <form id="deleteForm">
+    <label for="videoId">Enter Video ID to Delete Video:</label><br>
+    <input type="text" id="videoId" name="videoId"><br><br>
+    <input type="submit" value="Delete Video">
+  </form>
+<script>
+  document.getElementById('deleteForm').addEventListener('submit', async function (event) {
+    event.preventDefault();
+    const videoId = document.getElementById('videoId').value;
+
+    // Show confirmation dialog
+    const isConfirmed = window.confirm("Are You Sure You Want Delete This Video ?");
+
+    if (isConfirmed) {
+        try {
+            const response = await fetch(`/social/social-links/deleteVideo/videos/${videoId}`, {
+                method: 'DELETE'
+            });
+
+            if (response.ok) {
+                console.log('Video Deleted Successfully');
+                // Refresh the page or perform other actions
+                window.location.reload();
+            } else {
+                console.error('Error Deleting Video');
+            }
+        } catch (error) {
+            console.error('Error Deleting Video:', error);
+        }
+    } else {
+        console.log('Deletion Canceled By The User');
+    }
+});
+</script>
+
+  
+  </body>
+  </html>

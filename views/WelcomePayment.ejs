@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Account Details</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+      margin-top: 10rem;
+    }
+
+    h2 {
+      /* margin-bottom: 50px; */
+      color: black;
+    }
+
+    button {
+      font-size: 1em;
+      padding: 10px 20px;
+      color: black;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin: 10px;
+      outline: none;
+      transition: 300ms ease;
+      background-color: transparent;
+    }
+
+    button:hover {
+      background-color: #F1F1F1;
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+  </style>
+</head>
+<body>
+  <h2>Payment Account Details</h2>
+
+  <button onclick="location.href='/Account/All_Payment_accounts_deatils'" style="display: none;" >View All Payment Details</button>
+  <button onclick="location.href='/Account/Delete_the_Payment_deatails'"  style="display: none;">Delete Payment Details</button>
+  <button onclick="location.href='/Account/Create_Payment_accounts_deatils'" style="display: none;">Create Payment Details</button>
+  <button onclick="location.href='/Account/accounts'" >View Account Details</button>
+</body>
+</html>

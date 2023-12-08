@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update Buy Record</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap');
+
+    input {
+      caret-color: red;
+    }
+
+    body {
+      background: #ecf0f3;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+      place-items: center;
+      place-items: center;
+      font-family: poppins;
+    }
+
+    .container {
+      position: relative;
+      width: clamp(250px, 100%, 600px);
+      height: auto;
+      margin-top: 20px;
+      border-radius: 20px;
+      padding: 10px;
+      box-sizing: border-box;
+      background: #ecf0f3;
+      box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
+    }
+
+    .inputs {
+      text-align: left;
+      margin-top: 10px;
+    }
+
+    label,
+    input,
+    button,
+    textarea {
+      display: block;
+      width: 100%;
+      padding: 0;
+      border: none;
+      outline: none;
+      box-sizing: border-box;
+    }
+
+    label {
+      margin-bottom: 4px;
+      font-size: 15px;
+      font-weight: 550;
+      letter-spacing: 0.5px;
+    }
+
+    label:nth-of-type(2) {
+      margin-top: 12px;
+    }
+
+    input::placeholder {
+      color: gray;
+    }
+
+    input,
+    textarea {
+      background: #ecf0f3;
+      padding: 10px;
+      padding-left: 20px;
+      height: 50px;
+      font-size: 14px;
+      border-radius: 50px;
+      box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
+    }
+
+    .small {
+      display: flex;
+      margin-top: 30px
+    }
+
+    .inout {
+      display: flex;
+      flex-direction: column;
+    }
+
+    textarea {
+      height: 150px;
+      border-radius: 2px;
+      padding-left: 10px;
+      resize: none;
+    }
+
+    textarea::placeholder {
+      position: relative;
+      top: 20px;
+      left: 10px
+    }
+
+    .last {
+      margin-top: 20px;
+    }
+
+    button {
+      color: white;
+      margin-top: 20px;
+      background: #1DA1F2;
+      height: 40px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 900;
+      box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
+      transition: 0.5s;
+    }
+
+    button:hover {
+      box-shadow: none;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- <form id="updateForm" action="/buyandsell/update-buy-sells/:serialNo" method="PUT"> -->
+
+  <form id="updateForm">
+    <div class="container">
+      <h2>Add To Sell and Buy Page</h2>
+      <div class="inputs">
+        <label for="serialNo">Serial No:</label>
+        <input type="number" name="serialNo" id="serialNo" placeholder="Enter Serial No: Must Be Unique" required>
+        <label for="earningPlatforms">Earning Platforms:</label>
+        <input type="text" name="earningPlatforms" id="earningPlatforms" placeholder="Enter EarningPlatforms" required>
+        <label for="accPrice">Account Price:</label>
+        <input type="text" name="aboutThisAccount[accPrice]" id="accPrice" placeholder="Enter Account Price" required>
+        <label for="accName">Account Name:</label>
+        <input type="text" name="aboutThisAccount[accName]" id="accName" placeholder="Enter Account Name" required>
+        <label for="accountUrl">Account URL:</label>
+        <input type="url" name="aboutThisAccount[accountUrl]" id="accountUrl" placeholder="Enter Account URL" required>
+        <label for="accountAge">Account Age:</label>
+        <input type="number" name="aboutThisAccount[accountAge]" id="accountAge" placeholder="Enter Account Age">
+        <label>Account Name</label>
+        <input type="text" id="accountFullname" name="accountFullname" required
+          placeholder="Enter the account fullname"><br />
+        <label>Account Description</label>
+        <textarea type="text" id="descFull" name="descFull" required placeholder="Account Description"> </textarea>
+        <div class="small">
+          <div class="inout">
+            <label>Site Age</label>
+            <input type="number" id="siteAge" name="siteAge" placeholder="Site Age" />
+          </div>
+          <div class="inout">
+            <label>Monthly Profit</label>
+            <input type="number" id="monthlyProfit" placeholder="Monthly Profit" />
+          </div>
+          <div class="inout">
+
+            <label>Profit Margin</label>
+            <input type="number" id="profitMargin" name="profitMargin" placeholder="Profit Margin" />
+          </div>
+        </div>
+        <div class="small">
+          <div class="inout">
+            <label>Page views</label>
+            <input type="number" id="pageViews" name="pageViews" placeholder="Page views" />
+          </div>
+          <div class="inout">
+            <label>Profit Multiple</label>
+            <input type="text" id="profitMultiple" name="profitMultiple" placeholder="Profit Multiple" />
+          </div>
+          <div class="inout">
+            <label>Revenue Multiple</label>
+            <input type="text" id="revenueMultiple" name="revenueMultiple" placeholder="Revenue Multiple" />
+
+          </div>
+        </div>
+      </div>
+      <div class="last">
+        <label>Performance overview Des</label>
+        <textarea type="text" id="performanceOverviewDetails" name="performanceOverviewDetails"
+          placeholder="Account Description"> </textarea>
+        <label>Performance overview img</label>
+        <input type="url" placeholder="Enter Image Url" id="performanceOverviewimg" name="performanceOverviewimg"
+          accept="image/gif, image/jpeg, image/png">
+        <label>More Detalis Des</label>
+        <textarea type="text" id="moreDetailsDetails" name="moreDetailsDetails"
+          placeholder="Account Description"> </textarea>
+        <label>More Detalis img</label>
+        <input type="url" placeholder="Enter Image Url" id="moreDetailsimg" name="moreDetailsimg"
+          accept="image/gif, image/jpeg, image/png">
+        <label>Account Analytics Des</label>
+        <textarea type="text" id="accountAnalyticsDetails" name="accountAnalyticsDetails"
+          placeholder="Account Description"> </textarea>
+        <label>Account Analytics img</label>
+        <input type="url" placeholder="Enter Image Url" id="accountAnalyticsimg" name="accountAnalyticsimg" n
+          accept="image/gif, image/jpeg, image/png">
+        <label>Monthly Reviwnew Desc</label>
+        <textarea type="text" id="monthlyrevenueDetails" name="monthlyrevenueDetails"
+          placeholder="Account Description"> </textarea>
+        <label>Monthly Reviwnew img</label>
+        <input type="url" placeholder="Enter Image Url" id="monthlyrevenueimg" name="monthlyrevenueimg"
+          accept="image/gif, image/jpeg, image/png">
+        <label>Google Analytics Desc</label>
+        <textarea type="text" id="googleAnalyticsDetails" name="googleAnalyticsDetails"
+          placeholder="Account Description"> </textarea>
+        <label>Google Analytics img</label>
+        <input type="url" placeholder="Enter Image Url" id="googleAnalyticsimg" name="googleAnalyticsimg"
+          accept="image/gif, image/jpeg, image/png">
+      </div>
+      <button type="submit">Submit Form</button>
+    </div>
+  </form>
+
+
+<script>
+  document.getElementById('updateForm').addEventListener('submit', function (event) {
+  event.preventDefault();
+
+  const data = {
+    serialNo: parseInt(document.getElementById('serialNo').value),
+    earningPlatforms: document.getElementById('earningPlatforms').value,
+    aboutThisAccount: {
+      accPrice: document.getElementById('accPrice').value,
+      accName: document.getElementById('accName').value,
+      accountUrl: document.getElementById('accountUrl').value,
+      accountAge: parseInt(document.getElementById('accountAge').value),
+    },
+    details: {
+      
+      accountFullname: document.getElementById('accountFullname').value,
+      descFull: document.getElementById('descFull').value,
+      siteAge: parseInt(document.getElementById('siteAge').value),
+      monthlyProfit: parseInt(document.getElementById('monthlyProfit').value),
+      profitMargin: parseFloat(document.getElementById('profitMargin').value),
+      pageViews: parseInt(document.getElementById('pageViews').value),
+      profitMultiple: document.getElementById('profitMultiple').value,
+      revenueMultiple: document.getElementById('revenueMultiple').value,
+      performanceOverviewimg: document.getElementById('performanceOverviewimg').value,
+      performanceOverviewDetails: document.getElementById('performanceOverviewDetails').value,
+      moreDetailsimg: document.getElementById('moreDetailsimg').value,
+      moreDetailsDetails: document.getElementById('moreDetailsDetails').value,
+      monthlyrevenueimg: document.getElementById('monthlyrevenueimg').value,
+      monthlyrevenueDetails: document.getElementById('monthlyrevenueDetails').value,
+      accountAnalyticsimg: document.getElementById('accountAnalyticsimg').value,
+      accountAnalyticsDetails: document.getElementById('accountAnalyticsDetails').value,
+      googleAnalyticsimg: document.getElementById('googleAnalyticsimg').value,
+      googleAnalyticsDetails: document.getElementById('googleAnalyticsDetails').value,
+    }
+  };
+
+  fetch(`/buyandsell/update-buy-sells/${data.serialNo}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log(data);
+      alert("Are You Sure You Want Create A New Account");
+      if (data.message) {
+        window.alert(data.message);
+      }
+      if (data.message) {
+        this.reset();
+
+      } else {
+        console.log('User canceled the record creation');
+      }
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+      alert('Error occurred while processing your request');
+    });
+});
+
+</script>
+</body>
+
+</html>

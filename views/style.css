@@ -1,0 +1,73 @@
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input[type="text"] {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  button[type="submit"] {
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+  }
+  form:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  input[type="text"]:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #0069d9;
+  }
+
+
+  body {
+      background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
+  }
+  .button {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 20px;
+      color: white;
+      background-color: #007BFF;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: transform .2s;
+  }
+  .button:hover {
+      background-color: #0056b3;
+      transform: scale(1.1);
+  }
+  @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+  }
+  h1, .button {
+      animation: fadeIn 2s;
+  }

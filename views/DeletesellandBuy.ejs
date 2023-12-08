@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delete  Account</title>
+</head>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 2rem;
+    text-transform: capitalize;
+    /* margin-top: 5rem; */
+    color: black;
+    letter-spacing: 0.2rem;
+    font-weight: 600;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 280px;
+    margin: 10px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    line-height: 2rem;
+    outline: none;
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
+  }
+
+  form:hover {
+    box-shadow: rgba(238, 233, 233, 0.19) 0px 10px, rgba(219, 212, 212, 0.498) 0px 6px 6px;
+  }
+
+  form select {
+    padding: 0.5rem 1rem;
+    border-radius: 0.2rem;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+
+  textarea,
+  select:hover {
+    border-color: black;
+  }
+
+  label {
+    display: block;
+    font-size: 1rem;
+    text-transform: capitalize;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: black;
+  }
+
+  select,
+  textarea {
+    border: 2px solid rgba(0, 0, 0, 0.324);
+    transition: 0.3s ease-in-out;
+  }
+
+  textarea {
+    height: 8rem;
+    width: 100%;
+    resize: none;
+  }
+
+  input[type="text"] {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+
+  button[type="submit"] {
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    transition: 0.3s ease-in-out;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+
+  input[type="text"]:focus {
+    outline: none;
+    border: 2px solid #007bff;
+  }
+
+  button[type="submit"]:hover {
+    background-color: #0069d9;
+  }
+</style>
+
+<body>
+  <h1>Delete Buy Record</h1>
+
+  <form id="deleteForm" action="/buyandsell/delete-buy-sells/:serialNo" method="DELETE">
+    <label for="serialNo">Serial No:</label>
+    <input type="number" name="serialNo" id="serialNo" placeholder="Enter Serial No" required>
+
+    <button type="submit">Delete Buy account</button>
+  </form>
+
+</body>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('deleteForm');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault(); // Prevent default form submission
+
+      const serialNo = document.getElementById('serialNo').value;
+      fetch(`/buyandsell/delete-buy-sells/${serialNo}`, {
+        method: 'DELETE',
+      })
+      .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+        .then(data => {
+          console.log(data);
+          alert("Are You Sure You Want Delete This Account");
+          if (data.message) {
+            alert(data.message);
+            this.reset()
+          }
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+          alert('Cannot Found In The Database Please Check This Serial Number');
+        });
+    });
+  });
+</script>
+
+</html>
