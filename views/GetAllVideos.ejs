@@ -21,7 +21,7 @@
       /* background-color: ; */
       box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
       justify-content: center;
-      width: clamp(15rem , 100% , 20rem); 
+      width: clamp(15rem , 100% , 25rem); 
       border: 2px solid white;
       height: 10rem;
       border-radius: 24px;
@@ -31,9 +31,9 @@
       transition:  0.3s ease-in-out;
       cursor: pointer;
      }
-  
+ 
     .custom-box-text {
-      font-size: 20px;
+      font-size: 15px;
       font-weight: 600;
       line-height: 2rem;
     }
@@ -45,7 +45,9 @@
       transform: scale(1.01); 
       box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.75);
      }
-  
+     .url{
+    width: 4rem;
+  }
   </style>
   
 </head>
@@ -71,7 +73,7 @@
               <%= video.video.description %>
             </span><br> -->
             <strong>URL:</strong>
-            <span class="dark-video-text">
+            <span class="dark-video-text url">
               <%= video.video.url %>
             </span><br>
             <!-- <a href="<%= video.video.url %>" target="_blank">Watch video</a> -->
