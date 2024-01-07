@@ -6,7 +6,6 @@ const createBuySell = async (req, res) => {
     if (!serialNo || !earningPlatforms || !aboutThisAccount.accName || !aboutThisAccount.accountUrl || !details.accountFullname || !details.descFull || !details.siteAge || !details.monthlyProfit || !details.profitMargin || !details.pageViews) {
         return res.status(400).json({ message: 'Missing required fields' });
     }
-
     try {
         const existingBuySell = await BuyAndSell.findOne({ 'serialNo': serialNo });
         if (existingBuySell) {
@@ -19,7 +18,6 @@ const createBuySell = async (req, res) => {
             aboutThisAccount: aboutThisAccount,
             details: details,
         });
-
         const newRecord = await newBuySell.save();
         res.status(201).json({ message: 'Buy and Sell  Created Successfully', newRecord: newRecord });
     } catch (error) {

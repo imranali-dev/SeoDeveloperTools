@@ -6,19 +6,20 @@ const conn = mongoose.connection;
 let gfs;
 const upload = require('../Storage');
 const { uploadImage, readFiles, RenderALlDetails, deletAccount } = require('../src/users/PaymentControoler');
+const authenticateToken = require('../middlewares/authMiddleware');
 //this is the route for uploading the image like this is the route you need to fetch in front 
-router.post('/upload-image', upload.single('image'), uploadImage);
+router.post('/upload-image',upload.single('image'), uploadImage);
 // you can get All the detai;s in the Api form in this way you can get id and delete payement 
-router.get('/All_Payment_accounts_deatils', readFiles)
+router.get('/All_Payment_accounts_deatils',readFiles)
 //  for deleting the comopnent 
-router.delete('/Delete_Payment_accounts_deatils/:id', deletAccount)
+router.delete('/Delete_Payment_accounts_deatils/:id', authenticateToken,deletAccount)
 // i am going to commint it so you upload it using front 
-router.get("/Create_Payment_accounts_deatils", renderCreateForpament)
+router.get("/Create_Payment_accounts_deatils", authenticateToken,renderCreateForpament)
 // i am going to delete it because not need of this
-router.get("/Get_All_Payment_accounts_deatils", renderGetAllDeatils)
+router.get("/Get_All_Payment_accounts_deatils", authenticateToken,renderGetAllDeatils)
 
 //this is the ui you get all the deatils about the account payments
-router.get('/accounts', RenderALlDetails)
+router.get('/accounts', authenticateToken,RenderALlDetails)
 function renderCreateForpament(req, res) {
   res.render('PaymentAdd');
 }
@@ -43,11 +44,11 @@ router.get('/image/:filename', (req, res) => {
   });
 });
 
-router.get('/Welcome_to_Payment', WelcomeEarningVideo)
+router.get('/Welcome_to_Payment', authenticateToken,WelcomeEarningVideo)
 function WelcomeEarningVideo(req, res) {
   res.render('WelcomePayment');
 }
-router.get('/Delete_the_Payment_deatails', WelcomeEarningDelete)
+router.get('/Delete_the_Payment_deatails', authenticateToken,WelcomeEarningDelete)
 function WelcomeEarningDelete(req, res) {
   res.render('PaymentDelete');
 }

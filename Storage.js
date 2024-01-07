@@ -22,8 +22,6 @@ const storage = new GridFsStorage({
     };
   },
 });
-
-// Initialize Multer with GridFS storage
 const upload = multer({ storage });
 
 module.exports = upload;

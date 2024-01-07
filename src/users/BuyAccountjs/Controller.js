@@ -4,61 +4,10 @@ const express = require('express')
 const app = express();
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true }));
-// const multer = require('multer')
-// const storage = require('../../../Storage').upload;get
 
-// const fields = [
-//   { name: 'performanceOverviewimg', dest: 'uploads/performanceOverviewimg' },
-//   { name: 'moreDetailsimg', dest: 'uploads/moreDetailsimg' },
-//   { name: 'monthlyrevenueimg', dest: 'uploads/monthlyrevenueimg' },
-//   { name: 'accountAnalyticsimg', dest: 'uploads/accountAnalyticsimg' },
-//   { name: 'googleAnalyticsimg', dest: 'uploads/googleAnalyticsimg' },
-// ];
-// const upload = multer({ storage, fields });
-
-// exports.createDetails = async (req, res) => {
-//   try {
-//     upload(req, res, async (err) => {
-//       if (err) {
-//         console.error(err);
-//         return res.status(500).json({ message: err.message });
-//       }
-//       const imagePath = req.file ? req.file.path : null;
-
-//       const newDetails = new BuyandsellSchma({
-//         accountFullname,
-//         DescFull,
-//         siteAge,
-//         monthlyProfit,
-//         profitMargin,
-//         pageViews,
-//         profitMultiple,
-//         revenueMultiple,
-//         moreDetailsimg: req.body.moreDetailsimg,
-//         moreDetailsDetails: req.body.moreDetailsDetails,
-//         monthlyrevenueimg: req.body.monthlyrevenueimg,
-//         monthlyrevenueDetails: req.body.monthlyrevenueDetails,
-//         accountAnalyticsimg: req.body.accountAnalyticsimg,
-//         accountAnalyticsDetails: req.body.accountAnalyticsDetails,
-//         googleAnalyticsimg: req.body.googleAnalyticsimg,
-//         googleAnalyticsDetails: req.body.googleAnalyticsDetails,
-//         performanceOverviewimg: imagePath,
-//       });
-
-//       const savedDetails = await newDetails.save();
-//       res.status(201).json(savedDetails);
-//     });
-//   } catch (err) {
-//     res.status(500).json({ message: err.message });
-//   }
-// };
 exports.createDetails = async (req, res) => {
   try {
     console.log('Received request to create new details');
-    // if (!req.body.accountFullname || !req.body.DescFull || !req.body.siteAge || !req.body.monthlyProfit || !req.body.profitMargin || !req.body.pageViews || !req.body.profitMultiple || !req.body.revenueMultiple || !req.body.performanceOverviewimg || !req.body.moreDetailsimg || !req.body.monthlyrevenueimg || !req.body.accountAnalyticsimg || !req.body.googleAnalyticsimg) {
-    //   throw new Error('Missing required fields');
-    // }
-
     console.log('Required fields present, creating new details object');
 
     const newDetails = new BuyandsellSchma({
@@ -97,25 +46,6 @@ exports.createDetails = async (req, res) => {
   }
 };
 
-
-// ----------------------------------------------------------
-// exports.getAllDetailsForRendring = async (req, res) => {
-//   try {
-//     const allDetails = await BuyandsellSchma.find();
-//     res.render('allDetails', { allDetails });
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).send('Error retrieving all details');
-//   }
-// };
-// i am not using right know just for later use 
-
-
-
-// =================================
-//   find method
-
-// Controller function for retrieving all details
 exports.getAllDetails = async (req, res) => {
   try {
     const allDetails = await BuyandsellSchma.find().sort({ createdAt: -1 });
@@ -137,14 +67,14 @@ exports.getAllDetails = async (req, res) => {
 
 // controllers/detailsController.js
 exports.updateDetailsById = async (req, res) => {
-  const { id } = req.params; 
-  const updateFields = req.body; 
+  const { id } = req.params;
+  const updateFields = req.body;
 
   try {
     const updatedDetails = await BuyandsellSchma.findByIdAndUpdate(
       id,
-      { $set: updateFields }, 
-      { new: true } 
+      { $set: updateFields },
+      { new: true }
     );
 
     if (!updatedDetails) {
@@ -155,7 +85,7 @@ exports.updateDetailsById = async (req, res) => {
   } catch (err) {
     console.error(err);
 
-    if (err.name === 'ValidationError') { 
+    if (err.name === 'ValidationError') {
       const validationErrors = [];
 
       for (const error of err.errors) {
@@ -175,7 +105,7 @@ exports.updateDetailsById = async (req, res) => {
 
 
 exports.deleteDetailsById = async (req, res) => {
-  const { id } = req.params; 
+  const { id } = req.params;
   try {
     const deletedDetails = await BuyandsellSchma.findByIdAndRemove(id);
 

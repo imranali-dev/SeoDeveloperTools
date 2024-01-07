@@ -1,44 +1,48 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
+const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
+const Schema = mongoose.Schema;
+const userSchema = new Schema(
+  {
+    userId: { type: String, unique: true, required: true },
+    email: { type: String, required: true, unique: true },
+    active: { type: Boolean, default: false },
+    password: { type: String, required: true },
+    firstName: { type: String },
+    lastName: { type: String },
+    resetPasswordToken: { type: String, default: null },
+    resetPasswordExpires: { type: Date, default: null },
 
-const userSchema = new mongoose.Schema({
-  fname: {
-    type: String,
-    required: true,
+    emailToken: { type: String, default: null },
+    emailTokenExpires: { type: Date, default: null },
+
+    accessToken: { type: String, default: null },
+
+    referralCode: { type: String, unique: true },
+    referrer: { type: String, default: null },
   },
-  lname: {
-    type: String,
-    required: true,
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  isAdmin: {
-    type: String,
-    required: true,
-  },
-});
+  {
+    timestamps: {
+      createdAt: "createdAt",
+      updatedAt: "updatedAt",
+    },
+  }
+);
 
-// userSchema.pre('save', async function (next) {
-//   const adminCount = await AdminUser.countDocuments({ userType: 'admin' });
+const User = mongoose.model("AdminRegister", userSchema);
+module.exports = User;
 
-//   // Limit to two admin accounts
-//   if (this.userType === 'admin' && adminCount >= 2) {
-//     const err = new Error('Cannot create more than two admin accounts.');
-//     return next(err);
-//   }
-
-//   const salt = await bcrypt.genSalt(10);
-//   this.password = await bcrypt.hash(this.password, salt);
-//   next();
-// });
-
-const AdminUser = mongoose.model('AdminRegisterDb', userSchema);
-
-module.exports = AdminUser;
+module.exports.hashPassword = async (password) => {
+  try {
+    const salt = await bcrypt.genSalt(10);
+    return await bcrypt.hash(password, salt);
+  } catch (error) {
+    throw new Error("Hashing failed", error);
+  }
+};
+module.exports.comparePasswords = async (inputPassword, hashedPassword) => {
+  try {
+    return await bcrypt.compare(inputPassword, hashedPassword);
+  } catch (error) {
+    throw new Error("Comparison failed", error);
+  }
+};

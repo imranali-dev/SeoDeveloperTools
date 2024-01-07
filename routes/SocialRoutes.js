@@ -11,16 +11,7 @@ const {
   AdminVideo,
   updateVideoByID,
 } = require('../src/users/SocialLinksControllers'); 
-router.delete('/social-links/deleteVideo/videos/:videoId', deleteVideoByID);
-router.get('/social-links/deleteVideo/videos', renderDeleteVideo); 
-router.post('/social-links/addVideo/videos', addVideo); 
-router.get('/show-videos', AdminVideo);
-router.get('/add-video', renderAddVideo); 
-// ahemd ya front ka route hai is ko fetch krna hai
-router.get('/social-links/videos', showVideo);
-router.put('/social-links/updateSocialLinks/videos/:videoId', updateVideoByID); 
-router.get('/social-links/updateSocialLinks/videos', renderUpdateSocialLinks);
-router.get('/home',HomepageofSocialLinks)
+const authenticateToken = require('../middlewares/authMiddleware');
 function renderDeleteVideo(req, res) {
   const videoId = '';
   res.render('DeleteVideo', { videoId });
@@ -35,8 +26,17 @@ function renderUpdateSocialLinks(req, res) {
 function HomepageofSocialLinks(req, res) {
   res.render('HomeSo');
 }
-router.get('/WelcomeEarningVideo',WelcomeEarningVideo)
+router.get('/WelcomeEarningVideo',authenticateToken,WelcomeEarningVideo)
 function WelcomeEarningVideo(req, res) {
   res.render('WelcomeSocialVideo');
 }
+router.delete('/social-links/deleteVideo/videos/:videoId', authenticateToken,deleteVideoByID);
+router.get('/social-links/deleteVideo/videos', authenticateToken,renderDeleteVideo); 
+router.post('/social-links/addVideo/videos', authenticateToken,addVideo); 
+router.get('/show-videos', authenticateToken,AdminVideo);
+router.get('/add-video', authenticateToken,renderAddVideo); 
+router.get('/social-links/videos', showVideo);
+router.put('/social-links/updateSocialLinks/videos/:videoId', authenticateToken,updateVideoByID); 
+router.get('/social-links/updateSocialLinks/videos', authenticateToken,renderUpdateSocialLinks);
+router.get('/home',authenticateToken,HomepageofSocialLinks)
 module.exports = router;

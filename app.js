@@ -6,13 +6,15 @@ const mongoose = require("mongoose");
 const authrRouter = require('./routes/users.js');
 const methodOverride = require('method-override');
 const DatabaseOfMongo = process.env.MONGO_URI;
-const PORT = process.env.PORT || 8000;
+const PORT = 9895 ||5064 ||8000 || 9000  || 8005;
 const ejs = require('ejs');
+var useragent = require('express-useragent');
 const path = require('path');
 const bodyParser = require('body-parser');
 app.set("view engine", "ejs");
 app.use(express.static('public'));
 app.set("views", path.join(__dirname, "./views"));
+
 const authRoutes = require("./routes/users");
 const router = require("./routes/AdminRoutes.js");
 const socilarouter = require("./routes/SocialRoutes.js");
@@ -20,6 +22,8 @@ const Buyandsell = require("./routes/BuyandsellRoutes.js");
 const socialsell = require("./routes/SocialSellRoutes.js");
 const BuyAccountsRoutes = require("./routes/BuyAccountsRoutes.js");
 const Accoutn = require("./routes/PaymentRouter.js");
+const ChatApp = require("./routes/livechatRoutes.js");
+
 const connectWithRetry = () => {
   mongoose
     .connect(DatabaseOfMongo, {
@@ -33,12 +37,12 @@ const connectWithRetry = () => {
       app.use(methodOverride('_method')); // yeah check krta hai ky put request to update krna hai ya nahi
       app.use(bodyParser.json());
       const corsOptions = {
-        // origin: 'http://yourfrontenddomain.com', // Replace with your frontend domain
         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
         preflightContinue: false,
         optionsSuccessStatus: 204,
       };
       app.use(cors(corsOptions));
+      app.use(useragent.express());
       app.use(bodyParser.urlencoded({ extended: true }));
       app.use(express.json()); // for parsing application/json
       app.use(express.urlencoded({ extended: true }));
@@ -51,12 +55,13 @@ const connectWithRetry = () => {
       });
       app.use("/users", authRoutes);
       app.use("/sell", authrRouter);
-      app.use("/admin", router)
-      app.use('/social', socilarouter)
+      app.use("/admin", router);
+      app.use('/social', socilarouter);
       app.use("/buyandsell", Buyandsell)
       app.use('/socialsell', socialsell)
       app.use('/BuyAccounts', BuyAccountsRoutes)
       app.use('/Account', Accoutn)
+      app.use('/Chat', ChatApp)
       const server = app.listen(PORT, () => {
         console.log("Server started listening on PORT: " + PORT);
       });

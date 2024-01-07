@@ -4,8 +4,21 @@ const bcrypt = require('bcryptjs'); // Import bcrypt module
 const AdminUser = require('./AdminModel');
 const User = require('./user.model');
 const SellModel = require('./sellSchema');
-const JWT_SECRET = 'helloyarrtokiahaalhain';
-
+const { generateTokens } = require('../../middlewares/tokenGenerator');
+require("dotenv").config();
+const cookie = require('cookie');
+const options = {
+  expiresIn: "1h",
+};
+async function generateJwt(email, fname, lname) {
+  try {
+    const payload = { email: email, fname: fname, lname: lname };
+    const token = jwt.sign(payload, process.env.JWT_SECRET, options);
+    return token;
+  } catch (error) {
+    throw new Error("Token generation failed");
+  }
+}
 class AdminController {
   static async renderLoginPage(req, res) {
     res.render('Login');
@@ -16,15 +29,14 @@ class AdminController {
   static async renderRegisterPage(req, res) {
     res.render('Rigester');
   }
-static async register(req, res) {
+  static async register(req, res) {
     const { fname, lname, email, password, userType } = req.body;
     try {
       const oldUser = await AdminUser.findOne({ email });
-
+  
       if (oldUser) {
         return res.json({ error: 'User Exists' });
       }
-
       const encryptedPassword = await bcrypt.hash(password, 10);
       const userdetails = await AdminUser.create({
         fname,
@@ -34,46 +46,45 @@ static async register(req, res) {
         userType,
         isAdmin: true,
       });
-      const token = jwt.sign({ email, fname, lname }, JWT_SECRET, {
-        expiresIn: '1h',
-      });
-      console.log(token)
-      res.redirect('/admin/admin/userdata');
-      // / res.status(200).json({ message: 'User registered successfully' ,t});
+      res.redirect(`/admin/admin/userdata`);
     } catch (error) {
       res.status(500).json({ status: 'error', error: error.message });
     }
   }
   static async login(req, res) {
     const { email, password } = req.body;
-
+  
     try {
       const admin = await AdminUser.findOne({ email });
-
+  
       if (!admin) {
         return res.status(404).json({ error: 'Admin not found' });
       }
-      console.log('Stored Hashed Password:', admin.password);
-      console.log('Entered Password:', password);
-
+  
       const isPasswordValid = await bcrypt.compare(password, admin.password);
-      console.log("Hashed password=>", isPasswordValid)
+  
       if (!isPasswordValid) {
-        console.log('Password comparison failed');
         return res.status(401).json({ error: 'Invalid Password' });
       }
-      const token = jwt.sign({ email }, JWT_SECRET, {
-        expiresIn: '1h',
-      });
-      console.log(token)
-      res.redirect('/admin/collection-ensureIndex/kira-yagami-082561-lira-Integrate-page-of-admin-931249/success');
-      // res.status(200).json({ message: 'Login successful' });
+  
+      const token = await generateTokens(email);
+      console.log(token);
+  
+      res.setHeader('Set-Cookie', cookie.serialize('authToken', token, {
+        httpOnly: true,
+        maxAge: 3600,
+        sameSite: 'strict',
+        path: '/', 
+        secure: process.env.NODE_ENV === 'production'
+      }));
+  
+      res.redirect(`/admin/collection-ensureIndex/kira-yagami-082561-lira-Integrate-page-of-admin-931249/success`);
     } catch (error) {
-      console.error('Error during login:', error); // Log any other errors
+      console.error('Error during login:', error);
       res.status(500).json({ status: 'error', error: error.message });
     }
   }
-  static async Allusers(req, res) {
+  static async Allusersd(req, res) {
     try {
       const users = await User.find();
       res.render('AdminDashboard', { users });
@@ -85,7 +96,7 @@ static async register(req, res) {
     const { token } = req.body;
 
     try {
-      const user = jwt.verify(token, JWT_SECRET, (err, decoded) => {
+      const user = jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
         if (err) {
           return 'token expired';
         }

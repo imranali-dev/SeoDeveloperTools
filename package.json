@@ -12,10 +12,12 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
+    "cookie": "^0.6.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.9",
     "express": "^4.17.1",
+    "express-useragent": "^1.0.15",
     "googleapis": "^128.0.0",
     "joi": "^17.3.0",
     "jsonwebtoken": "^9.0.2",
@@ -24,6 +26,7 @@
     "mongoose": "^5.11.10",
     "multer-gridfs-storage": "^5.0.2",
     "nanoid": "^3.1.20",
+    "node-cron": "^3.0.3",
     "nodemailer": "^6.4.17",
     "uuid": "^8.3.2"
   }

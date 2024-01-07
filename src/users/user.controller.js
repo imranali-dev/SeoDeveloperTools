@@ -165,10 +165,8 @@ exports.Login = async (req, res) => {
       });
     }
 
-    //1. Find if any account with that email exists in DB
     const user = await User.findOne({ email: email });
 
-    // NOT FOUND - Throw error
     if (!user) {
       return res.status(404).json({
         error: true,
@@ -189,8 +187,6 @@ exports.Login = async (req, res) => {
         message: "Invalid credentials",
       });
     }
-    //Generate Access token
-
     const { error, token } = await generateJwt(user.email, user.userId);
     if (error) {
       return res.status(500).json({
@@ -201,7 +197,6 @@ exports.Login = async (req, res) => {
     user.accessToken = token;
     await user.save();
 
-    //Success
     return res.send({
       success: true,
       message: "User logged in successfully",
