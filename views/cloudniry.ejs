@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Images Upload Form</title>
+</head>
+<body style="padding: 30px;">
+
+<form id="singleUploadForm" method="POST" action="/cloudinaryupload/profile-upload-single" enctype="multipart/form-data">
+    <div>
+        <label>Upload profile picture</label>
+        <input type="file" name="profile-file" id="profile-file" required />
+    </div>
+    <div>
+        <button type="submit">Upload</button>
+    </div>
+</form>
+
+<br><hr><br>
+
+<form id="multipleUploadForm" method="POST" action="/cloudinaryupload/profile-upload-multiple" enctype="multipart/form-data">
+    <div>
+        <label>Upload multiple profile pictures</label>
+        <input type="file" name="profile-files" id="profile-files" required multiple />
+    </div>
+    <div>
+        <button type="submit">Upload</button>
+    </div>
+</form>
+
+<script>
+function submitForm(formId) {
+    const form = document.getElementById(formId);
+
+    const formData = new FormData(form);
+    const xhr = new XMLHttpRequest();
+
+    xhr.open(form.method, form.action, true);
+
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            const response = JSON.parse(xhr.responseText);
+            console.log(response);
+            alert('Upload successful!');
+
+            // Clear input fields after successful upload (optional)
+            form.reset();
+        } else {
+            console.error(response);
+            alert('Error uploading file. Please try again.');
+        }
+    };
+
+    xhr.onerror = function () {
+        console.error('Network error');
+        alert('An error occurred while uploading. Please check your internet connection and try again.');
+    };
+
+    xhr.send(formData);
+}
+
+// Attach event listeners to the forms
+document.getElementById('singleUploadForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    submitForm('singleUploadForm');
+});
+
+document.getElementById('multipleUploadForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    submitForm('multipleUploadForm');
+});
+</script>
+</body>
+</html>

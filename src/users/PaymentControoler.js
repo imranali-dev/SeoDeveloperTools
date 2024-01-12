@@ -8,7 +8,6 @@ const storage = multer.diskStorage({
     cb(null, uniqueFileName);
   },
 });
-
 const upload = multer({ storage });
 
 exports.uploadImage= async (req, res) => {

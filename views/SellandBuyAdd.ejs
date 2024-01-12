@@ -181,31 +181,31 @@
           placeholder="Account Description"> </textarea>
         <label>Performance overview img</label>
         <input type="url" placeholder="Enter Image Url" id="performanceOverviewimg" name="performanceOverviewimg"
-          accept="image/gif, image/jpeg, image/png">
+          accept="image/gif, image/jpeg, image/png" onchange="validateInput(this)">
         <label>More Detalis Des</label>
         <textarea type="text" id="moreDetailsDetails" name="moreDetailsDetails"
           placeholder="Account Description"> </textarea>
         <label>More Detalis img</label>
         <input type="url" placeholder="Enter Image Url" id="moreDetailsimg" name="moreDetailsimg"
-          accept="image/gif, image/jpeg, image/png">
+          accept="image/gif, image/jpeg, image/png" onchange="validateInput(this)">
         <label>Account Analytics Des</label>
         <textarea type="text" id="accountAnalyticsDetails" name="accountAnalyticsDetails"
           placeholder="Account Description"> </textarea>
         <label>Account Analytics img</label>
         <input type="url" placeholder="Enter Image Url" id="accountAnalyticsimg" name="accountAnalyticsimg" n
-          accept="image/gif, image/jpeg, image/png">
+          accept="image/gif, image/jpeg, image/png" onchange="validateInput(this)">
         <label>Monthly Reviwnew Desc</label>
         <textarea type="text" id="monthlyrevenueDetails" name="monthlyrevenueDetails"
           placeholder="Account Description"> </textarea>
         <label>Monthly Reviwnew img</label>
         <input type="url" placeholder="Enter Image Url" id="monthlyrevenueimg" name="monthlyrevenueimg"
-          accept="image/gif, image/jpeg, image/png">
+          accept="image/gif, image/jpeg, image/png" onchange="validateInput(this)"/>
         <label>Google Analytics Desc</label>
         <textarea type="text" id="googleAnalyticsDetails" name="googleAnalyticsDetails"
           placeholder="Account Description"> </textarea>
         <label>Google Analytics img</label>
         <input type="url" placeholder="Enter Image Url" id="googleAnalyticsimg" name="googleAnalyticsimg"
-          accept="image/gif, image/jpeg, image/png">
+          accept="image/gif, image/jpeg, image/png" onchange="validateInput(this)">
       </div>
       <button type="submit">Submit Form</button>
     </div>
@@ -279,7 +279,19 @@
       });
   });
 </script>
+<script>
+  function validateUrl(url) {
+  // Comprehensive URL validation using a regular expression
+  const urlRegex = /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/;
+  return urlRegex.test(url);
+}
+function validateInput(inputField) {
+  const url = inputField.value;
+  if (!validateUrl(url)) {
+    alert("Invalid URL. Please enter a valid image URL starting with http:// or https://");
+    inputField.value = ""; // Clear the input field
+  }
+}
 
-  
+</script>
     </html>
-    <!-- this is the Buy and sell panel page -->

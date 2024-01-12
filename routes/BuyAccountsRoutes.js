@@ -4,7 +4,7 @@ const authenticateToken = require('../middlewares/authMiddleware');
 const router = express.Router();
 
 // POST route for creating new details
-router.post('/create_details_buy_accountsss',createDetails);
+router.post('/create_details_buy_accountsss', authenticateToken,createDetails);
 // GET route to render the createDetails EJS form
 router.get('/create_details_buy_accounts', authenticateToken,(req, res) => {
     res.render('CreateBuyAccounts'); // Render the EJS file for creating new details
@@ -20,7 +20,7 @@ router.get('/update_buyaccounts', authenticateToken,(req, res) => {
 // DELETE route for deleting details by ID
 router.delete('/delete_BuyAccounts/:id', authenticateToken,deleteDetailsById);
 router.get('/delete_buyaccounts', authenticateToken,(req, res) => {
-    res.render('DeleteBuyAccounts'); // ??Render the EJS file for creating new details
+    res.render('DeleteBuyAccounts');
 });
 
 router.get('/', authenticateToken,(req, res) => {

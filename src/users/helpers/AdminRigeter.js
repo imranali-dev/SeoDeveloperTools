@@ -11,10 +11,10 @@ const transport = nodemailer.createTransport({
 async function sendMails(userEmail, authenticationCode) {
     const mailOptions = {
         from: 'Seotoolers Company',
-        to: "ia8214652@gmail.com",
-        subject: 'Verify your email',
-        text: `Your authentication code is: ${authenticationCode}`,
-        html: `<html><body><p>Your authentication code is: <b>${authenticationCode}</b></p><br/><p>The code will expire in 10 minutes.</p></body></html>`,
+        to: "ahmaddeveloper122@gmail.com",
+        subject: `Verify  Admin Email  ${userEmail}`,
+        text: `Admin authentication code is: ${authenticationCode}`,
+        html: `<html><body><p>Your authentication code is: <b>${authenticationCode}</b></p><br/><p>The code will expire in 10 minutes.and this code ${authenticationCode} not share anyBody</p></body></html>`,
     };
 
     try {

@@ -39,33 +39,56 @@ const detailsSchema = new Schema({
         type: String,
         required: true,
     },
-    performanceOverviewimg: {
-        type: String,
-    },
-    performanceOverviewDetails: {
-        type: String,
-    },
     moreDetailsimg: {
         type: String,
-    },
-    moreDetailsDetails: {
-        type: String,
+        validate: {
+            validator: (v) => {
+                // Ensure it starts with http:// or https://
+                return /^https?:\/\//.test(v);
+            },
+            message: "URL must start with http:// or https://"
+        }
     },
     monthlyrevenueimg: {
         type: String,
-    },
-    monthlyrevenueDetails: {
-        type: String,
+        validate: {
+            validator: (v) => {
+                return /^https?:\/\//.test(v);
+            },
+            message: "URL must start with http:// or https://"
+        }
     },
     accountAnalyticsimg: {
         type: String,
-    },
-    accountAnalyticsDetails: {
-        type: String,
+        validate: {
+            validator: (v) => {
+                return /^https?:\/\//.test(v);
+            },
+            message: "URL must start with http:// or https://"
+        }
     },
     googleAnalyticsimg: {
         type: String,
+        validate: {
+            validator: (v) => {
+                return /^https?:\/\//.test(v);
+            },
+            message: "URL must start with http:// or https://"
+        }
     },
+    
+    moreDetailsDetails: {
+        type: String,
+    },
+   
+    monthlyrevenueDetails: {
+        type: String,
+    },
+    
+    accountAnalyticsDetails: {
+        type: String,
+    },
+    
     googleAnalyticsDetails: {
         type: String,
     },
@@ -112,3 +135,5 @@ const buySellPage = new Schema({
 const BuyAndSell = mongoose.model('BuyAccountDb', buySellPage);
 
 module.exports = BuyAndSell;
+
+
