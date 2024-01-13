@@ -7,7 +7,6 @@ async function uploadToCloudinary(locaFilePath, fieldName) {
 var mainFolderName = "akana";
 const sanitizedFilePath = locaFilePath.replace(/[^a-zA-Z0-9\-_.\/]/g, ""); // Sanitize filename
 const filePathOnCloudinary = `${mainFolderName}/${sanitizedFilePath}`; // Use forward slashes
-
 try {
  const result = await cloudinary.uploader.upload(locaFilePath, { public_id: filePathOnCloudinary });
 
