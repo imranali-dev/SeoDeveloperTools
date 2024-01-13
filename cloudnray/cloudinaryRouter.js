@@ -2,7 +2,6 @@ const express = require("express");
 const multer = require("multer");
 const cloudinaryController = require("./cloudinaryController");
 const { getAllImages } = require("./gelcloudnaryimages");
-const authenticateToken = require("../authMiddleware");
 
 const router = express.Router();
 const storage = multer.diskStorage({
@@ -27,11 +26,11 @@ router.post(
     upload.array("profile-files", 6),
     cloudinaryController.profileUploadMultiple
 );
-router.get('/upload-form',authenticateToken, (req, res) => {
+router.get('/upload-form', (req, res) => {
     res.render('cloudniry');
 });
 router.get(
-    "/all-images-urls",authenticateToken,
+    "/all-images-urls",
     getAllImages
 );
 module.exports = router;

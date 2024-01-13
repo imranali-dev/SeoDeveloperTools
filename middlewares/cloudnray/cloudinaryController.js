@@ -7,8 +7,6 @@ async function profileUploadSingle(req, res, next) {
     var response = buildSuccessMsg([result.url]);
     return res.send(response);
 }
-
-
 async function profileUploadMultiple(req, res, next) {
     try {
       var imageUrlList = [];
@@ -29,20 +27,19 @@ async function profileUploadMultiple(req, res, next) {
           
         } catch (error) {
           console.error("Error processing image", i + 1, ":", error);
+          imageUrlList.push("Error: Image upload failed");
+          console.error("Error type:", error.constructor.name);
+
         }
       }
       var response = buildSuccessMsg(imageUrlList);
       return res.send(response);
     } catch (error) {
+      
       console.error("Unhandled error in profileUploadMultiple:", error);
       return res.status(500).send("Internal server error");
     }
   }
-
-
-  
-  
-
 
 module.exports = {
     profileUploadSingle,

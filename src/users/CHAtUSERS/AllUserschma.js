@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 // Establish MongoDB connection
-mongoose.connect('mongodb://localhost:27017/your_database_name', {
+mongoose.connect('mongodb+srv://holdseotoolerssms:SeoToolersstrong@cluster0.vsofdhn.mongodb.net/?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });

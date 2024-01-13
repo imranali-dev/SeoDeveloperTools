@@ -25,7 +25,7 @@ const Buyandsell = require("./routes/BuyandsellRoutes.js");
 const socialsell = require("./routes/SocialSellRoutes.js");
 const BuyAccountsRoutes = require("./routes/BuyAccountsRoutes.js");
 const Accoutn = require("./routes/PaymentRouter.js");
-const ChatApp = require("./routes/livechatRoutes.js");
+// const ChatApp = require("./routes/livechatRoutes.js");
 const cloudinaryRouter = require("./middlewares/cloudnray/cloudinaryRouter.js");
 
 const connectWithRetry = () => {
@@ -57,12 +57,11 @@ const connectWithRetry = () => {
       if (!fs.existsSync("./cloudinaryupload")) {
         fs.mkdirSync("./cloudinaryupload");
       }
-
-      // cloudinary config file 
       cloudinary.config({
         cloud_name: 'dpqks8bvs',
         api_key: '845448596562755',
-        api_secret: 'GKu1_IPbQITbsqLN0zjh8HMMq6o'
+        api_secret: 'GKu1_IPbQITbsqLN0zjh8HMMq6o',
+        secure: true
       });
       // if there is any error 
       if (!cloudinary.config().cloud_name) {
@@ -84,7 +83,7 @@ const connectWithRetry = () => {
       app.use('/socialsell', socialsell)
       app.use('/BuyAccounts', BuyAccountsRoutes)
       app.use('/Account', Accoutn)
-      app.use('/Chat', ChatApp);
+      // app.use('/Chat', ChatApp);
       app.use("/cloudinaryupload", cloudinaryRouter);
 
       // Generic Error Handling Middleware
