@@ -28,7 +28,8 @@ const createBuySell = async (req, res) => {
 };
 const getAllBuySell = async (req, res) => {
     try {
-      const buySellRecords = await BuyAndSell.find().sort({ createdAt: -1 }).limit(5);
+      const buySellRecords = await BuyAndSell.find().sort({ createdAt: -1 })
+      // .limit(5);
   
       if (!buySellRecords || buySellRecords.length === 0) {
         return res.status(404).json({ message: 'No Buy and Sell  Account Found' });
