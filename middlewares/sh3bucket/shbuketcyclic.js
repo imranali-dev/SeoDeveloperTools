@@ -1,0 +1,1 @@
+const fs = require('@cyclic.sh/s3fs/promises') 

@@ -79,7 +79,9 @@ const CreateSocialsell = async (req, res) => {
 
 const GetSocialsell = async (req, res) => {
     try {
-      const buySellRecords = await SocialSell.find().sort({ createdAt: -1 }).limit(5);
+      const buySellRecords = await SocialSell.find()
+      .sort({ createdAt: -1 })
+      // .limit(5);
   
       if (!buySellRecords || buySellRecords.length === 0) {
         return res.status(404).json({ message: 'No Social Account Found' });

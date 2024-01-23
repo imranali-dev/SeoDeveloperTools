@@ -47,4 +47,3 @@ async function uploadToCloudinary(locaFilePath) {
 		}); 
 } 
 module.exports = { uploadToCloudinary };
-

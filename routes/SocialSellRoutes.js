@@ -3,9 +3,9 @@ const { CreateSocialsell, GetSocialsell, UpdateSocialsell, DeleteSocialsell, Get
 const authenticateToken = require('../middlewares/authMiddleware');
 const router = express.Router();
 //this router has been checked 
-router.post('/create-social-sells', authenticateToken,CreateSocialsell);
-router.post('/create-social-sells', authenticateToken,CreateSocialsell);
-router.get("/add/create-social-sells", authenticateToken,CreateSocialsellData)
+router.post('/create-social-sells',  CreateSocialsell);
+router.post('/create-social-sells',  CreateSocialsell);
+router.get("/add/create-social-sells",CreateSocialsellData)
 router.post('/create-social-sells',CreateSocialsell);
 function CreateSocialsellData(req, res) {
 
@@ -15,18 +15,18 @@ router.get('/get-social-sells',GetSocialsell);
 router.get('/get-social-sells/:id', GetSocialsellDetails);
 //for updating 
 // //checked working or not // filhal kaam nahi kr rha hai 
-router.put('/update-social-sells/:serialNo', authenticateToken,UpdateSocialsell);
-router.get('/update-social-sells', authenticateToken,UpdateUpdateSocialsellData);
+router.put('/update-social-sells/:serialNo',  UpdateSocialsell);
+router.get('/update-social-sells',  UpdateUpdateSocialsellData);
 function UpdateUpdateSocialsellData(req, res) {
 
   res.render('SocialsellUpdate');
 }
-router.get('/welcomeSocialpages', authenticateToken,welcomeSocial);
+router.get('/welcomeSocialpages',  welcomeSocial);
 function welcomeSocial(req, res) {
   res.render('WelcomeSocial');
 }
 router.delete('/delete-social-sells/:serialNo', DeleteSocialsell);
-router.get('/delete-social-sells', authenticateToken,DeleteDeleteSocialsell);
+router.get('/delete-social-sells',  DeleteDeleteSocialsell);
 function DeleteDeleteSocialsell(req, res) {
 
   res.render('SocialsellDelete');
