@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      color: #333;
+      text-align: center;
+    }
+
+    .report-body {
+      max-width: 800px;
+      margin: 20px auto;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      border-radius: 5px;
+    }
+
+    .report-topic-heading {
+      margin-bottom: 20px;
+    }
+
+    .t-op {
+      list-style: none;
+      padding: 0;
+    }
+
+    .t-op li {
+      border-bottom: 1px solid #ddd;
+      padding: 20px 0;
+    }
+
+    h2 {
+      color: #333;
+      margin-bottom: 5px;
+    }
+
+    p {
+      color: #666;
+      margin: 5px 0;
+    }
+
+    h3 {
+      color: #555;
+      margin-bottom: 10px;
+    }
+
+    a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+  <title>Users</title>
+</head>
+<body>
+  <h1>Users</h1>
+  <div class="report-body">
+    <div class="report-topic-heading">
+      <ul class="t-op">
+        <% if (users.length > 0) { %>
+          <% for (const user of users) { %>
+            <li>
+              <h2><%= user.firstName %> <%= user.lastName %></h2>
+              <p>Email: <%= user.email %></p>
+              <% if (user.desc) { %>
+                <p>Description: <%= user.desc %></p>
+              <% } %>
+              <% if (user.exploreBusiness) { %>
+                <h3>Business Information</h3>
+                <p>Category: <%= user.exploreBusiness.category %></p>
+                <p>Data: <%= user.exploreBusiness.data %></p>
+              <% } %>
+              <% if (user.mobileWeb) { %>
+                <p>Mobile Website: <a href="<%= user.mobileWeb %>"><%= user.mobileWeb %></a></p>
+              <% } %>
+              <% if (user.website) { %>
+                <p>Website: <a href="<%= user.website %>"><%= user.website %></a></p>
+              <% } %>
+            </li>
+          <% } %>
+        <% } else { %>
+          <p>No users found.</p>
+        <% } %>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
