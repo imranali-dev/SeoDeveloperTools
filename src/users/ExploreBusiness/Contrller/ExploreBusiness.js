@@ -14,9 +14,6 @@ const getUserById = async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 };
-
-
-
 const getUserByEmail = async (req, res) => {
     const email = req.params.email;
 
@@ -35,34 +32,74 @@ const getUserByEmail = async (req, res) => {
 
 
 
-
-// Controller to create a new user
 const createUser = async (req, res) => {
-    const userData = req.body;
-
     try {
-        // Validate user data before attempting creation
-        const validationErrors = await Heria.validate(userData);
-        if (validationErrors) {
-            return res.status(400).json({ error: 'Validation Error', details: validationErrors });
-        }
-
-        const newUser = await Heria.create(userData);
-        res.status(201).json(newUser);
+      const userData = req.body;
+      const newUser = new Heria(userData);
+      await newUser.save();
+  
+      console.log(newUser);
+      res.status(201).json(newUser);
     } catch (error) {
-        if (error.name === 'ValidationError') {
-            // Mongoose validation errors already handled in the validation step
-        } else if (error.name === 'MongoError' && error.code === 11000) {
-            // Handle duplicate email error specifically
-            return res.status(409).json({ error: 'Duplicate Email' });
-        } else {
-            // Handle other unexpected errors, log for debugging, and send a generic error response
-            console.error('Internal server error:', error);
-            res.status(500).json({ error: 'Internal Server Error' });
-        }
+      console.error('Error creating user:', error);
+  
+      // Check for validation errors
+      if (error.name === 'ValidationError') {
+        return res.status(400).json({ error: 'Validation Error', details: error.message });
+      }
+  
+      // Check for duplicate key error
+      if (error.code === 11000) {
+        return res.status(409).json({ error: 'Duplicate Key Error', details: error.keyValue });
+      }
+  
+      // If it's not a validation or duplicate key error, send a generic error message
+      res.status(500).json({ error: 'Internal Server Error' });
     }
-};
+  };
+  
 
+
+// const createUser = async (req, res) => {
+//     const userData = req.body;
+
+//     try {
+//         // Validate user data before attempting creation
+//         const validationErrors = await Heria.validate(userData);
+//         if (validationErrors) {
+//             return res.status(400).json({ error: 'Validation Error', details: validationErrors });
+//         }
+
+//         const newUser = await Heria.create(userData);
+//         res.status(201).json(newUser);
+//         console.log('Received POST request:', req.body);
+
+//     } catch (error) {
+//         if (error.name === 'ValidationError') {
+//             // Mongoose validation errors already handled in the validation step
+//         } else if (error.name === 'MongoError' && error.code === 11000) {
+//             // Handle duplicate email error specifically
+//             return res.status(409).json({ error: 'Duplicate Email' });
+//         } else {
+//             // Handle other unexpected errors, log for debugging, and send a generic error response
+//             console.error('Internal server error:', error);
+//             res.status(500).json({ error: 'Internal Server Error' });
+//         }
+//     }
+// };
+
+const renderDeleteConfirmation = async (req, res) => {
+    const email = req.params.email;
+  
+    try {
+      const user = await Heria.findOne({ email });
+      res.render('BusniessExploresDEl', { user });
+    } catch (error) {
+      console.error('Error fetching user for delete confirmation:', error);
+      res.render('deleteConfirmation', { error: 'Internal Server Error' });
+    }
+  };
+  
 const deleteUserById = async (req, res) => {
     const userId = req.params.userId;
 
@@ -169,6 +206,7 @@ module.exports = {
     updateUserById,
     getUserByEmail,
     deleteUserByEmail,
-    updateUserByEmail
+    updateUserByEmail,
+    renderDeleteConfirmation
 
 };

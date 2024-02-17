@@ -1,0 +1,62 @@
+<!-- views/deleteUserForm.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delete User Form</title>
+</head>
+<body>
+
+  <h1>Delete User</h1>
+
+  <form id="deleteUserForm">
+    <label for="email">Enter User Email:</label>
+    <input type="email" id="email" name="email" required>
+    <button type="submit">Delete User</button>
+  </form>
+
+  <div id="resultMessage"></div>
+
+  <script>
+    document.getElementById('deleteUserForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      const email = document.getElementById('email').value;
+
+      // Basic email validation
+      if (!isValidEmail(email)) {
+        document.getElementById('resultMessage').innerText = 'Invalid email format.';
+        return;
+      }
+
+      // AJAX request to delete user
+      fetch(`/BusnessModel/${email}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.error) {
+          document.getElementById('resultMessage').innerText = `Error: ${data.error}`;
+        } else {
+          document.getElementById('resultMessage').innerText = 'User deleted successfully.';
+        }
+      })
+      .catch(error => {
+        document.getElementById('resultMessage').innerText = 'Internal Server Error';
+        console.error('Error deleting user:', error);
+      });
+    });
+
+    function isValidEmail(email) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    }
+  </script>
+
+</body>
+</html>

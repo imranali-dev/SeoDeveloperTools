@@ -43,11 +43,16 @@ const connectWithRetry = () => {
       app.use(methodOverride('_method'));
       app.use(bodyParser.json());
       const corsOptions = {
+        origin: '*', // Replace with your Next.js app's origin
         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
         preflightContinue: false,
         optionsSuccessStatus: 204,
+        credentials: true, // Set to true to allow credentials
       };
+      
       app.use(cors(corsOptions));
+      
+      
       app.use(useragent.express());
       app.use(bodyParser.urlencoded({ extended: true }));
       app.use(express.json()); // for parsing application/json
