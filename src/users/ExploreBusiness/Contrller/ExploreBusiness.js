@@ -99,7 +99,12 @@ const renderDeleteConfirmation = async (req, res) => {
       res.render('deleteConfirmation', { error: 'Internal Server Error' });
     }
   };
-  
+
+
+  const RederHomePage = async (req, res) => {
+      res.render('BusnisPageHome3');
+    }
+
 const deleteUserById = async (req, res) => {
     const userId = req.params.userId;
 
@@ -207,6 +212,7 @@ module.exports = {
     getUserByEmail,
     deleteUserByEmail,
     updateUserByEmail,
-    renderDeleteConfirmation
+    renderDeleteConfirmation,
+    RederHomePage
 
 };

@@ -91,7 +91,6 @@ const connectWithRetry = () => {
       app.use('/BuyAccounts', BuyAccountsRoutes)
       app.use('/Account', Accoutn)
       app.use('/BusnessModel', ExploreBusiness)
-
       // app.use('/Chat', ChatApp);
       app.use("/cloudinaryupload", cloudinaryRouter);
 
