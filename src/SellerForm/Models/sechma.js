@@ -18,12 +18,12 @@ const sellerFormSchema = new mongoose.Schema({
       type: String,
       required: true,
     },
-    accountId: {
+    BuyeruserName: {
       type: String,
       required: true,
     },
     accountPaymentReceivedFromBuyer: {
-      type: String,
+      type: Number,
       required: true,
     },
   },
