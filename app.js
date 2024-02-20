@@ -27,7 +27,7 @@ const BuyAccountsRoutes = require("./routes/BuyAccountsRoutes.js");
 const Accoutn = require("./routes/PaymentRouter.js");
 const ExploreBusiness = require("./src/users/ExploreBusiness/router/router.js");
 const buyerFormRoutes = require('./src/BuyerForm/router/BuyForm.js');
-const sellerFormRoutes = require('./src/SellerForm/router/BuyForm.js');
+const sellerFormRoutes = require('./src/SellerForm/router/SellerForm.js');
 // const ChatApp = require("./routes/livechatRoutes.js");
 const cloudinaryRouter = require("./middlewares/cloudnray/cloudinaryRouter.js");
 
