@@ -1,11 +1,10 @@
 const SellerForm = require("../Models/sechma");
 
 exports.createSellerForm = async (req, res) => {
-    const { userInfo, accountDetails, eightDigitCode1, eightDigitCode2, sellerFormMainBuyerGCFCode } = req.body;
+    const { userInfo, accountDetails, eightDigitCode2, sellerFormMainBuyerGCFCode } = req.body;
     const newSellerForm = new SellerForm({
         userInfo,
         accountDetails,
-        ...(eightDigitCode1 && { eightDigitCode1 }), // Set only if present
         ...(eightDigitCode2 && { eightDigitCode2 }), // Set only if present
         sellerFormMainBuyerGCFCode
       });

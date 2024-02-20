@@ -27,16 +27,16 @@ const sellerFormSchema = new mongoose.Schema({
       required: true,
     },
   },
-  eightDigitCode1: {
-    type: String,
-    // required: true,
-    // unique: true,
-    match: /^\d{8}$/,
-    validate: {
-      validator: (value) => value.length === 8,
-      message: props => `${props.path} must be exactly 8 digits long`
-    }
-  },
+  // eightDigitCode1: {
+  //   type: String,
+  //   // required: true,
+  //   // unique: true,
+  //   match: /^\d{8}$/,
+  //   validate: {
+  //     validator: (value) => value.length === 8,
+  //     message: props => `${props.path} must be exactly 8 digits long`
+  //   }
+  // },
   eightDigitCode2: {
     type: String,
     // required: true,
