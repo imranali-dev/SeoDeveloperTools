@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Buyer Forms</title>
+</head>
+<body>
+    <h1>All Buyer Forms</h1>
+
+    <% if (sellerForms.length > 0) { %>
+        <table>
+            <thead>
+                <tr>
+                    <th>Sr NO</th>
+                    <th>User Name</th>
+                    <th>Seller Username</th>
+                    <th>Email</th>
+                    <th>Total Account Type Available</th>
+                    <th>Total Account ID Available</th>
+                    <th>Random Code</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% sellerForms.forEach(sellerForm => { %>
+                    <tr>
+                        <td><%= sellerForm.eightDigitCode %></td>
+
+                        <td><%= sellerForm.userInfo.userName %></td>
+                        <td><%= sellerForm.sellerUserName %></td>
+                        <td><%= sellerForm.userInfo.email %></td>
+                        <td><%= sellerForm.totalAccountTypeAvailable %></td>
+                        <td><%= sellerForm.totalAccountIdAvailable %></td>
+                        <td><%= sellerForm.eightDigitCodeRandom %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    <% } else { %>
+        <p>No buyer forms found.</p>
+    <% } %>
+
+    <a href="/">Home</a>
+</body>
+</html>

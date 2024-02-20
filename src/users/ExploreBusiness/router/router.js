@@ -37,4 +37,7 @@ router.get('/BusinessPages/pages', (req, res) => {
   res.render('BusnisPageHome');
 });
 
+
+
+
 module.exports = router;

@@ -102,7 +102,7 @@ const renderDeleteConfirmation = async (req, res) => {
 
 
   const RederHomePage = async (req, res) => {
-      res.render('BusnisPageHome3');
+      res.render('BusnisPageHome');
     }
 
 const deleteUserById = async (req, res) => {

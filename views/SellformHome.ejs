@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Green Buttons</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    /* Basic button styling */
+.animated-button {
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: sans-serif; /* Choose your preferred font */
+    cursor: pointer; /* Indicate clickable element */
+    text-decoration: none; /* Remove underline */
+    color: white;
+    background-color: #81c784; /* Green color */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    transition: all 0.2s ease-in-out; /* Smooth transitions */
+}
+
+/* Animation on hover */
+.animated-button:hover {
+    transform: translateY(-5px); /* Move down slightly */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+}
+
+/* Centering the buttons */
+.container {
+    text-align: center;
+}
+
+</style>
+<body>
+    <div class="container">
+        <a href="/Seller-form/Api/Page/Create" class="animated-button" role="button">Add Buyer-form- Details</a>
+        <a href="/Seller-form/Api/getAllSellerFormsRen" class="animated-button" role="button">All Seller Forms</a>
+        <a href="/Seller-form/Api/delete" class="animated-button" role="button">Delete Business Details</a>
+    </div>
+</body>
+
+</html>

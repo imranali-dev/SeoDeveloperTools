@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Seller Forms</title>
+</head>
+<body>
+    <h1>All Seller Forms</h1>
+    <% sellerForms.forEach(sellerForm => { %>
+        <h2><%= sellerForm.userInfo.userName %></h2>
+        <p>Number <%= sellerForm.eightDigitCode1 %></p>
+        <p>Email: <%= sellerForm.userInfo.email %></p>
+        <p>Account Type: <%= sellerForm.accountDetails.accountType %></p>
+        <p>Account ID: <%= sellerForm.accountDetails.accountId %></p>
+        <p>Payment Received: <%= sellerForm.accountDetails.accountPaymentReceivedFromBuyer %></p>
+        <p>Number <%= sellerForm.eightDigitCode1 %></p>
+        <p>Code 2: <%= sellerForm.eightDigitCode2 %></p>
+        <p>Main Buyer GCF Code: <%= sellerForm.sellerFormMainBuyerGCFCode %></p>
+        <hr>
+    <% }) %>
+</body>
+</html>
