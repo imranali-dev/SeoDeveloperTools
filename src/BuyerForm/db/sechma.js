@@ -30,28 +30,28 @@ const buyerFormSchema = new mongoose.Schema({
       }
   });
 
-buyerFormSchema.pre('save', async function (next) {
+// buyerFormSchema.pre('save', async function (next) {
     
-    if (!this.eightDigitCodeRandom || !this.eightDigitCode) {
-      try {
-        if (!this.eightDigitCodeRandom) {
-            this.eightDigitCodeRandom = generateRandom8DigitCode();
-          }
-        const sequence = await getNextSequenceValue('buyerForm');
-        this.eightDigitCode = sequence.toString().padStart(8, '0');
-      } catch (error) {
-        console.error('Error generating eight-digit code:', error);
-        const err = new Error('Failed to generate eight-digit code');
-        err.originalError = error;
-        return next(err);
-      }
-    }
-    next();
-  });
+//     if (!this.eightDigitCodeRandom || !this.eightDigitCode) {
+//       try {
+//         if (!this.eightDigitCodeRandom) {
+//             this.eightDigitCodeRandom = generateRandom8DigitCode();
+//           }
+//         const sequence = await getNextSequenceValue('buyerForm');
+//         this.eightDigitCode = sequence.toString().padStart(8, '0');
+//       } catch (error) {
+//         console.error('Error generating eight-digit code:', error);
+//         const err = new Error('Failed to generate eight-digit code');
+//         err.originalError = error;
+//         return next(err);
+//       }
+//     }
+//     next();
+//   });
   
-  function generateRandom8DigitCode() {
-    return Math.floor(10000000 + Math.random() * 90000000).toString();
-  }
+  // function generateRandom8DigitCode() {
+  //   return Math.floor(10000000 + Math.random() * 90000000).toString();
+  // }
 const BuyerForm = mongoose.model('BuyerForm', buyerFormSchema);
 
 module.exports = BuyerForm;
