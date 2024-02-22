@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centered Animated Buttons</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <a href="/buyerPayment-form/users/data" class="animated-button" role="button">Get All Payment-Form Details</a>
+        <a href="/buyerPayment-form/Delete/page" class="animated-button" role="button">Delete Payment-Form Details</a>
+    </div>
+</body>
+
+</html>
+<style>
+    /* Basic button styling */
+.animated-button {
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: sans-serif; /* Choose your preferred font */
+    cursor: pointer; /* Indicate clickable element */
+    text-decoration: none; /* Remove underline */
+    color: white;
+    background-color: #81c784; /* Green color */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    transition: all 0.2s ease-in-out; /* Smooth transitions */
+}
+.animated-button:hover {
+    transform: translateY(-5px); /* Move down slightly */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+}
+
+/* Centering the buttons */
+.container {
+    text-align: center;
+}
+
+</style>

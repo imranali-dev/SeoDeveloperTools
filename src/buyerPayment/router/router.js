@@ -42,12 +42,12 @@ router.get('/users/data', paymentController.renderUserPage);
 
 router.post('/payment', upload.single('paymentScreenshot'), paymentController.createPayment);
 
-// router.delete('/payment/:id', paymentController.deletePayment);
 router.delete('/payment/:email', paymentController.deletePaymentByEmail);
 router.get('/Delete/page', paymentController.renderDeletePage);
 
-// Define route to delete a user by email
-// router.post('/delete/:email', paymentController.deletePaymentByEmail);
+router.get('/PaymentPage/home', (req, res) => {
+    res.render('PaymentPageHome');
+  });
 module.exports = router;
 
 
