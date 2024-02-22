@@ -21,6 +21,7 @@
     "express": "^4.17.1",
     "express-useragent": "^1.0.15",
     "googleapis": "^128.0.0",
+    "gridfs-stream": "^1.1.1",
     "joi": "^17.3.0",
     "jsonwebtoken": "^9.0.2",
     "method-override": "^3.0.0",

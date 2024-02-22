@@ -28,6 +28,7 @@ const Accoutn = require("./routes/PaymentRouter.js");
 const ExploreBusiness = require("./src/users/ExploreBusiness/router/router.js");
 const buyerFormRoutes = require('./src/BuyerForm/router/BuyForm.js');
 const sellerFormRoutes = require('./src/SellerForm/router/SellerForm.js');
+const buyerPaymentRoutes = require('./src/buyerPayment/router/router.js');
 // const ChatApp = require("./routes/livechatRoutes.js");
 const cloudinaryRouter = require("./middlewares/cloudnray/cloudinaryRouter.js");
 
@@ -91,9 +92,10 @@ const connectWithRetry = () => {
       app.use('/socialsell', socialsell)
       app.use('/BuyAccounts', BuyAccountsRoutes)
       app.use('/Account', Accoutn)
-      app.use('/BusnessModel', ExploreBusiness);
+      app.use('/BusnessModel', ExploreBusiness);buyerPaymentRoutes
       app.use('/buyer-form', buyerFormRoutes); // Adjust the base path as needed
       app.use('/Seller-form', sellerFormRoutes); // Adjust the base path as needed
+      app.use('/buyerPayment-form', buyerPaymentRoutes); // Adjust the base path as needed
 
       // app.use('/Chat', ChatApp);
       app.use("/cloudinaryupload", cloudinaryRouter);
