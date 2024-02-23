@@ -22,7 +22,7 @@ exports.createSellerForm = async (req, res) => {
         accountType,
         BuyeruserName,
         accountPaymentReceivedFromBuyer,
-        accountId, // If accountId is meant to be part of accountDetails
+        accountId,
       },
       sellerFormMainBuyerGCFCode,
     });
