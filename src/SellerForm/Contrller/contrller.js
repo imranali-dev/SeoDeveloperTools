@@ -1,37 +1,47 @@
 const SellerForm = require("../Models/sechma");
 
+
 exports.createSellerForm = async (req, res) => {
-    const { userInfo, accountDetails, BuyeruserName,eightDigitCode2, sellerFormMainBuyerGCFCode } = req.body;
-    const newSellerForm = new SellerForm({
-        userInfo,
-        accountDetails,
-        ...(eightDigitCode2 && { eightDigitCode2 }), // Set only if present
-        sellerFormMainBuyerGCFCode,
-        BuyeruserName
-      });
-    newSellerForm.save()
-      .then(savedSellerForm => {
-        res.status(201).json({
-          success: true,
-          message: 'Seller form successfully created!',
-          data: savedSellerForm
-        });
-      })
-      .catch(error => {
-        console.error('Error creating seller form:', error);
-        let errorMessage = 'Failed to create seller form. Please try again.';
-        if (error.name === 'ValidationError') {
-          errorMessage = 'Invalid input data. Please check your data and try again.';
-        } else if (error.name === 'MongoError' && error.code === 11000) {
-          errorMessage = 'Duplicate field value entered. Please check your data and try again.';
-        }
-        res.status(500).json({
-          success: false,
-          message: errorMessage,
-          error: error.message
-        });
-      });
-  };
+  try {
+    const {
+      username,
+      email,
+      accountType,
+      BuyeruserName,
+      accountPaymentReceivedFromBuyer,
+      accountId, // User-provided accountId
+      sellerFormMainBuyerGCFCode,
+    } = req.body;
+
+    const sellerForm = new SellerForm({
+      userInfo: {
+        username,
+        email,
+      },
+      accountDetails: {
+        accountType,
+        BuyeruserName,
+        accountPaymentReceivedFromBuyer,
+        accountId, // If accountId is meant to be part of accountDetails
+      },
+      sellerFormMainBuyerGCFCode,
+    });
+
+    await sellerForm.save();
+
+    res.status(201).json({
+      success: true,
+      message: 'SellerForm created successfully!',
+      data: sellerForm,
+    });
+  } catch (error) {
+    console.error('Error creating SellerForm:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to create SellerForm. Please try again later.',
+    });
+  }
+};
   
   
 exports.getAllSellerForms = async (req, res) => {

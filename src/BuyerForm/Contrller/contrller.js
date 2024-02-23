@@ -2,44 +2,65 @@ const BuyerForm = require("../db/sechma");
 
 
 exports.createBuyerForm = async (req, res) => {
-  try {
-    const {
-      email,
-      userName,
-      sellerUserName,
-      totalAccountTypeAvailable,
-      totalAccountIdAvailable,
-      eightDigitCodeRandom,
-      accountId, 
-    } = req.body;
-
-    const buyerForm = new BuyerForm({
-      userInfo: {
+    try {
+      const {
         email,
         userName,
-      },
-      sellerUserName,
-      totalAccountTypeAvailable,
-      totalAccountIdAvailable,
-      eightDigitCodeRandom,
-      accountId,
-    });
-
-    await buyerForm.save();
-
-    res.status(200).json({
-      success: true,
-      message: 'BuyerForm created successfully!',
-      data: buyerForm,
-    });
-  } catch (error) {
-    console.error('Error creating BuyerForm:', error);
-    res.status(500).json({
-      success: false,
-      error: 'Failed to create BuyerForm. Please try again later.',
-    });
-  }
-};
+        sellerUserName,
+        totalAccountTypeAvailable,
+        totalAccountIdAvailable,
+        eightDigitCodeRandom,
+        accountId,
+      } = req.body;
+  
+      const buyerForm = new BuyerForm({
+        userInfo: {
+          email,
+          userName,
+        },
+        sellerUserName,
+        totalAccountTypeAvailable,
+        totalAccountIdAvailable,
+        eightDigitCodeRandom,
+        accountId,
+      });
+  
+      await buyerForm.save();
+  
+      res.status(201).json({
+        success: true,
+        message: 'BuyerForm created successfully!',
+        data: buyerForm,
+      });
+    } catch (error) {
+      console.error('Error creating BuyerForm:', error);
+  
+      if (error.name === 'ValidationError') {
+        // Mongoose validation error (e.g., required field missing or validation failed)
+        const validationErrors = Object.values(error.errors).map(err => err.message);
+        res.status(400).json({
+          success: false,
+          error: 'Validation error. Please check your input.',
+          validationErrors,
+        });
+    } else if (error.name === 'MongoError' && error.code === 11000) {
+        const duplicatedField = Object.keys(error.keyValue)[0];
+        const duplicatedValue = error.keyValue[duplicatedField];
+      
+        res.status(400).json({
+          success: false,
+          error: `Duplicate key error. The value '${duplicatedValue}' for field '${duplicatedField}' is not unique.`,
+        });
+      
+      } else {
+        res.status(500).json({
+          success: false,
+          error: 'Failed to create BuyerForm. Please try again later.',
+        });
+      }
+    }
+  };
+  
 
 exports.getAllBuyerForms = async (req, res) => {
     try {

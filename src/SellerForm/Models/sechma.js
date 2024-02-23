@@ -1,9 +1,8 @@
-// models/SellerForm.js
 const mongoose = require('mongoose');
 
 const sellerFormSchema = new mongoose.Schema({
   userInfo: {
-    userName: {
+    username: {
       type: String,
       required: true,
     },
@@ -25,45 +24,22 @@ const sellerFormSchema = new mongoose.Schema({
       type: Number,
       required: true,
     },
-  },
-
-  eightDigitCode2: {
-    type: String,
-    // required: true,
-    unique: true,
-    match: /^\d{8}$/,
-    validate: {
-      validator: (value) => value.length === 8,
-      message: props => `${props.path} must be exactly 8 digits long`
-    }
+    accountId: {  
+      type: String,
+      unique: true,
+      required: true,
+    },
   },
   sellerFormMainBuyerGCFCode: {
     type: String,
     required: true,
   },
-});
-
-sellerFormSchema.pre('save', async function (next) {
-    
-
-  
-  if (!this.eightDigitCode2) {
-    try {
-      this.eightDigitCode2 = eightDigitCode2(); // Assuming eightDigitCode2() generates a code
-    } catch (error) {
-      console.error('Error generating eight-digit code 2:', error);
-      return next(new Error('Failed to generate eight-digit code 2'));
-    }
+  createdAt: {
+    type: Date,
+    default: Date.now
   }
-  
-  next();
 });
 
-function eightDigitCode2() {
-  return Math.floor(10000000 + Math.random() * 90000000).toString();
-}
 const SellerForm = mongoose.model('SellerForm', sellerFormSchema);
 
 module.exports = SellerForm;
-
-

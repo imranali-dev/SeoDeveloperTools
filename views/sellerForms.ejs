@@ -29,33 +29,36 @@
     }
   </style>
 <body>
-    <h1>All Seller Forms</h1>
-    <table>
-      <thead>
-        <tr>
-          <th>User Name</th>
-          <th>Email</th>
-          <th>Account Type</th>
-          <th>Buyer User Name</th>
-          <th>Account Payment Received From Buyer</th>
-          <th>Eight Digit Code 2</th>
-          <th>Seller Form Main Buyer GCF Code</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% sellerForms.forEach(sellerForm => { %>
-          <tr>
-            <td><%= sellerForm.userInfo.userName %></td>
-            <td><%= sellerForm.userInfo.email %></td>
-            <td><%= sellerForm.accountDetails.accountType %></td>
-            <td><%= sellerForm.accountDetails.BuyeruserName %></td>
-            <td><%= sellerForm.accountDetails.accountPaymentReceivedFromBuyer %></td>
-            <td><%= sellerForm.eightDigitCode2 %></td>
-            <td><%= sellerForm.sellerFormMainBuyerGCFCode %></td>
-          </tr>
-        <% }) %>
-      </tbody>
-    </table>
+   <h1>All Seller Forms</h1>
+<table>
+  <thead>
+    <tr>
+      <th>User Name</th>
+      <th>Email</th>
+      <th>Account Type</th>
+      <th>Buyer User Name</th>
+      <th>Account Payment Received From Buyer</th>
+      <th>Account ID</th> <!-- Add Account ID column -->
+      <th>Seller Form Main Buyer GCF Code</th>
+      <th>Created At</th> <!-- Add Created At column -->
+    </tr>
+  </thead>
+  <tbody>
+    <% sellerForms.forEach(sellerForm => { %>
+      <tr>
+        <td><%= sellerForm.userInfo.username %></td>
+        <td><%= sellerForm.userInfo.email %></td>
+        <td><%= sellerForm.accountDetails.accountType %></td>
+        <td><%= sellerForm.accountDetails.BuyeruserName %></td>
+        <td><%= sellerForm.accountDetails.accountPaymentReceivedFromBuyer %></td>
+        <td><%= sellerForm.accountDetails.accountId %></td> <!-- Display Account ID -->
+        <td><%= sellerForm.sellerFormMainBuyerGCFCode %></td>
+        <td><%= sellerForm.createdAt %></td> <!-- Display Created At -->
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+
     
     
 </body>
