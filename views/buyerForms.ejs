@@ -3,10 +3,36 @@
 <head>
     <title>All Buyer Forms</title>
 </head>
+<style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+  
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border: 1px solid #ddd;
+    }
+  
+    th {
+      background-color: #f2f2f2;
+    }
+  
+    tr:hover {
+      background-color: #f5f5f5;
+    }
+  
+    .active-row {
+      background-color: #cce5ff;  /* Light blue for the active row */
+    }
+  </style>
+  
 <body>
     <h1>All Buyer Forms</h1>
 
-    <% if (sellerForms.length > 0) { %>
+    <% if (buyerForms.length > 0) { %>
         <table>
             <thead>
                 <tr>
@@ -16,20 +42,21 @@
                     <th>Email</th>
                     <th>Total Account Type Available</th>
                     <th>Total Account ID Available</th>
-                    <th>Random Code</th>
+                    <th>Eight Digit Code</th>
+                    <th>Eight Digit Code Random</th>
                 </tr>
             </thead>
             <tbody>
-                <% sellerForms.forEach(sellerForm => { %>
-                    <tr>
-                        <td><%= sellerForm.eightDigitCode %></td>
-
-                        <td><%= sellerForm.userInfo.userName %></td>
-                        <td><%= sellerForm.sellerUserName %></td>
-                        <td><%= sellerForm.userInfo.email %></td>
-                        <td><%= sellerForm.totalAccountTypeAvailable %></td>
-                        <td><%= sellerForm.totalAccountIdAvailable %></td>
-                        <td><%= sellerForm.eightDigitCodeRandom %></td>
+                <% buyerForms.forEach((buyerForm, index) => { %>
+                    <tr class="<%= index === selectedRowIndex ? 'active-row' : '' %>">
+                        <td><%= index + 1 %></td>
+                        <td><%= buyerForm.userInfo.userName %></td>
+                        <td><%= buyerForm.sellerUserName %></td>
+                        <td><%= buyerForm.userInfo.email %></td>
+                        <td><%= buyerForm.totalAccountTypeAvailable %></td>
+                        <td><%= buyerForm.totalAccountIdAvailable %></td>
+                        <td><%= buyerForm.eightDigitCode %></td>
+                        <td><%= buyerForm.eightDigitCodeRandom %></td>
                     </tr>
                 <% }) %>
             </tbody>
@@ -37,7 +64,9 @@
     <% } else { %>
         <p>No buyer forms found.</p>
     <% } %>
-
+        
+    
+    
     <a href="/">Home</a>
 </body>
 </html>

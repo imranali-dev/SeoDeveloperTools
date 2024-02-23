@@ -85,17 +85,18 @@ exports.deleteSellerFormByCode = async (req, res) => {
 exports.getAllSellerFormsRen = async (req, res) => {
   try {
     const allSellerForms = await SellerForm.find({});
-    
-    res.render('sellerForms', { sellerForms: allSellerForms });
+    res.render('sellerForms', { sellerForms: allSellerForms, selectedRowIndex: -1 });
   } catch (error) {
     console.error('Error retrieving seller forms:', error);
     res.status(500).json({
       success: false,
       message: 'Failed to retrieve seller forms. Please try again.',
-      error: error.message
+      error: error.message,
+      selectedRowIndex: -1  // Add this line
     });
   }
 };
+
 
 
 exports.deleteSellerForm = async (req, res) => {

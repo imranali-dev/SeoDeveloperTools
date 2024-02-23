@@ -3,19 +3,60 @@
 <head>
     <title>All Seller Forms</title>
 </head>
+<style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+  
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border: 1px solid #ddd;
+    }
+  
+    th {
+      background-color: #f2f2f2;
+    }
+  
+    tr:hover {
+      background-color: #f5f5f5;
+    }
+  
+    .active-row {
+      background-color: #cce5ff;  /* Light blue for the active row */
+    }
+  </style>
 <body>
     <h1>All Seller Forms</h1>
-    <% sellerForms.forEach(sellerForm => { %>
-        <h2><%= sellerForm.userInfo.userName %></h2>
-        <p>Number <%= sellerForm.accountPaymentReceivedFromBuyer %></p>
-        <p>Email: <%= sellerForm.userInfo.email %></p>
-        <p>Account Type: <%= sellerForm.accountDetails.accountType %></p>
-        <p>Account Details: <%= sellerForm.accountDetails.accountDetails %></p>
-        <p>Payment Received: <%= sellerForm.accountDetails.accountPaymentReceivedFromBuyer %></p>
-        <p>BuyeruserName <%= sellerForm.BuyeruserName %></p>
-        <p>Code 2: <%= sellerForm.eightDigitCode2 %></p>
-        <p>Main Buyer GCF Code: <%= sellerForm.sellerFormMainBuyerGCFCode %></p>
-        <hr>
-      <% }) %>
+    <table>
+      <thead>
+        <tr>
+          <th>User Name</th>
+          <th>Email</th>
+          <th>Account Type</th>
+          <th>Buyer User Name</th>
+          <th>Account Payment Received From Buyer</th>
+          <th>Eight Digit Code 2</th>
+          <th>Seller Form Main Buyer GCF Code</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% sellerForms.forEach(sellerForm => { %>
+          <tr>
+            <td><%= sellerForm.userInfo.userName %></td>
+            <td><%= sellerForm.userInfo.email %></td>
+            <td><%= sellerForm.accountDetails.accountType %></td>
+            <td><%= sellerForm.accountDetails.BuyeruserName %></td>
+            <td><%= sellerForm.accountDetails.accountPaymentReceivedFromBuyer %></td>
+            <td><%= sellerForm.eightDigitCode2 %></td>
+            <td><%= sellerForm.sellerFormMainBuyerGCFCode %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+    
+    
 </body>
 </html>

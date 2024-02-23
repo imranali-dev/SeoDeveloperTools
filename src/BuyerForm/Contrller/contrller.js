@@ -1,25 +1,46 @@
 const BuyerForm = require("../db/sechma");
 
+
 exports.createBuyerForm = async (req, res) => {
-    try {
-        const { email, userName, eightDigitCodeRandom,sellerUserName, totalAccountTypeAvailable, totalAccountIdAvailable } = req.body;
-        const buyerForm = new BuyerForm({
-            userInfo: {
-                email,
-                userName,
-            },
-            sellerUserName,
-            totalAccountTypeAvailable,
-            totalAccountIdAvailable,
-            eightDigitCodeRandom
-        });
-        await buyerForm.save();
-        res.status(200).json({ success: true, message: 'BuyerForm created successfully!',data:buyerForm});
-    } catch (error) {
-        console.error('Error creating BuyerForm:', error);
-        res.status(500).json({ success: false, error: 'Failed to create BuyerForm. Please try again later.' });
-    }
+  try {
+    const {
+      email,
+      userName,
+      sellerUserName,
+      totalAccountTypeAvailable,
+      totalAccountIdAvailable,
+      eightDigitCodeRandom,
+      accountId, 
+    } = req.body;
+
+    const buyerForm = new BuyerForm({
+      userInfo: {
+        email,
+        userName,
+      },
+      sellerUserName,
+      totalAccountTypeAvailable,
+      totalAccountIdAvailable,
+      eightDigitCodeRandom,
+      accountId,
+    });
+
+    await buyerForm.save();
+
+    res.status(200).json({
+      success: true,
+      message: 'BuyerForm created successfully!',
+      data: buyerForm,
+    });
+  } catch (error) {
+    console.error('Error creating BuyerForm:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Failed to create BuyerForm. Please try again later.',
+    });
+  }
 };
+
 exports.getAllBuyerForms = async (req, res) => {
     try {
         const buyerForms = await BuyerForm.find();
