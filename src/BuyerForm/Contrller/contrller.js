@@ -36,7 +36,6 @@ exports.createBuyerForm = async (req, res) => {
       console.error('Error creating BuyerForm:', error);
   
       if (error.name === 'ValidationError') {
-        // Mongoose validation error (e.g., required field missing or validation failed)
         const validationErrors = Object.values(error.errors).map(err => err.message);
         res.status(400).json({
           success: false,

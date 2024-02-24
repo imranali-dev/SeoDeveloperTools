@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Seller Payments</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border: 1px solid #ddd;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    tr:hover {
+      background-color: #f5f5f5;
+    }
+    .active-row {
+  background-color: #cce5ff;  /* Light blue for the active row */
+  color: #000;  /* Black text for the active row */
+}
+  </style>
+
+</head>
+<body>
+  <h1>Seller Payments</h1>
+  <input type="text" id="search" onkeyup="searchTable()" placeholder="Search for payments..">
+
+  <table id="paymentsTable">
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>User Name</th>
+      <th>Unique Pin</th>
+      <th>Email Address</th>
+      <th>Seller Email Address</th>
+      <th>Account Serial No</th>
+      <th>Account Type</th>
+      <th>Account Price</th>
+      <th>Account Tax</th>
+      <th>Total Account Price</th>
+      <th>Transition Id</th>
+      <th>Transition Id Date</th>
+      <th>Payment Account Name</th>
+      <th>Payment Account Address</th>
+      <th>Select Payment Method</th>
+      <th>Buyer Code</th>
+      <th>Seller Code</th>
+      <th>Transition Screenshot</th>
+      <th>Created At</th>
+    </tr>
+    <% payments.forEach(function(payment) { %>
+      <tr>
+        <td><%= payment.firstName %></td>
+        <td><%= payment.lastName %></td>
+        <td><%= payment.userName %></td>
+        <td><%= payment.uniquePin %></td>
+        <td><%= payment.emailAddress %></td>
+        <td><%= payment.sellerEmailAddress %></td>
+        <td><%= payment.accountSerialNo %></td>
+        <td><%= payment.accountType %></td>
+        <td><%= payment.accountPrice %></td>
+        <td><%= payment.accountTax %></td>
+        <td><%= payment.totalAccountPrice %></td>
+        <td><%= payment.transitionId %></td>
+        <td><%= payment.transitionIdDate %></td>
+        <td><%= payment.paymentAccountName %></td>
+        <td><%= payment.paymentAccountAddress %></td>
+        <td><%= payment.selectPaymentMethod %></td>
+        <td><%= payment.buyerCode %></td>
+        <td><%= payment.sellerCode %></td>
+        <td>
+          <% if (payment.transitionScreenShot) { %>
+            <img src="<%= payment.transitionScreenShot %>" alt="Transition Screenshot" width="100">
+          <% } else { %>
+            No screenshot available
+          <% } %>
+        </td>
+        
+        
+        <td><%= payment.createdAt %></td>
+      </tr>
+    <% }); %>
+  </table>
+</body>
+<script>
+  function showDetails(button) {
+    const row = button.parentNode.parentNode;
+    const cells = Array.from(row.children);
+    alert(cells.map(cell => cell.innerText).join('\n'));
+  }
+</script>
+<script>
+  function searchTable() {
+  const input = document.getElementById('search');
+  const filter = input.value.toUpperCase();
+  const table = document.getElementById('paymentsTable');
+  const trs = table.getElementsByTagName('tr');
+
+  for (let i = 1; i < trs.length; i++) { // Start from 1 to skip the header row
+    let found = false;
+    const tds = trs[i].getElementsByTagName('td');
+    for (let j = 0; j < tds.length; j++) {
+      if (tds[j].innerHTML.toUpperCase().indexOf(filter) > -1) {
+        found = true;
+        break;
+      }
+    }
+    trs[i].style.display = found ? '' : 'none';
+  }
+}
+
+</script>
+</html>

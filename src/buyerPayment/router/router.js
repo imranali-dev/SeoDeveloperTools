@@ -48,5 +48,8 @@ router.get('/Delete/page', paymentController.renderDeletePage);
 router.get('/PaymentPage/home', (req, res) => {
     res.render('PaymentPageHome');
   });
+  router.get('/paymentPage/render/home', (req, res) => {
+    res.render('renderHomePagePayemnt');
+  });
 module.exports = router;
 
