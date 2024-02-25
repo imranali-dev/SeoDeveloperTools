@@ -4,7 +4,7 @@ const router = express.Router();
 const buyerFormController = require('../Contrller/contrller');
 const { getAllBuyerFormsRen } = require('../Contrller/Renderpage');
 
-router.post('/Create', buyerFormController.createBuyerForm);
+router.post('/Creating', buyerFormController.createBuyerForm);
 router.get('/:email', buyerFormController.getBuyerFormByEmail);
 router.get('/', buyerFormController.getAllBuyerForms);
 router.delete('/:email', buyerFormController.deleteBuyerFormByEmail);

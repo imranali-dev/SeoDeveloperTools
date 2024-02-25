@@ -4,9 +4,6 @@ const paymentController = require('../contrller/buyerCon'); // adjust the path t
 const upload = require('../../../Storage');
 const mongoose = require('mongoose');
 const Grid = require('gridfs-stream');
-
-
-// Create a GridFS stream
 const conn = mongoose.connection;
 let gfs;
 conn.once('open', () => {
@@ -14,7 +11,6 @@ conn.once('open', () => {
   gfs.collection('uploads');
 });
 
-// Route for serving files
 router.get('/paymentScreenshot/:filename', (req, res) => {
   gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
     if (!file || file.length === 0) {
@@ -23,9 +19,7 @@ router.get('/paymentScreenshot/:filename', (req, res) => {
       });
     }
 
-    // Check if image
     if (file.contentType === 'image/jpeg' || file.contentType === 'image/png') {
-      // Read output to browser
       const readstream = gfs.createReadStream(file.filename);
       readstream.pipe(res);
     } else {

@@ -111,7 +111,7 @@ exports.getAllPayments = async (req, res) => {
 
   } catch (error) {
     if (error.name === 'ValidationError') {
-      return res.status(BAD_REQUEST_ERROR).json({ message: error.message }); // Provide validation error details
+      return res.status(BAD_REQUEST_ERROR).json({ message: error.message }); 
     } else if (error.name === 'MongoError' && error.code === DUPLICATE_KEY_ERROR_CODE) {
       const duplicateField = Object.keys(error.keyValue)[0];
       return res.status(BAD_REQUEST_ERROR).json({ message: `Duplicate key error for field: ${duplicateField}` });

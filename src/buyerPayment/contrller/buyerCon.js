@@ -2,7 +2,6 @@ const Payment = require("../Model/schma");
 
 exports.createPayment = async (req, res) => {
     try {
-      // Validate if required fields are present in the request body
       const requiredFields = ['firstName', 'lastName', 'userName', 'email', 'accountType', 'accountPrice'];
       for (const field of requiredFields) {
         if (!req.body[field]) {
@@ -11,9 +10,7 @@ exports.createPayment = async (req, res) => {
           });
         }
       }
-  
-      // Add the uploaded file's filename to the request body
-      if (req.file) {
+        if (req.file) {
         req.body.paymentScreenshot = req.file.filename;
       }
   
@@ -25,7 +22,6 @@ exports.createPayment = async (req, res) => {
         data: savedPayment
       });
     } catch (error) {
-      // Handle validation errors
       if (error.name === 'ValidationError') {
         const validationErrors = Object.values(error.errors).map(err => err.message);
         return res.status(400).json({
@@ -69,7 +65,7 @@ exports.getUserData = async (req, res) => {
     let query = {};
 
     if (id) {
-      query._id = id; // Assuming id is the MongoDB ObjectId
+      query._id = id; 
     } else if (email) {
       query.email = email;
     } else if (sellerEmail) {
@@ -151,7 +147,6 @@ exports.deletePaymentByEmail = async (req, res) => {
   }
 };
 
-// Assuming you have a 'views/deletePage.ejs' file
 exports.renderDeletePage = (req, res) => {
     res.render('deletePayementuser');
   };

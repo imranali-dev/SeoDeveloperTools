@@ -94,11 +94,10 @@ const connectWithRetry = () => {
       app.use('/BuyAccounts', BuyAccountsRoutes)
       app.use('/Account', Accoutn)
       app.use('/BusnessModel', ExploreBusiness);buyerPaymentRoutes
-      app.use('/buyer-form', buyerFormRoutes); // Adjust the base path as needed
-      app.use('/Seller-form', sellerFormRoutes); // Adjust the base path as needed
-      app.use('/buyerPayment-form', buyerPaymentRoutes); // Adjust the base path as needed
-      app.use('/SellerPayment-form', SellerPayement); // Adjust the base path as needed
-
+      app.use('/buyer-form', buyerFormRoutes); 
+      app.use('/Seller-form', sellerFormRoutes); 
+      app.use('/buyerPayment-form', buyerPaymentRoutes); 
+      app.use('/SellerPayment-form', SellerPayement); 
       // app.use('/Chat', ChatApp);
       app.use("/cloudinaryupload", cloudinaryRouter);
 

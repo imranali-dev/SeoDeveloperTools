@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const SellerPayment = require('../contrllerSellerPayment/index'); // Or adjust based on your file structure
+const SellerPayment = require('../contrllerSellerPayment/index');
 const upload = require('../../../Storage');
 const mongoose = require('mongoose');
 const Grid = require('gridfs-stream');
@@ -11,7 +11,6 @@ conn.once('open', () => {
     gfs.collection('uploads');
 });
 
-// Route for serving files
 router.get('/transitionScreenShot/:filename', (req, res) => {
     gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
         if (!file || file.length === 0) {
