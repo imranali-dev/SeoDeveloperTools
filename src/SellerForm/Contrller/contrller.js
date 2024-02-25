@@ -1,29 +1,28 @@
 const SellerForm = require("../Models/sechma");
 
 
+const { validationResult } = require('express-validator');
+
 exports.createSellerForm = async (req, res) => {
   try {
+    const validationErrors = validationResult(req);
+    if (!validationErrors.isEmpty()) {
+      return res.status(400).json({
+        success: false,
+        error: 'Validation error. Please check your input.',
+        validationErrors: validationErrors.array(),
+      });
+    }
+
     const {
-      username,
-      email,
-      accountType,
-      BuyeruserName,
-      accountPaymentReceivedFromBuyer,
-      accountId, 
+      userInfo,
+      accountDetails,
       sellerFormMainBuyerGCFCode,
     } = req.body;
 
     const sellerForm = new SellerForm({
-      userInfo: {
-        username,
-        email,
-      },
-      accountDetails: {
-        accountType,
-        BuyeruserName,
-        accountPaymentReceivedFromBuyer,
-        accountId,
-      },
+      userInfo,
+      accountDetails,
       sellerFormMainBuyerGCFCode,
     });
 
@@ -36,12 +35,30 @@ exports.createSellerForm = async (req, res) => {
     });
   } catch (error) {
     console.error('Error creating SellerForm:', error);
-    res.status(500).json({
-      success: false,
-      error: 'Failed to create SellerForm. Please try again later.',
-    });
+
+    if (error.name === 'ValidationError') {
+      res.status(400).json({
+        success: false,
+        error: 'Validation error. Please check your input.',
+        validationErrors: Object.values(error.errors).map((err) => err.message),
+      });
+    } else if (error.name === 'MongoError' && error.code === 11000) {
+      const duplicatedField = Object.keys(error.keyValue)[0];
+      const duplicatedValue = error.keyValue[duplicatedField];
+
+      res.status(400).json({
+        success: false,
+        error: `Duplicate key error. The value '${duplicatedValue}' for field '${duplicatedField}' is not unique.`,
+      });
+    } else {
+      res.status(500).json({
+        success: false,
+        error: 'Failed to create SellerForm. Please try again later.',
+      });
+    }
   }
 };
+
   
   
 exports.getAllSellerForms = async (req, res) => {

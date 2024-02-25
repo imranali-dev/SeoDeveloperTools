@@ -24,11 +24,7 @@ const sellerFormSchema = new mongoose.Schema({
       type: Number,
       required: true,
     },
-    accountId: {  
-      type: String,
-      unique: true,
-      required: true,
-    },
+
   },
   sellerFormMainBuyerGCFCode: {
     type: String,
