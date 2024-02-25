@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const sellerFormController = require('../Contrller/contrller');
 const { getAllSellerFormsRen } = require('../Contrller/Renderpage');
-router.post('/Create', sellerFormController.createSellerForm);
+router.post('/Createing', sellerFormController.createSellerForm);
 router.get('/:email', sellerFormController.getSellerFormByEmail);
 router.get('/get', sellerFormController.getAllSellerForms);
 router.get('/Api/getAllSellerFormsRen',getAllSellerFormsRen);

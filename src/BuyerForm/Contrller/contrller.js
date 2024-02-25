@@ -13,8 +13,7 @@ exports.createBuyerForm = async (req, res) => {
     }
 
     const {
-      email,
-      userName,
+      userInfo,
       sellerUserName,
       totalAccountTypeAvailable,
       totalAccountIdAvailable,
@@ -23,10 +22,7 @@ exports.createBuyerForm = async (req, res) => {
     } = req.body;
 
     const buyerForm = new BuyerForm({
-      userInfo: {
-        email,
-        userName,
-      },
+      userInfo,
       sellerUserName,
       totalAccountTypeAvailable,
       totalAccountIdAvailable,
@@ -66,7 +62,6 @@ exports.createBuyerForm = async (req, res) => {
     }
   }
 };
-
   
 
 exports.getAllBuyerForms = async (req, res) => {
