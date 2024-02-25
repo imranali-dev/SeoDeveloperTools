@@ -151,9 +151,6 @@ exports.renderDeletePage = (req, res) => {
     res.render('deletePayementuser');
   };
   
-
-
-
 exports.renderUserPage = async (req, res) => {
   try {
     const users = await Payment.find();
