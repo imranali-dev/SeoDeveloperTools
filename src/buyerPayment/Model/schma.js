@@ -13,7 +13,7 @@ const PaymentSchema = new Schema({
   accountPrice: Number,
   accountTax: { type: Number, default: 0.00 },
   totalAccountPrice: Number,
-  adminPayment: String,
+  
   paymentScreenshot: String,
   transitionId: String,
   transitionData: String,

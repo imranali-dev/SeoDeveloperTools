@@ -98,7 +98,6 @@ const connectWithRetry = () => {
       app.use('/Seller-form', sellerFormRoutes); 
       app.use('/buyerPayment-form', buyerPaymentRoutes); 
       app.use('/SellerPayment-form', SellerPayement); 
-      // app.use('/Chat', ChatApp);
       app.use("/cloudinaryupload", cloudinaryRouter);
 
       // Generic Error Handling Middleware

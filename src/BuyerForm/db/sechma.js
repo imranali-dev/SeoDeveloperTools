@@ -16,10 +16,7 @@ const buyerFormSchema = new mongoose.Schema({
       message: props => `${props.path} must be exactly 8 digits long`
     }
   },
-  accountId: {
-    type: String,
-    unique: true,
-  },
+
   createdAt: {
     type: Date,
     default: Date.now

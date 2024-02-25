@@ -22,7 +22,6 @@
                 <th>Account Price</th>
                 <th>Account Tax</th>
                 <th>Total Account Price</th>
-                <th>Admin Payment</th>
                 <th>Payment Screenshot</th>
                 <th>Transaction ID</th>
                 <th>Transaction Data</th>
@@ -64,9 +63,7 @@
                     <td>
                         <%= user.totalAccountPrice %>
                     </td>
-                    <td>
-                        <%= user.adminPayment %>
-                    </td>
+                
                     <td>
                         <% if (user.paymentScreenshot) { %>
                             <img src="/buyerPayment-form/paymentScreenshot/<%= user.paymentScreenshot %>"

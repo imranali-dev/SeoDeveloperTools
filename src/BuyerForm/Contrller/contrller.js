@@ -18,7 +18,6 @@ exports.createBuyerForm = async (req, res) => {
       totalAccountTypeAvailable,
       totalAccountIdAvailable,
       eightDigitCodeRandom,
-      accountId,
     } = req.body;
 
     const buyerForm = new BuyerForm({
@@ -27,7 +26,6 @@ exports.createBuyerForm = async (req, res) => {
       totalAccountTypeAvailable,
       totalAccountIdAvailable,
       eightDigitCodeRandom,
-      accountId,
     });
 
     await buyerForm.save();

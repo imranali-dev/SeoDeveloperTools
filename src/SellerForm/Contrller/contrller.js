@@ -9,7 +9,7 @@ exports.createSellerForm = async (req, res) => {
       accountType,
       BuyeruserName,
       accountPaymentReceivedFromBuyer,
-      accountId, // User-provided accountId
+      accountId, 
       sellerFormMainBuyerGCFCode,
     } = req.body;
 
