@@ -9,10 +9,10 @@ const buyerFormSchema = new mongoose.Schema({
   totalAccountTypeAvailable: String,
   totalAccountIdAvailable: Number,
   eightDigitCodeRandom: {
-    type: Number,
+    type: String,
     match: /^\d{8}$/,
     validate: {
-      validator: (value) => value.length === 8 && /^\d+$/.test(value), // Ensure only digits
+      validator: (value) => value.length === 8 && /^\d+$/.test(value),
       message: props => `${props.path} must be exactly 8 digits long`
     }
   },
