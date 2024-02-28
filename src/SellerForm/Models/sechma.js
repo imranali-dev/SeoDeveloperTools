@@ -42,3 +42,4 @@ const sellerFormSchema = new mongoose.Schema({
 const SellerForm = mongoose.model('SellerForm', sellerFormSchema);
 
 module.exports = SellerForm;
+

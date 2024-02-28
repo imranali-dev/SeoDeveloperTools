@@ -38,8 +38,9 @@
       <th>Account Type</th>
       <th>Buyer User Name</th>
       <th>Account Payment Received From Buyer</th>
-      <th>Seller Form Main Buyer GCF Code</th>
-      <th>Created At</th> <!-- Add Created At column -->
+      <th> Account Id</th>
+      <th>Seller Form Main Buyer GCF Code</th> 
+      <th>Created At</th> 
     </tr>
   </thead>
   <tbody>
@@ -50,8 +51,9 @@
         <td><%= sellerForm.accountDetails.accountType %></td>
         <td><%= sellerForm.accountDetails.BuyeruserName %></td>
         <td><%= sellerForm.accountDetails.accountPaymentReceivedFromBuyer %></td>
+        <td><%= sellerForm.accountDetails.accountId %></td>
         <td><%= sellerForm.sellerFormMainBuyerGCFCode %></td>
-        <td><%= sellerForm.createdAt %></td> <!-- Display Created At -->
+        <td><%= sellerForm.createdAt %></td> 
       </tr>
     <% }) %>
   </tbody>
