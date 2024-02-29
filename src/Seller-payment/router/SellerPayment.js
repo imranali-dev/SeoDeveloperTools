@@ -7,28 +7,30 @@ const Grid = require('gridfs-stream');
 const conn = mongoose.connection;
 let gfs;
 conn.once('open', () => {
-    gfs = Grid(conn.db, mongoose.mongo);
-    gfs.collection('uploads');
+  gfs = Grid(conn.db, mongoose.mongo);
+  gfs.collection('uploads');
 });
 
-router.get('/transitionScreenShot/:filename', (req, res) => {
+router.get('/paymentScreenshot/:filename', (req, res) => {
     gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
-        if (!file || file.length === 0) {
-            return res.status(404).json({
-                err: 'No file exists'
-            });
-        }
-
-        if (file.contentType === 'image/jpeg' || file.contentType === 'image/png') {
-            const readstream = gfs.createReadStream(file.filename);
-            readstream.pipe(res);
-        } else {
-            res.status(404).json({
-                err: 'Not an image'
-            });
-        }
+      if (!file || file.length === 0) {
+        return res.status(404).json({
+          err: 'No file exists'
+        });
+      }
+  
+      if (file.contentType.startsWith('image/')) {
+        const readstream = gfs.createReadStream(file.filename);
+        readstream.pipe(res);
+      } else {
+        res.status(404).json({
+          err: 'Not an image'
+        });
+      }
     });
-});
+  });
+  
+
 router.delete('/:emailAddress', SellerPayment.deleteUserByEmail);
 router.get('/Delete/page', SellerPayment.renderDeletePage);
 

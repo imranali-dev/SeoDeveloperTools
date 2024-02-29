@@ -43,6 +43,7 @@
                     <th>Total Account Type Available</th>
                     <th>Total Account ID Available</th>
                     <th>Eight Digit Code</th>
+                    <th> Date And Time</th>
                 </tr>
             </thead>
             <tbody>
@@ -55,6 +56,8 @@
                         <td><%= buyerForm.totalAccountTypeAvailable %></td>
                         <td><%= buyerForm.totalAccountIdAvailable %></td>
                         <td><%= buyerForm.eightDigitCodeRandom %></td>
+                        <td><%= buyerForm.createdAt %></td>
+
                     </tr>
                 <% }) %>
             </tbody>
