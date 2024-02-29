@@ -30,7 +30,6 @@ const buyerFormRoutes = require('./src/BuyerForm/router/BuyForm.js');
 const sellerFormRoutes = require('./src/SellerForm/router/SellerForm.js');
 const buyerPaymentRoutes = require('./src/buyerPayment/router/router.js');
 const SellerPayement = require('./src/Seller-payment/router/SellerPayment.js');
-
 // const ChatApp = require("./routes/livechatRoutes.js");
 const cloudinaryRouter = require("./middlewares/cloudnray/cloudinaryRouter.js");
 
@@ -56,12 +55,12 @@ const connectWithRetry = () => {
       
       app.use(cors(corsOptions));
       
-      app.use(express.static(path.join(__dirname, 'public')));
+      
       app.use(useragent.express());
       app.use(bodyParser.urlencoded({ extended: true }));
       app.use(express.json()); // for parsing application/json
       app.use(express.urlencoded({ extended: true }));
-      app.use(express.static(__dirname + "/public"));
+      // app.use(express.static(__dirname + "/public"));
       app.use("/cloudinaryupload", express.static("cloudinaryupload"));
       app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 

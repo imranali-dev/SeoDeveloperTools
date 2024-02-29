@@ -19,9 +19,10 @@ app.use("/uploads", express.static("uploads"));
 
           
 cloudinary.config({ 
-  cloud_name: '*******', 
-  api_key: '******', 
-  api_secret: '*********' 
+	cloud_name: 'dpqks8bvs',
+	api_key: '845448596562755',
+	api_secret: 'GKu1_IPbQITbsqLN0zjh8HMMq6o',
+	secure: true
 });
 
 async function uploadToCloudinary(locaFilePath) { 

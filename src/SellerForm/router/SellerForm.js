@@ -4,10 +4,11 @@ const router = express.Router();
 const sellerFormController = require('../Contrller/contrller');
 const { getAllSellerFormsRen } = require('../Contrller/Renderpage');
 router.post('/Creats', sellerFormController.createSellerForm);
-router.get('/:email', sellerFormController.getSellerFormByEmail);
+// router.get('/:email', sellerFormController.getSellerFormByEmail);
+router.get('/geting', sellerFormController.getSellers);
 router.get('/get', sellerFormController.getAllSellerForms);
 router.get('/Api/getAllSellerFormsRen',getAllSellerFormsRen);
-router.delete('/:email', sellerFormController.deleteSellerFormByEmail);
+// router.delete('/:email', sellerFormController.deleteSellerFormByEmail);
 router.delete('/delete', sellerFormController.deleteSellerForm);
 router.delete('/:eightDigitCode', sellerFormController.deleteSellerFormByCode);
 router.get('/Api/delete', (req, res) => {
