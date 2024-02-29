@@ -31,7 +31,7 @@ router.get('/paymentScreenshot/:filename', (req, res) => {
 });
 
 router.get('/payments', paymentController.getAllPayments);
-// router.get('/user', paymentController.getUserData);
+router.get('/user', paymentController.getUserData);
 router.get('/users/data', paymentController.renderUserPage);
 
 router.post('/payment', upload.single('paymentScreenshot'), paymentController.createPayment);
