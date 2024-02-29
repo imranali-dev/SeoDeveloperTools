@@ -6,7 +6,7 @@ const SellerPaymt = new Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   userName: { type: String, required: true },
-  uniquePin: { type: Number, required: true },
+  uniquePin: { type: Number, required: true,unique:true },
   emailAddress: { type: String, required: true },
   sellerEmailAddress: { type: String, required: true },
   accountSerialNo: { type: Number, required: true },
@@ -23,6 +23,13 @@ const SellerPaymt = new Schema({
   sellerCode: { type: String, required: true },
   transitionScreenShot: { type: String, required: true },
   createdAt: { type: Date, default: Date.now }
+});
+
+SellerPaymt.pre('save', function (next) {
+  if (!this.uniquePin) {
+    this.uniquePin = Math.floor(Math.random() * 900000) + 100000;
+  }
+  next();
 });
 
 SellerPaymt.post('save', function(error, doc, next) {
