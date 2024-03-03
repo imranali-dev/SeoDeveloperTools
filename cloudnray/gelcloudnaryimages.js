@@ -13,7 +13,6 @@ async function getAllImages(req, res, next) {
     }
 }
 
-// Export the route
 module.exports = {
     getAllImages,
 };

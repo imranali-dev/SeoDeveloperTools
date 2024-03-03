@@ -1,9 +1,54 @@
-const SellerPayment = require("../model/Model"); 
-const { validationResult } = require('express-validator'); 
+const SellerPayment = require("../model/Model");
+const { validationResult } = require('express-validator');
+const sendMail = require("../middlewares/mailsending");
 
 const DUPLICATE_KEY_ERROR_CODE = 11000;
 const INTERNAL_SERVER_ERROR = 500;
 const BAD_REQUEST_ERROR = 400;
+const fs = require('fs');
+const generatePDF = (formData) => {
+  const PDFDocument = require('pdfkit');
+  const fs = require('fs');
+  const path = require('path');
+
+  const directory = 'invoices';
+  const filePath = path.join(directory, `invoice_${formData._id}.pdf`);
+
+  if (!fs.existsSync(directory)) {
+    fs.mkdirSync(directory);
+  }
+  try {
+    const doc = new PDFDocument();
+    const filePath = `invoices/invoice_${formData._id}.pdf`; 
+    const stream = fs.createWriteStream(filePath);
+
+    doc.pipe(stream);
+    doc.text(`Name: ${formData.firstName} ${formData.lastName}`);
+    doc.text(`Username: ${formData.userName}`);
+    doc.text(`Email: ${formData.emailAddress}`);
+    doc.text(`Unique Pin Type: ${formData.uniquePin}`);
+    doc.text(`Account Serial No.: ${formData.accountSerialNo}`);
+    doc.text(`Account Type: ${formData.accountType}`);
+    doc.text(`Account Price: ${formData.accountPrice}`);
+    doc.text(`Account Tax: ${formData.accountTax}`);
+    doc.text(`Total Account Price: ${formData.totalAccountPrice}`);
+
+    doc.text(`Transaction ID: ${formData.transitionId}`);
+    doc.text(`Transaction Date: ${formData.transitionIdDate}`);
+
+    doc.text(`Payment Account Name: ${formData.paymentAccountName}`);
+    doc.text(`Payment Account Address: ${formData.paymentAccountAddress}`);
+    doc.text(`Payment Method: ${formData.selectPaymentMethod}`);
+
+    doc.text(`Buyer Code: ${formData.buyerCode}`); 
+    doc.text(`Seller Code: ${formData.sellerCode}`); 
+    doc.end();
+    return filePath;
+  } catch (error) {
+    console.error("Error generating PDF:", error);
+    throw new Error("Error generating PDF");
+  }
+};
 
 exports.createPayment = async (req, res) => {
   const errors = validationResult(req);
@@ -53,10 +98,43 @@ exports.createPayment = async (req, res) => {
       sellerCode,
       transitionScreenShot,
     });
-
     const savedSellerPayment = await newSellerPayment.save();
+    const pdfFilePath = await generatePDF(savedSellerPayment);
+    const selectedFields = {
+      firstName: savedSellerPayment.firstName,
+      lastName: savedSellerPayment.lastName,
+      userName:savedSellerPayment.userName,
+      uniquePin:savedSellerPayment.uniquePin,
+      emailAddress:savedSellerPayment.emailAddress,
+      sellerEmailAddress:savedSellerPayment.sellerEmailAddress,
+      accountSerialNo:savedSellerPayment.accountSerialNo,
+      accountType:savedSellerPayment.accountType,
+      accountPrice:savedSellerPayment.accountPrice,
+      accountTax:savedSellerPayment.accountTax,
+      totalAccountPrice:savedSellerPayment.totalAccountPrice,
+      transitionId:savedSellerPayment.transitionId,
+      transitionIdDate:savedSellerPayment.transitionIdDate,
+      paymentAccountName:savedSellerPayment.paymentAccountName,
+      paymentAccountAddress:savedSellerPayment.paymentAccountAddress,
+      selectPaymentMethod:savedSellerPayment.selectPaymentMethod,
+      selectPaymentMethod:savedSellerPayment.selectPaymentMethod,
+      sellerCode:savedSellerPayment.sellerCode,
+      transitionScreenShot:savedSellerPayment.transitionScreenShot,
+    };
+    const userEmail = savedSellerPayment.emailAddress;
+    const sellerEmail = savedSellerPayment.sellerEmailAddress;
+    const { userResult, sellerResult } = await sendMail(selectedFields, pdfFilePath);
 
-    return res.status(201).json(savedSellerPayment);
+    if (!userResult.success || !sellerResult.success) {
+      try {
+        console.error('Error sending email(s).');
+        // You can uncomment the PDF deletion logic if needed
+      } catch (error) {
+        console.error('Error deleting PDF file:', error);
+      }
+    }
+
+    return res.status(201).json({ ...savedSellerPayment._doc, pdfFilePath });
 
   } catch (error) {
     if (error.name === 'ValidationError') {
@@ -70,6 +148,7 @@ exports.createPayment = async (req, res) => {
     }
   }
 };
+
 
 
 exports.deleteUserByEmail = async (req, res) => {
@@ -111,7 +190,7 @@ exports.getAllPayments = async (req, res) => {
 
   } catch (error) {
     if (error.name === 'ValidationError') {
-      return res.status(BAD_REQUEST_ERROR).json({ message: error.message }); 
+      return res.status(BAD_REQUEST_ERROR).json({ message: error.message });
     } else if (error.name === 'MongoError' && error.code === DUPLICATE_KEY_ERROR_CODE) {
       const duplicateField = Object.keys(error.keyValue)[0];
       return res.status(BAD_REQUEST_ERROR).json({ message: `Duplicate key error for field: ${duplicateField}` });
@@ -123,7 +202,7 @@ exports.getAllPayments = async (req, res) => {
 };
 exports.getAllPaymentsPages = async (req, res) => {
   const payments = await SellerPayment.find()
-//   .sort({ createdAt: 'desc' }); // Example sorting
+  //   .sort({ createdAt: 'desc' }); // Example sorting
 
   res.render('SellerpaymentsDetails', { payments });
 };
@@ -131,11 +210,10 @@ exports.getAllPaymentsPages = async (req, res) => {
 
 
 exports.renderDeletePage = (req, res) => {
-    res.render('SellerpaymentsDelete');
-  };
+  res.render('SellerpaymentsDelete');
+};
 
 
-  exports.renderHomePage = (req, res) => {
-    res.render('SellerpaymentsHomePage');
-  };
-  
+exports.renderHomePage = (req, res) => {
+  res.render('SellerpaymentsHomePage');
+};

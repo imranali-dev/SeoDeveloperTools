@@ -15,7 +15,7 @@ const SellerPaymt = new Schema({
   accountTax: { type: Number, required: true },
   totalAccountPrice: { type: Number, required: true },
   transitionId: { type: String, required: true },
-  transitionIdDate: { type: String, required: true },
+  transitionIdDate: { type: String },
   paymentAccountName: { type: String, required: true },
   paymentAccountAddress: { type: String, required: true },
   selectPaymentMethod: { type: String, required: true },
