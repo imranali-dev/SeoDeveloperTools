@@ -128,7 +128,6 @@ exports.createPayment = async (req, res) => {
     if (!userResult.success || !sellerResult.success) {
       try {
         console.error('Error sending email(s).');
-        // You can uncomment the PDF deletion logic if needed
       } catch (error) {
         console.error('Error deleting PDF file:', error);
       }
