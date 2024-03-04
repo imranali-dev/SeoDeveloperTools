@@ -21,6 +21,7 @@ async function sendMail(sellerPayment, pdfFilePath) {
 
   const userMailOptions = {
     from: 'seotoolers.com Company',
+    cc:"holdseotoolers@gmail.com",
     to: userEmailAddress, 
 
     subject: 'Transition Details for Seller Payment',

