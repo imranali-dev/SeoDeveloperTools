@@ -3,76 +3,238 @@
 <head>
   <title>Seller Payments</title>
   <style>
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-    th, td {
-      padding: 12px;
-      text-align: left;
-      border: 1px solid #ddd;
-    }
-    th {
-      background-color: #f2f2f2;
-    }
-    tr:hover {
-      background-color: #f5f5f5;
-    }
-    .active-row {
-  background-color: #cce5ff;  /* Light blue for the active row */
-  color: #000;  /* Black text for the active row */
+    /* core styles for table */
+
+.table {
+  width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 1px 2px 0 rgba(0, 0, 0, 0.24);
+  background-color: var(--tableBgColor, #fff);
 }
-  </style>
+
+.table__thead {
+  background-color: var(--tableTitleBgColor);
+  color: var(--tableTitleTextColor);
+}
+
+.table__mobile-caption {
+  display: none;
+}
+
+.table__td,
+.table__th {
+  padding: var(--tableCellPadding, 20px);
+  box-sizing: border-box;
+}
+
+@media screen and (min-width: 769px) {
+  .table__tr:hover {
+    background-color: var(--tableRowBgColorHover);
+  }
+
+  .table__td:first-child,
+  .table__th:first-child {
+    width: 30%;
+    text-align: left;
+  }
+
+  .table__td,
+  .table__th {
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .table,
+  .table__thead,
+  .table__tbody,
+  .table__tr {
+    display: block;
+  }
+
+  .table__td {
+    display: flex;
+  }
+
+  .table__head {
+    display: none;
+  }
+
+  .table__mobile-title {
+    background-color: var(--tableTitleBgColor);
+    color: var(--tableTitleTextColor);
+  }
+
+  .table__td {
+    border-bottom: 1px solid var(--tableSeparatorColor);
+  }
+
+  .table__td:last-of-type {
+    border-bottom: none;
+  }
+
+  .table__mobile-caption,
+  .table__value {
+    display: block;
+    width: 50%;
+    box-sizing: border-box;
+  }
+
+  .table__mobile-caption {
+    padding-right: 2%;
+  }
+}
+
+/* demo styles for table */
+
+.table {
+  --tableCellPadding: 2rem;
+  --tableTitleBgColor: #5668ca;
+  --tableTitleTextColor: #fff;
+  --tableRowBgColorHover: #f0f0f0;
+  --tableSeparatorColor: #eee;
+}
+
+/*
+* demo page
+*/
+
+@media screen and (min-width: 768px) {
+  html {
+    font-size: 62.5%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  html {
+    font-size: 50%;
+  }
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Open Sans", "Ubuntu", "Fira Sans", "Helvetica Neue", sans-serif;
+  font-size: 1.4rem;
+  background-color: #f0f0f0;
+  color: #222;
+  margin: 0;
+  -webkit-overflow-scrolling: touch;
+}
+
+a {
+  text-decoration: none;
+  color: #5668ca;
+}
+
+a:hover,
+a:focus {
+  text-decoration: underline;
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.page__demo {
+  flex-grow: 1;
+}
+
+.main-container {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  max-width: 1000px;
+
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.page__container {
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+}
+
+.footer {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  text-align: center;
+  font-size: 1.4rem;
+}
+
+@media screen and (min-width: 641px) {
+  .footer__container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .melnik909 {
+    margin-left: 2rem;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .melnik909 {
+    display: none;
+  }
+}
+
+</style>
 
 </head>
 <body>
   <h1>Seller Payments</h1>
   <input type="text" id="search" onkeyup="searchTable()" placeholder="Search for payments..">
 
-  <table id="paymentsTable">
-    <tr>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>User Name</th>
-      <th>Unique Pin</th>
-      <th>Email Address</th>
-      <th>Seller Email Address</th>
-      <th>Account Serial No</th>
-      <th>Account Type</th>
-      <th>Account Price</th>
-      <th>Account Tax</th>
-      <th>Total Account Price</th>
-      <th>Transition Id</th>
-      <th>Transition Id Date</th>
-      <th>Payment Account Name</th>
-      <th>Payment Account Address</th>
-      <th>Select Payment Method</th>
-      <th>Buyer Code</th>
-      <th>Seller Code</th>
-      <th>Transition Screenshot</th>
-      <th>Created At</th>
+  <table id="paymentsTable" class="table">
+    <thead class="table__thead">
+      <tr class="table__head">
+      <th class="table__th">First Name</th>
+      <th class="table__th">Last Name</th>
+      <th class="table__th">User Name</th>
+      <th class="table__th">Unique Pin</th>
+      <th class="table__th">Email Address</th>
+      <th class="table__th">Seller Email Address</th>
+      <th class="table__th">Account Serial No</th>
+      <th class="table__th">Account Type</th>
+      <th class="table__th">Account Price</th>
+      <th class="table__th">Account Tax</th>
+      <th class="table__th">Total Account Price</th>
+      <th class="table__th">Transition Id</th>
+      <th class="table__th">Transition Id Date</th>
+      <th class="table__th">Payment Account Name</th>
+      <th class="table__th">Payment Account Address</th>
+      <th class="table__th">Select Payment Method</th>
+      <th class="table__th">Buyer Code</th>
+      <th class="table__th">Seller Code</th>
+      <th class="table__th">Transition Screenshot</th>
+      <th class="table__th">Created At</th>
+
+      </thead>
     </tr>
     <% payments.forEach(function(payment) { %>
-      <tr>
-        <td><%= payment.firstName %></td>
-        <td><%= payment.lastName %></td>
-        <td><%= payment.userName %></td>
-        <td><%= payment.uniquePin %></td>
-        <td><%= payment.emailAddress %></td>
-        <td><%= payment.sellerEmailAddress %></td>
-        <td><%= payment.accountSerialNo %></td>
-        <td><%= payment.accountType %></td>
-        <td><%= payment.accountPrice %></td>
-        <td><%= payment.accountTax %></td>
-        <td><%= payment.totalAccountPrice %></td>
-        <td><%= payment.transitionId %></td>
-        <td><%= payment.transitionIdDate %></td>
-        <td><%= payment.paymentAccountName %></td>
-        <td><%= payment.paymentAccountAddress %></td>
-        <td><%= payment.selectPaymentMethod %></td>
-        <td><%= payment.buyerCode %></td>
-        <td><%= payment.sellerCode %></td>
+      <tbody class="table__tbody">
+      <tr class="table__tr">
+        <td class="table__td table__mobile-title"><%= payment.firstName %></td>
+        <td class="table__td table__mobile-title"><%= payment.lastName %></td>
+        <td class="table__td table__mobile-title"><%= payment.userName %></td>
+        <td class="table__td table__mobile-title"><%= payment.uniquePin %></td>
+        <td class="table__td table__mobile-title"><%= payment.emailAddress %></td>
+        <td class="table__td table__mobile-title"><%= payment.sellerEmailAddress %></td>
+        <td class="table__td table__mobile-title"><%= payment.accountSerialNo %></td>
+        <td class="table__td table__mobile-title"><%= payment.accountType %></td>
+        <td class="table__td table__mobile-title"><%= payment.accountPrice %></td>
+        <td class="table__td table__mobile-title"><%= payment.accountTax %></td>
+        <td class="table__td table__mobile-title"><%= payment.totalAccountPrice %></td>
+        <td class="table__td table__mobile-title"><%= payment.transitionId %></td>
+        <td class="table__td table__mobile-title"><%= payment.transitionIdDate %></td>
+        <td class="table__td table__mobile-title"><%= payment.paymentAccountName %></td>
+        <td class="table__td table__mobile-title"><%= payment.paymentAccountAddress %></td>
+        <td class="table__td table__mobile-title"><%= payment.selectPaymentMethod %></td>
+        <td class="table__td table__mobile-title"><%= payment.buyerCode %></td>
+        <td class="table__td table__mobile-title"><%= payment.sellerCode %></td>
 
 
         <td>
@@ -92,6 +254,7 @@
         <td><%= payment.createdAt %></td>
       </tr>
     <% }); %>
+    </tbody>
   </table>
 </body>
 <script>

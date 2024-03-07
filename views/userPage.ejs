@@ -9,62 +9,62 @@
 
 <body>
     <h1>User Data</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Username</th>
-                <th>Unique Pin</th>
-                <th>Seller Email</th>
-                <th>Account Serial No</th>
-                <th>Account Type</th>
-                <th>Account Price</th>
-                <th>Account Tax</th>
-                <th>Total Account Price</th>
-                <th>Payment Screenshot</th>
-                <th>Transaction ID</th>
-                <th>Transaction Data</th>
-                <th>Transaction Date</th>
-                <th>Transaction Time</th>
+    <table class="table">
+        <thead class="table__thead">
+            <tr class="table__head">
+                 <th class="table__th">Name</th>
+                 <th class="table__th">Email</th>
+                 <th class="table__th">Username</th>
+                 <th class="table__th">Unique Pin</th>
+                 <th class="table__th">Seller Email</th>
+                 <th class="table__th">Account Serial No</th>
+                 <th class="table__th">Account Type</th>
+                 <th class="table__th">Account Price</th>
+                 <th class="table__th">Account Tax</th>
+                 <th class="table__th">Total Account Price</th>
+                 <th class="table__th">Payment Screenshot</th>
+                 <th class="table__th">Transaction ID</th>
+                 <th class="table__th">Transaction Data</th>
+                 <th class="table__th">Transaction Date</th>
+                 <th class="table__th">Transaction Time</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="table__tbody">
             <% users.forEach(user=> { %>
-                <tr>
-                    <td>
+                <tr class="table__tr">
+                     <td class="table__td table__mobile-title">
                         <%= user.firstName %>
                             <%= user.lastName %>
                     </td>
-                    <td>
+                     <td class="table__td table__mobile-title">
                         <%= user.email %>
                     </td>
-                    <td>
+                     <td class="table__td table__mobile-title">
                         <%= user.userName %>
                     </td>
-                    <td>
+                     <td class="table__td table__mobile-title">
                         <%= user.uniquePin %>
                     </td>
-                    <td>
+                     <td class="table__td table__mobile-title">
                         <%= user.sellerEmail %>
                     </td>
-                    <td>
+                     <td class="table__td table__mobile-title">
                         <%= user.accountSerialNo %>
                     </td>
-                    <td>
+                     <td class="table__td table__mobile-title">
                         <%= user.accountType %>
                     </td>
-                    <td>
+                     <td class="table__td table__mobile-title">
                         <%= user.accountPrice %>
                     </td>
-                    <td>
+                     <td class="table__td table__mobile-title">
                         <%= user.accountTax %>
                     </td>
-                    <td>
+                     <td class="table__td table__mobile-title">
                         <%= user.totalAccountPrice %>
                     </td>
                 
-                    <td>
+                     <td class="table__td table__mobile-title">
                         <% if (user.paymentScreenshot) { %>
                             <img src="/buyerPayment-form/paymentScreenshot/<%= user.paymentScreenshot %>"
                                 alt="Payment Screenshot" class="payment-image"
@@ -75,16 +75,16 @@
                                 <% } %>
                     </td>
 
-                    <td>
+                     <td class="table__td table__mobile-title">
                         <%= user.transitionId %>
                     </td>
-                    <td>
+                     <td class="table__td table__mobile-title">
                         <%= user.transitionData %>
                     </td>
-                    <td>
+                     <td class="table__td table__mobile-title">
                         <%= user.transactionDate %>
                     </td>
-                    <td>
+                     <td class="table__td table__mobile-title">
                         <%= user.transactionTime %>
                     </td>
                 </tr>
@@ -95,50 +95,113 @@
 
 </html>
 <style>
-    table {
-        border-collapse: collapse;
-        width: 100%;
-        margin: 0 auto;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-        animation: tableFadeIn 1s ease-in;
-    }
+  .table {
+  width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 1px 2px 0 rgba(0, 0, 0, 0.24);
+  background-color: var(--tableBgColor, #fff);
+}
 
-    @keyframes tableFadeIn {
-        from {
-            opacity: 0;
-        }
+.table__thead {
+  background-color: var(--tableTitleBgColor);
+  color: var(--tableTitleTextColor);
+}
 
-        to {
-            opacity: 1;
-        }
-    }
+.table__mobile-caption {
+  display: none;
+}
 
-    th,
-    td {
-        padding: 15px;
-        text-align: left;
-        border: 1px solid #ddd;
-    }
+.table__td,
+.table__th {
+  padding: var(--tableCellPadding, 20px);
+  box-sizing: border-box;
+}
 
-    th:first-child,
-    td:first-child {
-        border-left: 0;
-    }
+@media screen and (min-width: 769px) {
+  .table__tr:hover {
+    background-color: var(--tableRowBgColorHover);
+  }
 
-    th {
-        background-color: #f2f2f2;
-        font-weight: bold;
-    }
+  .table__td:first-child,
+  .table__th:first-child {
+    width: 30%;
+    text-align: left;
+  }
 
-    tr:nth-child(even) {
-        background-color: #f8f8f8;
-    }
+  .table__td,
+  .table__th {
+    text-align: center;
+  }
+}
 
-    tr:hover {
-        background-color: #e6f7ff;
-    }
+@media screen and (max-width: 768px) {
+  .table,
+  .table__thead,
+  .table__tbody,
+  .table__tr {
+    display: block;
+  }
+
+  .table__td {
+    display: flex;
+  }
+
+  .table__head {
+    display: none;
+  }
+
+  .table__mobile-title {
+    background-color: var(--tableTitleBgColor);
+    color: var(--tableTitleTextColor);
+  }
+
+  .table__td {
+    border-bottom: 1px solid var(--tableSeparatorColor);
+  }
+
+  .table__td:last-of-type {
+    border-bottom: none;
+  }
+
+  .table__mobile-caption,
+  .table__value {
+    display: block;
+    width: 50%;
+    box-sizing: border-box;
+  }
+
+  .table__mobile-caption {
+    padding-right: 2%;
+  }
+}
+
+/* demo styles for table */
+
+.table {
+  --tableCellPadding: 2rem;
+  --tableTitleBgColor: #5668ca;
+  --tableTitleTextColor: #fff;
+  --tableRowBgColorHover: #f0f0f0;
+  --tableSeparatorColor: #eee;
+}
+
+/*
+* demo page
+*/
+
+@media screen and (min-width: 768px) {
+  html {
+    font-size: 62.5%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  html {
+    font-size: 50%;
+  }
+}
+
 
     .payment-image {
         border-radius: 25px;

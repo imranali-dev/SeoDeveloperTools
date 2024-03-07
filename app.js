@@ -30,6 +30,7 @@ const buyerFormRoutes = require('./src/BuyerForm/router/BuyForm.js');
 const sellerFormRoutes = require('./src/SellerForm/router/SellerForm.js');
 const buyerPaymentRoutes = require('./src/buyerPayment/router/router.js');
 const SellerPayement = require('./src/Seller-payment/router/SellerPayment.js');
+const Searchusers = require('./src/aggregateforms/router/router.js');
 // const ChatApp = require("./routes/livechatRoutes.js");
 const cloudinaryRouter = require("./middlewares/cloudnray/cloudinaryRouter.js");
 
@@ -94,13 +95,13 @@ const connectWithRetry = () => {
       app.use('/socialsell', socialsell)
       app.use('/BuyAccounts', BuyAccountsRoutes)
       app.use('/Account', Accoutn)
-      app.use('/BusnessModel', ExploreBusiness);buyerPaymentRoutes
+      app.use('/BusnessModel', ExploreBusiness);
       app.use('/buyer-form', buyerFormRoutes); 
       app.use('/Seller-form', sellerFormRoutes); 
       app.use('/buyerPayment-form', buyerPaymentRoutes); 
       app.use('/SellerPayment-form', SellerPayement); 
       app.use("/cloudinaryupload", cloudinaryRouter);
-
+    app.use("/serachusers/email",Searchusers)
       // Generic Error Handling Middleware
       app.use((err, req, res, next) => {
         console.error(err.stack);

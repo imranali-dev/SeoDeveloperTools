@@ -4,7 +4,7 @@ const fs = require("fs").promises;
 const cloudnarySchma = require("./cloudnaryschma");
 
 async function uploadToCloudinary(locaFilePath, fieldName) {
-var mainFolderName = "akana";
+var mainFolderName = "hafiz";
 const sanitizedFilePath = locaFilePath.replace(/[^a-zA-Z0-9\-_.\/]/g, ""); // Sanitize filename
 const filePathOnCloudinary = sanitizedFilePath; // Use sanitized filename directly
 try {

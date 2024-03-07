@@ -12,7 +12,7 @@ const upload = multer({ storage });
 
 exports.uploadImage= async (req, res) => {
   try {
-    const { name, email,paymentMethod,phone, description, accountBuyCheck, earningMoneyCheck } = req.body;
+    const { name, email,paymentMethod,phone, description, userName, transitionId } = req.body;
     const image = req.file ? req.file.filename : null;
 
     const newAccount = new Account({
@@ -21,8 +21,8 @@ exports.uploadImage= async (req, res) => {
       phone,
       description,
       paymentMethod,
-      accountBuyCheck,
-      earningMoneyCheck,
+      transitionId,
+      userName,
       image,
     });
 

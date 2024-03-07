@@ -23,12 +23,14 @@ const AccountSchema = new mongoose.Schema({
   description: {
     type: String,
   },
-  accountBuyCheck: {
+  userName: {
     type: String,
   },
-  earningMoneyCheck: {
+  transitionId: {
     type: String,
   },
+    transactionDate: { type: Date, default: Date.now },
+
   image: {
     type: String,
     default: 'https://roadtovrlive-5ea0.kxcdn.com/wp-content/uploads/2021/02/ready-player-me-avatar-vrchat.jpg',

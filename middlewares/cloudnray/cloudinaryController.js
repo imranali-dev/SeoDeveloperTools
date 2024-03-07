@@ -2,10 +2,8 @@ const cloudinaryModel = require("./cloudinaryModel");
 const { buildSuccessMsg } = require("./viewHelper");
 
 async function profileUploadSingle(req, res, next) {
-    // var locaFilePath = req.file.path;
+    var locaFilePath = req.file.path;
     const buffer = req.file.buffer;
-    // var result = await cloudinaryModel.uploadToCloudinary(locaFilePath);
-    // now it will stpre in the buffer form 1st it was storing in the eserver
       var result = await cloudinaryModel.uploadToCloudinary(locaFilePath);
     var response = buildSuccessMsg([result.url]);
     return res.send(response);
@@ -24,7 +22,7 @@ async function profileUploadMultiple(req, res, next) {
   
           const updateObject = { [fieldName]: result.url };
   
-          await CloudinaryModel.findOneAndUpdate({}, updateObject, { upsert: true, new: true });
+          await cloudinaryModel.findOneAndUpdate({}, updateObject, { upsert: true, new: true });
   
           imageUrlList.push(result.url);
           
