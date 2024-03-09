@@ -47,7 +47,7 @@ const generatePDF = (formData) => {
 exports.createPayment = async (req, res) => {
 
   try {
-    const requiredFields = ['firstName', 'lastName', 'userName', 'email', 'accountType', 'accountPrice'];
+    const requiredFields = ['firstName', 'lastName', 'userName', 'email', 'accountType', 'accountPrice',"selectPaymentMethod"];
     for (const field of requiredFields) {
       if (!req.body[field]) {
         return res.status(400).json({
