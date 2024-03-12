@@ -160,10 +160,8 @@ exports.Activate = async (req, res) => {
       user.emailTokenExpires = null;
       user.active = true;
       await user.save();
-      return res.status(200).json({
-        success: true,
-        message: "Account activated.",
-      });
+      return res.redirect("/admin/collection-ensureIndex/kira-yagami-082561-lira-Integrate-page-of-admin-931249/success");
+
     }
   } catch (error) {
     console.error("activation-error", error);
@@ -284,10 +282,8 @@ exports.Signup = async (req, res) => {
         user.emailTokenExpires = null;
         user.active = true;
         await user.save();
-        return res.status(200).json({
-          success: true,
-          message: "Account activated.",
-        });
+        return res.redirect("/admin/admin/login/page");
+
       }
     } catch (error) {
       console.error("activation-error", error);
