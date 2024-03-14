@@ -4,6 +4,7 @@ const paymentController = require('../contrller/buyerCon'); // adjust the path t
 const upload = require('../../../Storage');
 const mongoose = require('mongoose');
 const Grid = require('gridfs-stream');
+const authenticateToken = require('../../../middlewares/authMiddleware');
 const conn = mongoose.connection;
 let gfs;
 conn.once('open', () => {
@@ -35,13 +36,13 @@ router.get('/users/data', paymentController.renderUserPage);
 
 router.post('/payment', upload.single('paymentScreenshot'), paymentController.createPayment);
 
-router.delete('/payment/:email', paymentController.deletePaymentByEmail);
-router.get('/Delete/page', paymentController.renderDeletePage);
+router.delete('/payment/:email', authenticateToken,paymentController.deletePaymentByEmail);
+router.get('/Delete/page', authenticateToken,paymentController.renderDeletePage);
 
-router.get('/PaymentPage/home', (req, res) => {
+router.get('/PaymentPage/home', authenticateToken,(req, res) => {
     res.render('PaymentPageHome');
   });
-  router.get('/paymentPage/render/home', (req, res) => {
+  router.get('/paymentPage/render/home', authenticateToken,(req, res) => {
     res.render('renderHomePagePayemnt');
   });
 module.exports = router;
