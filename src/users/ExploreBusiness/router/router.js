@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../Contrller/ExploreBusiness');
+const authenticateToken = require('../../../../middlewares/authMiddleware');
 
 // Read all users
 router.get('/', userController.getAllUsers);
@@ -13,7 +14,7 @@ router.delete('Id/:userId', userController.deleteUserById);
 // Update a user by ID
 router.put('id/:userId', userController.updateUserById);
 // Read all users
-router.get('/GetBusiness/details', userController.getAllUsers);
+router.get('/GetBusiness/details', authenticateToken,userController.getAllUsers);
 
 // Read a specific user by email
 router.get('/:email', userController.getUserByEmail);
@@ -33,7 +34,7 @@ router.get('/delete/user', (req, res) => {
   res.render('BusniessExploresDEl');
 });
 router.get('/delete/:email', userController.renderDeleteConfirmation);
-router.get('/BusinessPages/pages', (req, res) => {
+router.get('/BusinessPages/pages', authenticateToken,(req, res) => {
   res.render('BusnisPageHome');
 });
 
