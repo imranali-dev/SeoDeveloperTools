@@ -6,7 +6,8 @@ function authenticateToken(req, res, next) {
   const token = cookies.authToken;
 
   if (!token) {
-    return res.status(401).json({ Message: "I dont't know whose are you" ,Message2:"DO you know me?"});
+    return res.redirect("/admin/admin/login/page");
+    // return res.status(401).json({ Message: "I dont't know whose are you" ,Message2:"DO you know me?"});
   }
   jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
     if (err) {
