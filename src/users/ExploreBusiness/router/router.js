@@ -30,7 +30,7 @@ router.post('/:email', userController.deleteUserByEmail);
 // Update a user by email
 
 router.put('/:email', userController.updateUserByEmail);
-router.get('/delete/user', (req, res) => {
+router.get('/delete/user', authenticateToken,(req, res) => {
   res.render('BusniessExploresDEl');
 });
 router.get('/delete/:email', userController.renderDeleteConfirmation);
