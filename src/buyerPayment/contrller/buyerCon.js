@@ -61,36 +61,36 @@ exports.createPayment = async (req, res) => {
 
     const payment = new Payment(req.body);
     const savedPayment = await payment.save();
-    // const pdfFilePath = await generatePDF(savedPayment);
-    // const selectedFields = {
-    //   firstName: savedPayment.firstName,
-    //   lastName: savedPayment.lastName,
+    const pdfFilePath = await generatePDF(savedPayment);
+    const selectedFields = {
+      firstName: savedPayment.firstName,
+      lastName: savedPayment.lastName,
 
-    //   uniquePin: savedPayment.uniquePin,
-    //   email: savedPayment.email,
-    //   sellerEmail: savedPayment.sellerEmail,
-    //   accountSerialNo: savedPayment.accountSerialNo,
-    //   accountType: savedPayment.accountType,
-    //   accountPrice: savedPayment.accountPrice,
-    //   accountTax: savedPayment.accountTax,
-    //   totalAccountPrice: savedPayment.totalAccountPrice,
+      uniquePin: savedPayment.uniquePin,
+      email: savedPayment.email,
+      sellerEmail: savedPayment.sellerEmail,
+      accountSerialNo: savedPayment.accountSerialNo,
+      accountType: savedPayment.accountType,
+      accountPrice: savedPayment.accountPrice,
+      accountTax: savedPayment.accountTax,
+      totalAccountPrice: savedPayment.totalAccountPrice,
 
-    //   paymentScreenshot: savedPayment.paymentScreenshot,
-    //   transitionId: savedPayment.transitionId,
-    //   transitionData: savedPayment.sellerEmail,
-    //   transactionDate: savedPayment.transitionId,
-    //   transactionTime: savedPayment.transactionTime
+      paymentScreenshot: savedPayment.paymentScreenshot,
+      transitionId: savedPayment.transitionId,
+      transitionData: savedPayment.sellerEmail,
+      transactionDate: savedPayment.transitionId,
+      transactionTime: savedPayment.transactionTime
 
-    // };
-    // const userEmail = savedPayment.email;
-    // const sellerEmail = savedPayment.sellerEmail;
-    // const { userResult, sellerResult } = await sendMail(selectedFields, pdfFilePath);
+    };
+    const userEmail = savedPayment.email;
+    const sellerEmail = savedPayment.sellerEmail;
+    const { userResult, sellerResult } = await sendMail(selectedFields, pdfFilePath);
 
     res.status(201).json({
       message: 'Payment created successfully',
       data: savedPayment,
-      // pdfFilePath: pdfFilePath,
-      // emailResults: { userResult, sellerResult },
+      pdfFilePath: pdfFilePath,
+      emailResults: { userResult, sellerResult },
     });
   } catch (error) {
     if (error.name === 'ValidationError') {

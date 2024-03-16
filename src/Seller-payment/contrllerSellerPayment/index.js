@@ -99,41 +99,40 @@ exports.createPayment = async (req, res) => {
       transitionScreenShot,
     });
     const savedSellerPayment = await newSellerPayment.save();
-    // const pdfFilePath = await generatePDF(savedSellerPayment);
-    // const selectedFields = {
-    //   firstName: savedSellerPayment.firstName,
-    //   lastName: savedSellerPayment.lastName,
-    //   userName:savedSellerPayment.userName,
-    //   uniquePin:savedSellerPayment.uniquePin,
-    //   emailAddress:savedSellerPayment.emailAddress,
-    //   sellerEmailAddress:savedSellerPayment.sellerEmailAddress,
-    //   accountSerialNo:savedSellerPayment.accountSerialNo,
-    //   accountType:savedSellerPayment.accountType,
-    //   accountPrice:savedSellerPayment.accountPrice,
-    //   accountTax:savedSellerPayment.accountTax,
-    //   totalAccountPrice:savedSellerPayment.totalAccountPrice,
-    //   transitionId:savedSellerPayment.transitionId,
-    //   transitionIdDate:savedSellerPayment.transitionIdDate,
-    //   paymentAccountName:savedSellerPayment.paymentAccountName,
-    //   paymentAccountAddress:savedSellerPayment.paymentAccountAddress,
-    //   selectPaymentMethod:savedSellerPayment.selectPaymentMethod,
-    //   selectPaymentMethod:savedSellerPayment.selectPaymentMethod,
-    //   sellerCode:savedSellerPayment.sellerCode,
-    //   transitionScreenShot:savedSellerPayment.transitionScreenShot,
-    // };
-    // const userEmail = savedSellerPayment.emailAddress;
-    // const sellerEmail = savedSellerPayment.sellerEmailAddress;
-    // const { userResult, sellerResult } = await sendMail(selectedFields, pdfFilePath);
+    const selectedFields = {
+      firstName: savedSellerPayment.firstName,
+      lastName: savedSellerPayment.lastName,
+      userName:savedSellerPayment.userName,
+      uniquePin:savedSellerPayment.uniquePin,
+      emailAddress:savedSellerPayment.emailAddress,
+      sellerEmailAddress:savedSellerPayment.sellerEmailAddress,
+      accountSerialNo:savedSellerPayment.accountSerialNo,
+      accountType:savedSellerPayment.accountType,
+      accountPrice:savedSellerPayment.accountPrice,
+      accountTax:savedSellerPayment.accountTax,
+      totalAccountPrice:savedSellerPayment.totalAccountPrice,
+      transitionId:savedSellerPayment.transitionId,
+      transitionIdDate:savedSellerPayment.transitionIdDate,
+      paymentAccountName:savedSellerPayment.paymentAccountName,
+      paymentAccountAddress:savedSellerPayment.paymentAccountAddress,
+      selectPaymentMethod:savedSellerPayment.selectPaymentMethod,
+      selectPaymentMethod:savedSellerPayment.selectPaymentMethod,
+      sellerCode:savedSellerPayment.sellerCode,
+      transitionScreenShot:savedSellerPayment.transitionScreenShot,
+    };
+    const userEmail = savedSellerPayment.emailAddress;
+    const sellerEmail = savedSellerPayment.sellerEmailAddress;
+    const { userResult, sellerResult } = await sendMail(selectedFields);
 
-    // if (!userResult.success || !sellerResult.success) {
-    //   try {
-    //     console.error('Error sending email(s).');
-    //   } catch (error) {
-    //     console.error('Error deleting PDF file:', error);
-    //   }
-    // }
+    if (!userResult.success || !sellerResult.success) {
+      try {
+        console.error('Error sending email(s).');
+      } catch (error) {
+        console.error('Error deleting PDF file:', error);
+      }
+    }
 
-    return res.status(201).json({ savedSellerPayment });
+    return res.status(201).json({ ...savedSellerPayment._doc, pdfFilePath });
 
   } catch (error) {
     if (error.name === 'ValidationError') {
