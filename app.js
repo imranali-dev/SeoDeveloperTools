@@ -31,6 +31,8 @@ const sellerFormRoutes = require('./src/SellerForm/router/SellerForm.js');
 const buyerPaymentRoutes = require('./src/buyerPayment/router/router.js');
 const SellerPayement = require('./src/Seller-payment/router/SellerPayment.js');
 const Searchusers = require('./src/aggregateforms/router/router.js');
+const Searchuserpayment = require('./src/aggregatepayments/router/router.js');
+
 // const ChatApp = require("./routes/livechatRoutes.js");
 const cloudinaryRouter = require("./middlewares/cloudnray/cloudinaryRouter.js");
 
@@ -53,10 +55,10 @@ const connectWithRetry = () => {
         optionsSuccessStatus: 204,
         credentials: true, // Set to true to allow credentials
       };
-      
+
       app.use(cors(corsOptions));
-      
-      
+
+
       app.use(useragent.express());
       app.use(bodyParser.urlencoded({ extended: true }));
       app.use(express.json()); // for parsing application/json
@@ -96,12 +98,14 @@ const connectWithRetry = () => {
       app.use('/BuyAccounts', BuyAccountsRoutes)
       app.use('/Account', Accoutn)
       app.use('/BusnessModel', ExploreBusiness);
-      app.use('/buyer-form', buyerFormRoutes); 
-      app.use('/Seller-form', sellerFormRoutes); 
-      app.use('/buyerPayment-form', buyerPaymentRoutes); 
-      app.use('/SellerPayment-form', SellerPayement); 
+      app.use('/buyer-form', buyerFormRoutes);
+      app.use('/Seller-form', sellerFormRoutes);
+      app.use('/buyerPayment-form', buyerPaymentRoutes);
+      app.use('/SellerPayment-form', SellerPayement);
       app.use("/cloudinaryupload", cloudinaryRouter);
-    app.use("/serachusers/email",Searchusers)
+      app.use("/serachusers/email", Searchusers)
+      app.use("/users/payments", Searchuserpayment)
+
       // Generic Error Handling Middleware
       app.use((err, req, res, next) => {
         console.error(err.stack);
