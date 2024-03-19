@@ -161,38 +161,37 @@ async function searchByEmail(email, Semail, accountSerialNo, transitionId, trans
           },
         },
       ]).exec();
+      // const resultAccount = await AccountModel.aggregate([
+      //   {
+      //     $match: {
+      //       $or: [
+      //         { name: { $regex: searchParam, $options: 'i' } },
+      //         { email: { $regex: searchParam, $options: 'i' } },
+      //         { phone: { $regex: searchParam, $options: 'i' } },
+      //         { paymentMethod: { $regex: searchParam, $options: 'i' } },
+      //         { description: { $regex: searchParam, $options: 'i' } },
+      //         { userName: { $regex: searchParam, $options: 'i' } },
+      //         { transitionId: { $regex: searchParam, $options: 'i' } },
+      //       ],
+      //     },
+      //   },
+      //   {
+      //     $project: {
+      //       _id: 0,
+      //       collectionType: { $literal: 'AccountModel' },
+      //       name: 1,
+      //       email: 1,
+      //       phone: 1,
+      //       paymentMethod: 1,
+      //       description: 1,
+      //       userName: 1,
+      //       transitionId: 1,
+      //       transactionDate: 1,
+      //     },
+      //   },
+      // ]).exec();
   
-      const resultAccount = await AccountModel.aggregate([
-        {
-          $match: {
-            $or: [
-              { name: { $regex: searchParam, $options: 'i' } },
-              { email: { $regex: searchParam, $options: 'i' } },
-              { phone: { $regex: searchParam, $options: 'i' } },
-              { paymentMethod: { $regex: searchParam, $options: 'i' } },
-              { description: { $regex: searchParam, $options: 'i' } },
-              { userName: { $regex: searchParam, $options: 'i' } },
-              { transitionId: { $regex: searchParam, $options: 'i' } },
-            ],
-          },
-        },
-        {
-          $project: {
-            _id: 0,
-            collectionType: { $literal: 'AccountModel' },
-            name: 1,
-            email: 1,
-            phone: 1,
-            paymentMethod: 1,
-            description: 1,
-            userName: 1,
-            transitionId: 1,
-            transactionDate: 1,
-          },
-        },
-      ]).exec();
-  
-      const combinedResult = [...resultSeller, ...resultPayment, ...resultAccount];
+      const combinedResult = [...resultSeller, ...resultPayment];
   
   
       if (combinedResult.length === 0) {

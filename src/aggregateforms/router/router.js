@@ -12,7 +12,6 @@ router.get('/admin/admin/search/:searchParam', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error by router' });
     }
 });
-
 router.get('/admin/search/:searchParam', async (req, res) => {
     try {
         const searchParam = req.params.searchParam;

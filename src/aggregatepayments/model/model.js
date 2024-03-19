@@ -108,18 +108,11 @@ async function searchByEmail(email, Semail, accountSerialNo, transitionId, trans
           $project: {
             _id: 0,
             collectionType: { $literal: 'SellerPaymentModel' },
-            // firstName: 1,
-            // lastName: 1,
             userName: 1,
-            uniquePin: 1,
             email: '$emailAddress',
-            sellerEmail: '$sellerEmailAddress',
-            // accountSerialNo: 1,
-            // accountType: 1,
-            // accountPrice: 1,
-            // totalAccountPrice: 1,
+            totalAccountPrice:1,
             transitionId: 1,
-     
+            paymentMethod:1,
             transactionDate: '$createdAt',
           },
         },
@@ -147,23 +140,51 @@ async function searchByEmail(email, Semail, accountSerialNo, transitionId, trans
             // firstName: 1,
             // lastName: 1,
             userName: 1,
-            uniquePin: 1,
+            // uniquePin: 1,
             email: 1,
-            sellerEmail: 1,
-            accountSerialNo: 1,
+            paymentMethod: 1,
+            // sellerEmail: 1,
+            // accountSerialNo: 1,
             // accountType: 1,
             // accountPrice: 1,
-            // totalAccountPrice: 1,
+            totalAccountPrice: 1,
             transitionId: 1,
-      
-            // transactionDate: 1,
-            transactionTime: 1,
+             transactionTime: 1,
+          },
+        },
+      ]).exec();
+
+      const resultAccount = await AccountModel.aggregate([
+        {
+          $match: {
+            $or: [
+              { name: { $regex: searchParam, $options: 'i' } },
+              { email: { $regex: searchParam, $options: 'i' } },
+              { phone: { $regex: searchParam, $options: 'i' } },
+              { paymentMethod: { $regex: searchParam, $options: 'i' } },
+              { description: { $regex: searchParam, $options: 'i' } },
+              { userName: { $regex: searchParam, $options: 'i' } },
+              { transitionId: { $regex: searchParam, $options: 'i' } },
+            ],
+          },
+        },
+        {
+          $project: {
+            _id: 0,
+            collectionType: { $literal: 'AccountModel' },
+            email: 1,
+            phone: 1,
+            // price 
+            paymentMethod: 1,
+            userName: 1,
+            transitionId: 1,
+            transactionDate: 1,
           },
         },
       ]).exec();
   
   
-      const combinedResult = [...resultSeller, ...resultPayment];
+      const combinedResult = [...resultSeller, ...resultPayment,...resultAccount];
   
       combinedResult.sort((a, b) => new Date(b.transactionDate || b.createdAt) - new Date(a.transactionDate || a.createdAt));
 
