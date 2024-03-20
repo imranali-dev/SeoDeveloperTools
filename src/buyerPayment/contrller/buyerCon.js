@@ -1,46 +1,7 @@
 const Payment = require("../Model/schma");
 const sendMail = require("../middlewares/mailsending");
 
-const generatePDF = (formData) => {
-  const PDFDocument = require('pdfkit');
-  const fs = require('fs');
-  const path = require('path');
 
-  const directory = 'invoices';
-  const filePath = path.join(directory, `invoice_${formData._id}.pdf`);
-
-  if (!fs.existsSync(directory)) {
-    fs.mkdirSync(directory);
-  }
-  try {
-    const doc = new PDFDocument();
-    const filePath = `invoices/invoice_${formData._id}.pdf`; // Assuming _id is a unique identifier in your schema
-    const stream = fs.createWriteStream(filePath);
-
-    doc.pipe(stream);
-
-    // Add content to the PDF using formData
-    doc.text(`Name: ${formData.firstName} ${formData.lastName}`);
-    doc.text(`Username: ${formData.userName}`);
-    doc.text(`Email: ${formData.email}`);
-    doc.text(`Account Type: ${formData.accountType}`);
-    doc.text(`Account Price: ${formData.accountPrice}`);
-    doc.text(`Account Serial No: ${formData.accountSerialNo}`);
-    doc.text(`Unique Pin: ${formData.uniquePin}`);
-    doc.text(`Seller Email: ${formData.sellerEmail}`);
-    doc.text(`Transaction ID: ${formData.transitionId}`);
-    doc.text(`Transaction Data: ${formData.transitionData}`);
-    doc.text(`Transaction Date: ${formData.transactionDate}`);
-    doc.text(`Transaction Time: ${formData.transactionTime}`);
-
-    doc.end();
-
-    return filePath;
-  } catch (error) {
-    console.error("Error generating PDF:", error);
-    throw new Error("Error generating PDF");
-  }
-};
 
 
 
@@ -61,7 +22,6 @@ exports.createPayment = async (req, res) => {
 
     const payment = new Payment(req.body);
     const savedPayment = await payment.save();
-    const pdfFilePath = await generatePDF(savedPayment);
     const selectedFields = {
       firstName: savedPayment.firstName,
       lastName: savedPayment.lastName,
@@ -84,7 +44,7 @@ exports.createPayment = async (req, res) => {
     };
     const userEmail = savedPayment.email;
     const sellerEmail = savedPayment.sellerEmail;
-    const { userResult, sellerResult } = await sendMail(selectedFields, pdfFilePath);
+    const { userResult, sellerResult } = await sendMail(selectedFields);
 
     res.status(201).json({
       message: 'Payment created successfully',

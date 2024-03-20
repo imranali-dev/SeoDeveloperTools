@@ -36,6 +36,7 @@ const AccountSchema = new mongoose.Schema({
     default: 'https://roadtovrlive-5ea0.kxcdn.com/wp-content/uploads/2021/02/ready-player-me-avatar-vrchat.jpg',
   },
 });
+AccountSchema.index({ createdAt: -1 });
 
 const Account = mongoose.model('paymentFormHistory', AccountSchema);
 

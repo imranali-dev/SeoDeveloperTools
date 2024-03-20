@@ -107,6 +107,7 @@ const socilapanelearning = new Schema({
   },
   details: detailsSchema, // Embed detailsSchema as a subdocument
 });
+socilapanelearning.index({ createdAt: -1 });
 
 const SocialSell = mongoose.model('SocialAccountDb', socilapanelearning);
 

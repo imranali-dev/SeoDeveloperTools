@@ -18,6 +18,7 @@ const socialPanelSchema = new mongoose.Schema({
     },
   },
 });
+socialPanelSchema.index({ createdAt: -1 });
 
 const SocialLinks = mongoose.model('earning', socialPanelSchema);
 

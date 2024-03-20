@@ -62,6 +62,7 @@ const userSchema = new Schema({
     default: Date.now,
   },
 });
+userSchema.index({ createdAt: -1 });
 const SellModel = mongoose.model("SellAccountDb", userSchema);
 
 module.exports = SellModel;

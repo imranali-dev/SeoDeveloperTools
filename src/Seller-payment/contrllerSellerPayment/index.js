@@ -6,49 +6,49 @@ const DUPLICATE_KEY_ERROR_CODE = 11000;
 const INTERNAL_SERVER_ERROR = 500;
 const BAD_REQUEST_ERROR = 400;
 const fs = require('fs');
-const generatePDF = (formData) => {
-  const PDFDocument = require('pdfkit');
-  const fs = require('fs');
-  const path = require('path');
+// const generatePDF = (formData) => {
+//   const PDFDocument = require('pdfkit');
+//   const fs = require('fs');
+//   const path = require('path');
 
-  const directory = 'invoices';
-  const filePath = path.join(directory, `invoice_${formData._id}.pdf`);
+//   const directory = 'invoices';
+//   const filePath = path.join(directory, `invoice_${formData._id}.pdf`);
 
-  if (!fs.existsSync(directory)) {
-    fs.mkdirSync(directory);
-  }
-  try {
-    const doc = new PDFDocument();
-    const filePath = `invoices/invoice_${formData._id}.pdf`; 
-    const stream = fs.createWriteStream(filePath);
+//   if (!fs.existsSync(directory)) {
+//     fs.mkdirSync(directory);
+//   }
+//   try {
+//     const doc = new PDFDocument();
+//     const filePath = `invoices/invoice_${formData._id}.pdf`; 
+//     const stream = fs.createWriteStream(filePath);
 
-    doc.pipe(stream);
-    doc.text(`Name: ${formData.firstName} ${formData.lastName}`);
-    doc.text(`Username: ${formData.userName}`);
-    doc.text(`Email: ${formData.emailAddress}`);
-    doc.text(`Unique Pin Type: ${formData.uniquePin}`);
-    doc.text(`Account Serial No.: ${formData.accountSerialNo}`);
-    doc.text(`Account Type: ${formData.accountType}`);
-    doc.text(`Account Price: ${formData.accountPrice}`);
-    doc.text(`Account Tax: ${formData.accountTax}`);
-    doc.text(`Total Account Price: ${formData.totalAccountPrice}`);
+//     doc.pipe(stream);
+//     doc.text(`Name: ${formData.firstName} ${formData.lastName}`);
+//     doc.text(`Username: ${formData.userName}`);
+//     doc.text(`Email: ${formData.emailAddress}`);
+//     doc.text(`Unique Pin Type: ${formData.uniquePin}`);
+//     doc.text(`Account Serial No.: ${formData.accountSerialNo}`);
+//     doc.text(`Account Type: ${formData.accountType}`);
+//     doc.text(`Account Price: ${formData.accountPrice}`);
+//     doc.text(`Account Tax: ${formData.accountTax}`);
+//     doc.text(`Total Account Price: ${formData.totalAccountPrice}`);
 
-    doc.text(`Transaction ID: ${formData.transitionId}`);
-    doc.text(`Transaction Date: ${formData.transitionIdDate}`);
+//     doc.text(`Transaction ID: ${formData.transitionId}`);
+//     doc.text(`Transaction Date: ${formData.transitionIdDate}`);
 
-    doc.text(`Payment Account Name: ${formData.paymentAccountName}`);
-    doc.text(`Payment Account Address: ${formData.paymentAccountAddress}`);
-    doc.text(`Payment Method: ${formData.selectPaymentMethod}`);
+//     doc.text(`Payment Account Name: ${formData.paymentAccountName}`);
+//     doc.text(`Payment Account Address: ${formData.paymentAccountAddress}`);
+//     doc.text(`Payment Method: ${formData.selectPaymentMethod}`);
 
-    doc.text(`Buyer Code: ${formData.buyerCode}`); 
-    doc.text(`Seller Code: ${formData.sellerCode}`); 
-    doc.end();
-    return filePath;
-  } catch (error) {
-    console.error("Error generating PDF:", error);
-    throw new Error("Error generating PDF");
-  }
-};
+//     doc.text(`Buyer Code: ${formData.buyerCode}`); 
+//     doc.text(`Seller Code: ${formData.sellerCode}`); 
+//     doc.end();
+//     return filePath;
+//   } catch (error) {
+//     console.error("Error generating PDF:", error);
+//     throw new Error("Error generating PDF");
+//   }
+// };
 
 exports.createPayment = async (req, res) => {
   const errors = validationResult(req);
@@ -132,7 +132,7 @@ exports.createPayment = async (req, res) => {
       }
     }
 
-    return res.status(201).json({ ...savedSellerPayment._doc, pdfFilePath });
+    return res.status(201).json({ ...savedSellerPayment._doc });
 
   } catch (error) {
     if (error.name === 'ValidationError') {

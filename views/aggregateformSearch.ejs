@@ -57,41 +57,42 @@
         </div>
          </form>
 
-    <% if (typeof searchResults !== 'undefined' && searchResults.length > 0) { %>
-        <% const tables = {} %>
-
-        <% searchResults.forEach(result => { %>
-            <% if (!tables[result.collectionType]) { %>
-                <% tables[result.collectionType] = [] %>
-            <% } %>
-            <% tables[result.collectionType].push(result) %>
-        <% }) %>
-
-        <% Object.keys(tables).forEach(collectionType => { %>
-            <h2><%= collectionType %> Table</h2>
-            <table class="table">
-                <thead class="table__thead">
-                    <tr class="table__head">
-                        <% Object.keys(tables[collectionType][0]).forEach(key => { %>
-                            <th class="table__th"><%= key %></th>
-                        <% }) %>
-                    </tr>
-                </thead>
-                <tbody class="table__tbody">
-                    <% tables[collectionType].forEach(result => { %>
-                        <tr class="table__tr">
-                            <% Object.values(result).forEach(value => { %>
-                                <td class="table__td table__mobile-title"><%= value %></td>
-                            <% }) %>
-                        </tr>
-                    <% }) %>
-                </tbody>
-            </table>
-        <% }) %>
-
-    <% } else { %>
-        <p>No user found with the specified criteria</p>
-    <% } %>
+         <% if (typeof searchResults !== 'undefined' && searchResults.length > 0) { %>
+          <% const tables = {} %>
+      
+          <% searchResults.forEach(result => { %>
+              <% if (!tables[result.collectionType]) { %>
+                  <% tables[result.collectionType] = [] %>
+              <% } %>
+              <% tables[result.collectionType].push(result) %>
+          <% }) %>
+      
+          <% Object.keys(tables).forEach(collectionType => { %>
+              <h2><%= collectionType %> Table</h2>
+              <table class="table">
+                  <thead class="table__thead">
+                      <tr class="table__head">
+                          <% Object.keys(tables[collectionType][0]).forEach(key => { %>
+                              <th class="table__th"><%= key %></th>
+                          <% }) %>
+                      </tr>
+                  </thead>
+                  <tbody class="table__tbody">
+                      <% tables[collectionType].forEach(result => { %>
+                          <tr class="table__tr">
+                              <% Object.values(result).forEach(value => { %>
+                                  <td class="table__td table__mobile-title"><%= value %></td>
+                              <% }) %>
+                          </tr>
+                      <% }) %>
+                  </tbody>
+              </table>
+          <% }) %>
+      
+      <% } else { %>
+          <p>No user found with the specified criteria</p>
+      <% } %>
+      
 </body>
 </html>
 <style>
