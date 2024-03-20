@@ -37,7 +37,7 @@ exports.Signup = async (req, res) => {
     }
     var user = await User.findOne({
       email: result.value.email,
-    });
+    }).sort({ createdAt: -1 });
 
     if (user) {
       return res.json({
