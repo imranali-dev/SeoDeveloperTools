@@ -17,7 +17,7 @@ const showVideos = async (req, res) => {
   };
   const AdminVideo = async (req, res) => {
     try {
-      const socialLinks = await SocialLinks.find();
+      const socialLinks = await SocialLinks.find().sort({ createdAt: -1 });;
   
       if (!socialLinks || socialLinks.length === 0) {
         return res.status(404).json({ message: 'Earning Media Panel Data Not Found' });
@@ -48,7 +48,7 @@ const showVideos = async (req, res) => {
      
 const showVideo = async (req, res) => {
     try {
-        const socialLinks = await SocialLinks.find();
+        const socialLinks = await SocialLinks.find().sort({ createdAt: -1 });;
 
         if (!socialLinks || !socialLinks.length) {
             return res.status(404).json({ message: 'Earning Media Panel Data Not Found' });
@@ -76,7 +76,7 @@ const updateVideoByID = async (req, res) => {
     console.log('Video ID:', videoId);
     console.log('Updated Fields:', updatedFields);
 
-    const video = await SocialLinks.findOne({ videoId });
+    const video = await SocialLinks.findOne({ videoId }).sort({ createdAt: -1 });;
 
     if (!video) {
       return res.status(404).json({ message: 'Video not found' });
@@ -117,7 +117,7 @@ const addVideo = async (req, res) => {
       return res.status(400).json({ message: 'Video URL and videoId are required' });
     }
 
-    const existingVideo = await SocialLinks.findOne({ 'video.url': videoUrl });
+    const existingVideo = await SocialLinks.findOne({ 'video.url': videoUrl }).sort({ createdAt: -1 });;
     if (existingVideo) {
       return res.status(400).json({ message: 'Video with this link already exists' });
     }
@@ -147,7 +147,7 @@ const addVideo = async (req, res) => {
 const deleteVideoByID = async (req, res) => {
   try {
     const { videoId } = req.params; 
-    const deletedVideo = await SocialLinks.findOneAndDelete({ videoId });
+    const deletedVideo = await SocialLinks.findOneAndDelete({ videoId }).sort({ createdAt: -1 });;
     
     if (!deletedVideo) {
       return res.status(404).json({ message: 'Video not found' });
