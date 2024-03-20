@@ -5,7 +5,7 @@ const showVideos = async (req, res) => {
       if (!videoId) {
         return res.status(404).send('Video ID not provided');
       }
-        const socialLinks = await SocialLinks.find({ videoId });
+        const socialLinks = await SocialLinks.find({ videoId }).sort({ createdAt: -1 });;
         if (!socialLinks || !socialLinks.length) {
         return res.status(404).send('Earning Media Panel Data Not Found');
       }

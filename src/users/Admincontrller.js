@@ -32,7 +32,7 @@ class AdminController {
   static async register(req, res) {
     const { fname, lname, email, password, userType } = req.body;
     try {
-      const oldUser = await AdminUser.findOne({ email });
+      const oldUser = await AdminUser.findOne({ email }).sort({ createdAt: -1 });;
   
       if (oldUser) {
         return res.json({ error: 'User Exists' });
@@ -55,7 +55,7 @@ class AdminController {
     const { email, password } = req.body;
   
     try {
-      const admin = await AdminUser.findOne({ email });
+      const admin = await AdminUser.findOne({ email }).sort({ createdAt: -1 });;
   
       if (!admin) {
         return res.status(404).json({ error: 'Admin not found' });
@@ -86,7 +86,7 @@ class AdminController {
   }
   static async Allusersd(req, res) {
     try {
-      const users = await User.find();
+      const users = await User.find().sort({ createdAt: -1 });;
       res.render('AdminDashboard', { users });
     } catch (error) {
       res.status(500).json({ status: 'error', error: error.message });

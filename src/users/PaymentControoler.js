@@ -45,7 +45,7 @@ exports.uploadImage= async (req, res) => {
 
 exports.readFiles = async (req, res) => {
     try {
-      const accounts = await Account.find();
+      const accounts = await Account.find().sort({ createdAt: -1 });;
       res.status(200).json({ accounts });
     } catch (error) {
       console.error(error);
@@ -56,7 +56,7 @@ exports.readFiles = async (req, res) => {
   exports.deletAccount =  async (req, res) => {
   try {
     const accountId = req.params.id;
-    const account = await Account.findByIdAndDelete(accountId);
+    const account = await Account.findByIdAndDelete(accountId).sort({ createdAt: -1 });;
 
     if (!account) {
       res.status(404).json({ message: 'Account not found.' });
@@ -71,7 +71,7 @@ exports.readFiles = async (req, res) => {
 
 exports.RenderALlDetails = async (req, res) => {
     try {
-      const accounts = await Account.find();
+      const accounts = await Account.find().sort({ createdAt: -1 });;
       res.render('GetAllPagment', { accounts });
     } catch (error) {
       console.error('Error retrieving accounts:', error); 
