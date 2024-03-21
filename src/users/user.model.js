@@ -27,9 +27,7 @@ const userSchema = new Schema(
     },
   }
 );
-
 userSchema.index({ createdAt: -1 });
-
 const User = mongoose.model("UsersRegister", userSchema);
 module.exports = User;
 

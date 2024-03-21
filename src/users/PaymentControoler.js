@@ -12,7 +12,7 @@ const upload = multer({ storage });
 
 exports.uploadImage= async (req, res) => {
   try {
-    const { name, email,paymentMethod,phone, description, userName, transitionId } = req.body;
+    const { name, email,paymentMethod,phone, description, userName, transitionId,totalAccountPrice } = req.body;
     const image = req.file ? req.file.filename : null;
 
     const newAccount = new Account({
@@ -23,19 +23,14 @@ exports.uploadImage= async (req, res) => {
       paymentMethod,
       transitionId,
       userName,
+      totalAccountPrice,
       image,
     });
 
     await newAccount.save();
-    res.status(201).json({ message: 'Image uploaded successfully.' });
+    res.status(201).json({ message: 'SuccessFul Payment.' });
   } catch (error) {
     console.error(error);
-
-    if (error.code === 11000) {
-      res.status(400).json({ message: 'Email already exists.' });
-    } else {
-      res.status(500).json({ message: 'Error uploading image.' });
-    }
   }
 };
 

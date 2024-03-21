@@ -6,12 +6,6 @@ const AccountSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    required: true,
-    unique: true,
-    validate: (email) => {
-      const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-      return regex.test(email);
-    },
   },
   phone: {
     type: Number,
@@ -26,10 +20,13 @@ const AccountSchema = new mongoose.Schema({
   userName: {
     type: String,
   },
+ totalAccountPrice: {
+    type: String
+  },
   transitionId: {
     type: String,
   },
-    transactionDate: { type: Date, default: Date.now },
+  transactionDate: { type: Date, default: Date.now },
 
   image: {
     type: String,
