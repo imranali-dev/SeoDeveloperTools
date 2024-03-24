@@ -10,7 +10,7 @@ const AccountSchema = new mongoose.Schema({
   phone: {
     type: Number,
   },
-  paymentMethod: {
+  selectPaymentMethod: {
     type: String,
     enum: ['jazzCash', 'easyPaisa', 'bankAccount', 'crypto', 'Payoneer', 'Skrill', 'Coinbase'],
   },
@@ -20,7 +20,7 @@ const AccountSchema = new mongoose.Schema({
   userName: {
     type: String,
   },
- totalAccountPrice: {
+  totalAccountPrice: {
     type: String
   },
   transitionId: {

@@ -105,14 +105,11 @@ const socilapanelearning = new Schema({
       required: true,
     },
   },
-  details: detailsSchema, // Embed detailsSchema as a subdocument
+  details: detailsSchema, 
 });
 socilapanelearning.index({ createdAt: -1 });
 
 const SocialSell = mongoose.model('SocialAccountDb', socilapanelearning);
 
 module.exports = SocialSell;
-
-
-// ===================================
-// to to continue
+// ___________________________________

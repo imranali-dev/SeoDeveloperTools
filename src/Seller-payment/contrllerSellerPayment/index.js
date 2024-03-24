@@ -122,17 +122,17 @@ exports.createPayment = async (req, res) => {
     };
     const userEmail = savedSellerPayment.emailAddress;
     const sellerEmail = savedSellerPayment.sellerEmailAddress;
-    const { userResult, sellerResult } = await sendMail(selectedFields);
+    // const { userResult, sellerResult } = await sendMail(selectedFields);
 
-    if (!userResult.success || !sellerResult.success) {
-      try {
-        console.error('Error sending email(s).');
-      } catch (error) {
-        console.error('Error deleting PDF file:', error);
-      }
-    }
+    // if (!userResult.success || !sellerResult.success) {
+    //   try {
+    //     console.error('Error sending email(s).');
+    //   } catch (error) {
+    //     console.error('Error deleting PDF file:', error);
+    //   }
+    // }
 
-    return res.status(201).json({ ...savedSellerPayment._doc });
+    return res.status(201).json({ savedSellerPayment });
 
   } catch (error) {
     if (error.name === 'ValidationError') {

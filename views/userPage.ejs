@@ -22,6 +22,8 @@
                  <th class="table__th">Account Price</th>
                  <th class="table__th">Account Tax</th>
                  <th class="table__th">Total Account Price</th>
+                 <th class="table__th">Payment Method</th>
+
                  <th class="table__th">Payment Screenshot</th>
                  <th class="table__th">Transaction ID</th>
                  <th class="table__th">Transaction Data</th>
@@ -63,6 +65,9 @@
                      <td class="table__td table__mobile-title">
                         <%= user.totalAccountPrice %>
                     </td>
+                    <td class="table__td table__mobile-title">
+                      <%= user.selectPaymentMethod %>
+                  </td>
                 
                      <td class="table__td table__mobile-title">
                         <% if (user.paymentScreenshot) { %>

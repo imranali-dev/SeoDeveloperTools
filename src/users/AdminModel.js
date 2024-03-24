@@ -27,7 +27,7 @@ const userSchema = new Schema(
     },
   }
 );
-
+userSchema.sort
 const User = mongoose.model("AdminRegister", userSchema);
 module.exports = User;
 
