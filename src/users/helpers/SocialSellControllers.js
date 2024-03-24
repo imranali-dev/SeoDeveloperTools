@@ -79,7 +79,7 @@ const CreateSocialsell = async (req, res) => {
 
 const GetSocialsell = async (req, res) => {
     try {
-      const buySellRecords = await SocialSell.find()
+      const buySellRecords = await SocialSell.find().sort({ createdAt: -1 })
       .sort({ createdAt: -1 })
       // .limit(5);
   

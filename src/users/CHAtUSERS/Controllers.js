@@ -4,7 +4,7 @@ const ChatAppusers = require("./schma");
 
 const readAllChatUsers = async (req, res) => {
   try {
-    const users = await ChatAppusers.User.find()
+    const users = await ChatAppusers.User.find().sort({ createdAt: -1 })
     res.status(200).json({ success: true, data: users });
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
