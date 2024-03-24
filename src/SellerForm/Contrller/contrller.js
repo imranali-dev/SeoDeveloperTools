@@ -150,7 +150,8 @@ exports.deleteSellerForm = async (req, res) => {
       const deletedSellerForm = await SellerForm.findOneAndDelete({
         $or: [
           { 'userInfo.email': email },
-          { 'accountDetails.accountId': accountId }
+          { 'accountDetails.accountId': accountId },
+          { 'accountId': sellerFormMainBuyerGCFCode }
         ]
       });
   

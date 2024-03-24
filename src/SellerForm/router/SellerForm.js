@@ -9,7 +9,7 @@ router.post('/Creats', sellerFormController.createSellerForm);
 router.get('/geting', sellerFormController.getSellers);
 router.get('/get', sellerFormController.getAllSellerForms);
 router.get('/Api/getAllSellerFormsRen',getAllSellerFormsRen);
-// router.delete('/:email', sellerFormController.deleteSellerFormByEmail);
+router.delete('/:email', sellerFormController.deleteSellerFormByEmail);
 router.delete('/delete', sellerFormController.deleteSellerForm);
 router.delete('/:eightDigitCode', authenticateToken,sellerFormController.deleteSellerFormByCode);
 router.get('/Api/delete', authenticateToken,(req, res) => {
