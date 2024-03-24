@@ -48,9 +48,6 @@ exports.createPayment = async (req, res) => {
 
     res.status(201).json({
       message: 'Payment created successfully',
-      data: savedPayment,
-      pdfFilePath: pdfFilePath,
-      emailResults: { userResult, sellerResult },
     });
   } catch (error) {
     if (error.name === 'ValidationError') {
