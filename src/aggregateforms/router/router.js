@@ -22,7 +22,14 @@ router.get('/admin/search/:searchParam', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error by router' });
     }
 });
-
+router.get('/admin/search', async (req, res) => {
+    try {
+        res.render('aggregateformSearch');
+    } catch (error) {
+        console.error('Error in admin search:', error.message);
+        res.status(500).json({ error: 'Internal Server Error by router' });
+    }
+});
 
 router.get('/admin/searching', async (req, res) => {
     try {
