@@ -48,7 +48,7 @@ const showVideos = async (req, res) => {
      
 const showVideo = async (req, res) => {
     try {
-        const socialLinks = await SocialLinks.find().sort({ createdAt: -1 });;
+        const socialLinks = await SocialLinks.find().sort({ createdAt: -1 });
 
         if (!socialLinks || !socialLinks.length) {
             return res.status(404).json({ message: 'Earning Media Panel Data Not Found' });

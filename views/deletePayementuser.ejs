@@ -1,175 +1,142 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Delete Seller Form</title>
+    <title>Delete Buyer Payment Form</title>
     <style>
+        #message{
+          text-align: center;
+          color: red;
+          text-transform: capitalize;
+        }
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
         }
-
+        
+    a {
+        color: white;
+        text-decoration: none;
+        padding: 0.6rem;
+        border-radius: 0.3rem;
+        background-color: green;
+        position: relative;
+        top: 1rem;
+        left: 1rem;
+    }
+      
         h1 {
-            color: #333;
+          text-align: center;
+          font-size: 2rem;
+          text-transform: capitalize;
+          /* margin-top: 5rem; */
+          color: black;
+          letter-spacing: 0.2rem;
+          font-weight: 600;
         }
-
+      
         form {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            margin-top: 20px;
-            width: 300px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+          display: flex;
+          flex-direction: column;
+          width: 280px;
+          margin: 10px auto;
+          padding: 20px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          line-height: 2rem;
+          outline: none;
+          transition: 0.3s ease-in-out;
+          cursor: pointer;
         }
-
+      
+        form:hover {
+          box-shadow: rgba(238, 233, 233, 0.19) 0px 10px, rgba(219, 212, 212, 0.498) 0px 6px 6px;
+        }
+      
+        form select {
+          padding: 0.5rem 1rem;
+          border-radius: 0.2rem;
+          cursor: pointer;
+          font-size: 0.8rem;
+          font-weight: 700;
+        }
+      
+        textarea,
+        select:hover {
+          border-color: black;
+        }
+      
         label {
-            margin-bottom: 10px;
-            font-weight: bold;
-            color: #333;
+          display: block;
+          font-size: 1rem;
+          text-transform: capitalize;
+          font-weight: 600;
+          margin-bottom: 5px;
+          color: black;
         }
-
-        input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+      
+        select,
+        textarea {
+          border: 2px solid rgba(0, 0, 0, 0.324);
+          transition: 0.3s ease-in-out;
         }
-
-        button {
-            background-color: #4caf50;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
+      
+        textarea {
+          height: 8rem;
+          width: 100%;
+          resize: none;
         }
-
-        button:hover {
-            background-color: #45a049;
+      
+        input[type="text"] {
+          width: 100%;
+          padding: 5px;
+          border: 1px solid #ccc;
+          border-radius: 3px;
         }
-
-        .message {
-            margin-top: 10px;
-            text-align: center;
+      
+        button[type="button"] {
+          margin-top: 10px;
+          padding: 10px;
+          border: none;
+          cursor: pointer;
+          background-color: #007bff;
+          color: #fff;
+          transition: 0.3s ease-in-out;
+          border-radius: 5px;
+          font-size: 1rem;
+          font-weight: 700;
         }
-
-        .error {
-            color: red;
+      
+      
+        input[type="button"]:focus {
+          outline: none;
+          border: 2px solid #007bff;
         }
-
-        .success {
-            color: green;
+      
+        button[type="button"]:hover {
+          background-color: #0069d9;
         }
-
-        a {
-            margin-top: 20px;
-            text-decoration: none;
-            color: #333;
-        }
-    </style>
-    <style>
-        /* Your existing styles remain unchanged */
-
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-
-        h1 {
-            color: #333;
-        }
-
-        form {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            margin-top: 20px;
-            width: 300px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        label {
-            margin-bottom: 10px;
-            font-weight: bold;
-            color: #333;
-        }
-
-        input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        button {
-            background-color: #4caf50;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
-        .message {
-            margin-top: 10px;
-            text-align: center;
-        }
-
-        .error {
-            color: red;
-        }
-
-        .success {
-            color: green;
-        }
-
-        a {
-            margin-top: 20px;
-            text-decoration: none;
-            color: #333;
-        }
-    </style>
+      </style>
 </head>
 
 <body>
-    <h1>Delete Buyer Payment-Form by Email</h1>
 
-    <form id="deleteForm" action="/buyerPayment-form/payment/:email" method="POST">
-        <label for="email">Enter Email to Delete:</label>
-        <input type="email" id="email" name="email" required>
-        <button type="button" onclick="deleteForm()">Delete</button>
-    </form>
+    <a
+    href="/admin/collection-ensureIndex/kira-yagami-082561-lira-Integrate-page-of-admin-931249/success"
+    style="text-decoration: none;">Go to Home</a>
+
+<h1>Delete BuyerPaymentForm user Email</h1>
+
+
+
+<form id="deleteForm" action="/buyerPayment-form/payment/:email" method="POST">
+    <label for="email">Enter User Email BuyerPaymentForm Delete</label>
+    <input type="email" id="email" name="email" required>
+    <button type="button" onclick="deleteForm()">Delete</button>
+  </form>
 
     <div id="message" class="message"></div>
 
-    <a href="/">Back to Home</a>
 
     <script>
         async function deleteForm() {

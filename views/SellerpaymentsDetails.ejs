@@ -1,374 +1,181 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Seller Payments</title>
-  <style>
-    /* core styles for table */
+  <head>
+    <title>Seller Payment Forms</title>
+    <style>
+    body {
+        overflow: scroll;
+    }
+  
+    a {
+        color: white;
+        text-decoration: none;
+        padding: 0.6rem;
+        border-radius: 0.3rem;
+        background-color: green;
+        position: relative;
+        top: 1rem;
+    }
+  
+    h2 {
+        text-align: center;
+    }
+  
+    input[type="search"] {
+        padding: 10px;
+        border-radius: 5px;
+        outline: none;
+        width: 250px;
+        position: relative;
+        left: 50%;
+        transform: translate(-50%);
+    }
+  
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 1rem;
+    }
+  
+    th, td {
+        white-space: nowrap;
+        padding: 10px;
+        border: 1px solid #ddd;
+        text-align: center;
+    }
+  </style>
 
-.table {
-  width: 100%;
-  border-spacing: 0;
-  border-collapse: collapse;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 1px 2px 0 rgba(0, 0, 0, 0.24);
-  background-color: var(--tableBgColor, #fff);
-}
+  </head>
+  <body>
+    <a
+      href="/admin/collection-ensureIndex/kira-yagami-082561-lira-Integrate-page-of-admin-931249/success"
+      role="button">Go tO Home</a>
+    <h2>Buyer Payment Users Forms</h2>
+    <input type="search" id="searchInput" onkeyup="searchTable()"
+      placeholder="Enter Name | userName | email ">
+    <h1 class="h1" style="text-align: center; margin-top: 1rem;"></h1>
 
-.table__thead {
-  background-color: var(--tableTitleBgColor);
-  color: var(--tableTitleTextColor);
-}
+    <table class="zigzag" id="userTable">
+      <thead >
+        <tr >
+          <th class="header">Name</th>
+          <th class="header">User Name</th>
+          <th class="header">Email Address</th>
+          <th class="header">Unique Pin</th>
+          <th class="header">Seller Email Address</th>
+          <th class="header">Account Serial No</th>
+          <th class="header">Account Type</th>
+          <th class="header">Account Price</th>
+          <th class="header">Account Tax</th>
+          <th class="header">Total Account Price</th>
+          <th class="header">Transition Id</th>
+          <th class="header">Transition Id Date</th>
+          <th class="header">Payment Account Name</th>
+          <th class="header">Payment Account Address</th>
+          <th class="header">Select Payment Method</th>
+          <th class="header">Buyer Code</th>
+          <th class="header">Seller Code</th>
+          <th class="header">Transition Screenshot</th>
+          <th class="header">Created At</th>
 
-.table__mobile-caption {
-  display: none;
-}
-
-.table__td,
-.table__th {
-  padding: var(--tableCellPadding, 20px);
-  box-sizing: border-box;
-}
-
-@media screen and (min-width: 769px) {
-  .table__tr:hover {
-    background-color: var(--tableRowBgColorHover);
-  }
-
-  .table__td:first-child,
-  .table__th:first-child {
-    width: 30%;
-    text-align: left;
-  }
-
-  .table__td,
-  .table__th {
-    text-align: center;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .table,
-  .table__thead,
-  .table__tbody,
-  .table__tr {
-    display: block;
-  }
-
-  .table__td {
-    display: flex;
-  }
-
-  .table__head {
-    display: none;
-  }
-
-  .table__mobile-title {
-    background-color: var(--tableTitleBgColor);
-    color: var(--tableTitleTextColor);
-  }
-
-  .table__td {
-    border-bottom: 1px solid var(--tableSeparatorColor);
-  }
-
-  .table__td:last-of-type {
-    border-bottom: none;
-  }
-
-  .table__mobile-caption,
-  .table__value {
-    display: block;
-    width: 50%;
-    box-sizing: border-box;
-  }
-
-  .table__mobile-caption {
-    padding-right: 2%;
-  }
-}
-
-/* demo styles for table */
-
-.table {
-  --tableCellPadding: 2rem;
-  --tableTitleBgColor: #5668ca;
-  --tableTitleTextColor: #fff;
-  --tableRowBgColorHover: #f0f0f0;
-  --tableSeparatorColor: #eee;
-}
-
-/*
-* demo page
-*/
-
-@media screen and (min-width: 768px) {
-  html {
-    font-size: 62.5%;
-  }
-}
-
-@media screen and (max-width: 767px) {
-  html {
-    font-size: 50%;
-  }
-}
-
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-    "Open Sans", "Ubuntu", "Fira Sans", "Helvetica Neue", sans-serif;
-  font-size: 1.4rem;
-  background-color: #f0f0f0;
-  color: #222;
-  margin: 0;
-  -webkit-overflow-scrolling: touch;
-}
-
-a {
-  text-decoration: none;
-  color: #5668ca;
-}
-
-a:hover,
-a:focus {
-  text-decoration: underline;
-}
-
-.page {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-}
-
-.page__demo {
-  flex-grow: 1;
-}
-
-.main-container {
-  padding-left: 1rem;
-  padding-right: 1rem;
-  max-width: 1000px;
-
-  margin-right: auto;
-  margin-left: auto;
-}
-
-.page__container {
-  margin-top: 4rem;
-  margin-bottom: 4rem;
-}
-
-.footer {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  text-align: center;
-  font-size: 1.4rem;
-}
-
-@media screen and (min-width: 641px) {
-  .footer__container {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .melnik909 {
-    margin-left: 2rem;
-  }
-}
-
-@media screen and (max-width: 640px) {
-  .melnik909 {
-    display: none;
-  }
-}
-
-</style>
-
-</head>
-<body>
-  <h1>Seller Payments</h1>
-  <input type="text" id="search" onkeyup="searchTable()" placeholder="Search for payments..">
-
-  <table id="paymentsTable" class="table">
-    <thead class="table__thead">
-      <tr class="table__head">
-      <th class="table__th">First Name</th>
-      <th class="table__th">Last Name</th>
-      <th class="table__th">User Name</th>
-      <th class="table__th">Unique Pin</th>
-      <th class="table__th">Email Address</th>
-      <th class="table__th">Seller Email Address</th>
-      <th class="table__th">Account Serial No</th>
-      <th class="table__th">Account Type</th>
-      <th class="table__th">Account Price</th>
-      <th class="table__th">Account Tax</th>
-      <th class="table__th">Total Account Price</th>
-      <th class="table__th">Transition Id</th>
-      <th class="table__th">Transition Id Date</th>
-      <th class="table__th">Payment Account Name</th>
-      <th class="table__th">Payment Account Address</th>
-      <th class="table__th">Select Payment Method</th>
-      <th class="table__th">Buyer Code</th>
-      <th class="table__th">Seller Code</th>
-      <th class="table__th">Transition Screenshot</th>
-      <th class="table__th">Created At</th>
-
-      </thead>
-    </tr>
-    <% payments.forEach(function(payment) { %>
+        </thead>
+      </tr>
+      <% payments.forEach(function(payment) { %>
       <tbody class="table__tbody">
-      <tr class="table__tr">
-        <td class="table__td table__mobile-title"><%= payment.firstName %></td>
-        <td class="table__td table__mobile-title"><%= payment.lastName %></td>
-        <td class="table__td table__mobile-title"><%= payment.userName %></td>
-        <td class="table__td table__mobile-title"><%= payment.uniquePin %></td>
-        <td class="table__td table__mobile-title"><%= payment.emailAddress %></td>
-        <td class="table__td table__mobile-title"><%= payment.sellerEmailAddress %></td>
-        <td class="table__td table__mobile-title"><%= payment.accountSerialNo %></td>
-        <td class="table__td table__mobile-title"><%= payment.accountType %></td>
-        <td class="table__td table__mobile-title"><%= payment.accountPrice %></td>
-        <td class="table__td table__mobile-title"><%= payment.accountTax %></td>
-        <td class="table__td table__mobile-title"><%= payment.totalAccountPrice %></td>
-        <td class="table__td table__mobile-title"><%= payment.transitionId %></td>
-        <td class="table__td table__mobile-title"><%= payment.transitionIdDate %></td>
-        <td class="table__td table__mobile-title"><%= payment.paymentAccountName %></td>
-        <td class="table__td table__mobile-title"><%= payment.paymentAccountAddress %></td>
-        <td class="table__td table__mobile-title"><%= payment.selectPaymentMethod %></td>
-        <td class="table__td table__mobile-title"><%= payment.buyerCode %></td>
-        <td class="table__td table__mobile-title"><%= payment.sellerCode %></td>
+        <tr class="table__tr">
+          <td class="table__td table__mobile-title"><%= payment.firstName
+            %> <%= payment.lastName %></td>
+          <td class="table__td table__mobile-title"><%= payment.userName %></td>
+          <td class="table__td table__mobile-title"><%= payment.emailAddress
+            %></td>
+          <td class="table__td table__mobile-title"><%= payment.uniquePin
+            %></td>
+        
+          <td class="table__td table__mobile-title"><%=
+            payment.sellerEmailAddress %></td>
+          <td class="table__td table__mobile-title"><%= payment.accountSerialNo
+            %></td>
+          <td class="table__td table__mobile-title"><%= payment.accountType
+            %></td>
+          <td class="table__td table__mobile-title"><%= payment.accountPrice
+            %></td>
+          <td class="table__td table__mobile-title"><%= payment.accountTax
+            %></td>
+          <td class="table__td table__mobile-title"><%=
+            payment.totalAccountPrice %></td>
+          <td class="table__td table__mobile-title"><%= payment.transitionId
+            %></td>
+          <td class="table__td table__mobile-title"><%= payment.transitionIdDate
+            %></td>
+          <td class="table__td table__mobile-title"><%=
+            payment.paymentAccountName %></td>
+          <td class="table__td table__mobile-title"><%=
+            payment.paymentAccountAddress %></td>
+          <td class="table__td table__mobile-title"><%=
+            payment.selectPaymentMethod %></td>
+          <td class="table__td table__mobile-title"><%= payment.buyerCode
+            %></td>
+          <td class="table__td table__mobile-title"><%= payment.sellerCode
+            %></td>
 
-
-        <td>
-          <% if (payment.transitionScreenShot) { %>
+          <td>
+            <% if (payment.transitionScreenShot) { %>
             <img src="/uploads/<%= payment.transitionScreenShot %>"
               alt="Payment Screenshot" class="payment-image"
               data-fullscreen-src="/uploads/<%= payment.transitionScreenShot %>"
               width="100" />
-          <% } else { %>
+            <% } else { %>
             No screenshot available
-          <% } %>
-        </td>
-        
-        
-        
-        
-        <td><%= payment.createdAt %></td>
-      </tr>
-    <% }); %>
-    </tbody>
-  </table>
-</body>
-<script>
+            <% } %>
+          </td>
+
+          <td><%= payment.createdAt %></td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </body>
+  <script>
   function showDetails(button) {
     const row = button.parentNode.parentNode;
     const cells = Array.from(row.children);
     alert(cells.map(cell => cell.innerText).join('\n'));
   }
 </script>
-<script>
+
+  <script>
   function searchTable() {
-  const input = document.getElementById('search');
-  const filter = input.value.toUpperCase();
-  const table = document.getElementById('paymentsTable');
-  const trs = table.getElementsByTagName('tr');
+      const input = document.getElementById('searchInput');
+      const filter = input.value.toUpperCase();
+      const table = document.getElementById('userTable');
+      const trs = table.getElementsByTagName('tr');
 
-  for (let i = 1; i < trs.length; i++) { // Start from 1 to skip the header row
-    let found = false;
-    const tds = trs[i].getElementsByTagName('td');
-    for (let j = 0; j < tds.length; j++) {
-      if (tds[j].innerHTML.toUpperCase().indexOf(filter) > -1) {
-        found = true;
-        break;
+      for (let i = 0; i < trs.length; i++) {
+          let match = false;
+          const tds = trs[i].querySelectorAll('td:nth-child(1), td:nth-child(2), td:nth-child(3)'); // Selecting username and email cells
+
+          for (let j = 0; j < tds.length; j++) {
+              const td = tds[j];
+              if (td) {
+                  if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                      match = true;
+                      break;
+                  }
+              }
+          }
+
+          if (match) {
+              trs[i].style.display = '';
+          } else {
+              trs[i].style.display = 'none';
+          }
       }
-    }
-    trs[i].style.display = found ? '' : 'none';
   }
-}
 
+  var totalAccounts = document.querySelectorAll('#userTable tbody tr').length;
+
+// Update the content of the h1 element with the total count
+document.querySelector('h1').innerText = 'Total Buyer Payment froms : ' + totalAccounts;
 </script>
-<style>
-.payment-image {
-  border-radius: 25px;
-  cursor: zoom-in;
-}
 
-.payment-image-fullscreen {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
-  z-index: 999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.payment-image-fullscreen img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  /* Resize image proportionally */
-}
-
-.payment-image-fullscreen button {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  background: none;
-  border: none;
-  font-size: 2.3em;
-  color: black;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.payment-image-fullscreen button:hover {
-  color: wheat;
-  font-size: 2.2em;
-}
-</style>
-
-<script>
-const images = document.querySelectorAll('.payment-image');
-
-images.forEach(image => {
-  image.addEventListener('click', () => {
-      const fullscreenImage = document.createElement('div');
-      fullscreenImage.classList.add('payment-image-fullscreen');
-
-      // Create the close button
-      const closeButton = document.createElement('button');
-      closeButton.classList.add('close-button');
-      closeButton.textContent = 'X';
-      fullscreenImage.appendChild(closeButton);
-
-      const img = document.createElement('img');
-      img.src = image.dataset.fullscreenSrc;
-      fullscreenImage.appendChild(img);
-
-      document.body.appendChild(fullscreenImage);
-
-      fullscreenImage.addEventListener('click', () => {
-          document.body.removeChild(fullscreenImage);
-      });
-      closeButton.addEventListener('click', () => {
-          document.body.removeChild(fullscreenImage);
-      });
-  });
-});
-
-const closeButtons = document.querySelectorAll('.close-button');
-closeButtons.forEach(button => {
-  button.addEventListener('mouseover', () => {
-      button.style.color = 'red';
-      button.style.fontSize = '1.2em';
-  });
-  button.addEventListener('mouseout', () => {
-      button.style.color = 'black';
-      button.style.fontSize = '1em';
-  });
-});
-
-</script>
 </html>

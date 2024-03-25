@@ -1,101 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      background-color: #f2f2f2;
-      margin: 0;
-      padding: 0;
-    }
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    h1 {
-      color: #333;
-      text-align: center;
-    }
-
-    .report-body {
-      max-width: 800px;
-      margin: 20px auto;
-      background-color: #fff;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-      border-radius: 5px;
-    }
-
-    .report-topic-heading {
-      margin-bottom: 20px;
-    }
-
-    .t-op {
-      list-style: none;
-      padding: 0;
-    }
-
-    .t-op li {
-      border-bottom: 1px solid #ddd;
-      padding: 20px 0;
-    }
-
-    h2 {
-      color: #333;
-      margin-bottom: 5px;
-    }
-
-    p {
-      color: #666;
-      margin: 5px 0;
-    }
-
-    h3 {
-      color: #555;
-      margin-bottom: 10px;
-    }
-
-    a {
-      color: #007bff;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
+    <title>Services User</title>
+    <style>
+        body{
+              overflow: scroll;
+             }
+          
+             a{
+          color: white;
+          text-decoration: none;
+          padding: 0.6rem;
+          border-radius: 0.3rem;
+          background-color: green;
+          position: relative;
+         top: 1rem;
+      }
+          
+        h2{
+          text-align: center;
+        }
+          
+              input[type="search"] {
+                padding: 10px;
+                border-radius: 5px;
+                outline: none;
+                width: 250px;
+                position: relative;
+                left: 50%;
+                transform: translate(-50%);
+              }
+          
+              table {
+                border-collapse: collapse;
+                width: 100%;
+                margin-top: 1rem;
+              }
+              
+              th, td {
+                  white-space: nowrap;
+                  padding: 10px;
+                border: 1px solid #ddd;
+                text-align: center;
+              }
   </style>
-  <title>Users</title>
-</head>
-<body>
-  <h1>Users</h1>
-  <div class="report-body">
-    <div class="report-topic-heading">
-      <ul class="t-op">
+  </head>
+  <body>
+    <a href="/admin/collection-ensureIndex/kira-yagami-082561-lira-Integrate-page-of-admin-931249/success" style="text-decoration: none;">Go to Home</a>
+    <h2></h2>
+    <input type="search" id="searchInput" onkeyup="searchTable()"
+      placeholder="Enter fullName | Email">
+
+    <table class="zigzag" id="userTable">
+      <thead>
+        <br>
+        <tr>
+          <th class="header">User Full Name</th>
+          <th class="header">Email</th>
+          <th class="header">Description</th>
+          <th class="header">Category</th>
+          <th class="header">Category Mid</th>
+        </tr>
+      </thead>
+      <tbody>
         <% if (users.length > 0) { %>
-          <% for (const user of users) { %>
-            <li>
-              <h2><%= user.firstName %> <%= user.lastName %></h2>
-              <p>Email: <%= user.email %></p>
-              <% if (user.desc) { %>
-                <p>Description: <%= user.desc %></p>
-              <% } %>
-              <% if (user.exploreBusiness) { %>
-                <h3>Business Information</h3>
-                <p>Category: <%= user.exploreBusiness.category %></p>
-                <p>Data: <%= user.exploreBusiness.data %></p>
-              <% } %>
-              <% if (user.mobileWeb) { %>
-                <p>Mobile Website: <a href="<%= user.mobileWeb %>"><%= user.mobileWeb %></a></p>
-              <% } %>
-              <% if (user.website) { %>
-                <p>Website: <a href="<%= user.website %>"><%= user.website %></a></p>
-              <% } %>
-            </li>
+        <% for (const user of users) { %>
+        <tr class="table-row">
+          <td class="col col-8"><%= user.firstName %> <%= user.lastName %></td>
+
+          <td class="col col-8"><%= user.email %></td>
+          <% if (user.desc) { %>
+          <td class="col col-4"><%= user.desc %></td>
           <% } %>
-        <% } else { %>
-          <p>No users found.</p>
+          <% if (user.exploreBusiness) { %>
+          <td class="col col-5"><%= user.exploreBusiness.category %></td>
+          <td class="col col-6 width"> <%= user.exploreBusiness.data %></td>
+          <% } %>
+
+          <% if (user.mobileWeb) { %>
+          <p>Mobile Website: <a href="<%= user.mobileWeb %>"><%= user.mobileWeb
+              %></a></p>
+          <% } %>
+          <% if (user.website) { %>
+          <p>Website: <a href="<%= user.website %>"><%= user.website %></a></p>
+          <% } %>
+        </tr>
         <% } %>
-      </ul>
-    </div>
-  </div>
-</body>
+        <% } else { %>
+        <p>No users found.</p>
+        <% } %>
+      </tbody>
+    </table>
+    <script>
+     function searchTable() {
+    const input = document.getElementById('searchInput');
+    const filter = input.value.toUpperCase();
+    const table = document.getElementById('userTable');
+    const trs = table.getElementsByTagName('tr');
+
+    for (let i = 0; i < trs.length; i++) {
+        let match = false;
+        const tds = trs[i].querySelectorAll('td:nth-child(1), td:nth-child(2)'); // Selecting username and email cells
+
+        for (let j = 0; j < tds.length; j++) {
+            const td = tds[j];
+            if (td) {
+                if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    match = true;
+                    break;
+                }
+            }
+        }
+
+        if (match) {
+            trs[i].style.display = '';
+        } else {
+            trs[i].style.display = 'none';
+        }
+    }
+   
+}
+
+    </script>
+    <script>
+      // Count the total number of rows in the table
+      var totalAccounts = document.querySelectorAll('#userTable tbody tr').length;
+    
+      // Update the content of the h2 element with the total count
+      document.querySelector('h2').innerText = 'Total Add Fund Payment Details: ' + totalAccounts;
+    </script>
+  </body>
 </html>

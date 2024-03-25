@@ -4,46 +4,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Centered Animated Buttons</title>
+    <title>Buyer Code</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <div class="container">
         <!-- <a href="/buyer-form/" class="animated-button" role="button">Buyer-form- Details</a> -->
-        <a href="/buyer-form/" class="animated-button" role="button">Get All Buyer Forms Json Form</a>
-
-        <a href="/buyer-form/Api/getAllSellerFormsRen" class="animated-button" role="button">Get All Buyer Forms</a>
-        <a href="/buyer-form/Api/delete" class="animated-button" role="button">Delete Business Details of Buyer Form</a>
+      
         <!-- <a href="/buyer-form/Api/getAllSellerFormsRen" class="animated-button" role="button">Add Business Details</a> -->
     </div>
+    <header>
+        <h1>Welcome to Buyer Code Data Page</h1>
+        <nav>
+            <a href="/buyer-form/" class="button-20" role="button" style="display: none;">Get All Buyer Forms Json Form</a>
+
+            <a href="/buyer-form/Api/getAllSellerFormsRen" class="button-20" role="button">Get All Buyer Code Forms</a>
+            <a href="/buyer-form/Api/delete" class="button-20" role="button">Delete Buyer Code Forms</a>
+        </nav>
+    </header>
 </body>
 
 </html>
 <style>
-    /* Basic button styling */
-.animated-button {
-    display: inline-block;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    font-family: sans-serif; /* Choose your preferred font */
-    cursor: pointer; /* Indicate clickable element */
-    text-decoration: none; /* Remove underline */
-    color: white;
-    background-color: #81c784; /* Green color */
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-    transition: all 0.2s ease-in-out; /* Smooth transitions */
-}
-.animated-button:hover {
-    transform: translateY(-5px); /* Move down slightly */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
-}
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f0f0f0;
+      padding: 0;
+  }
 
-/* Centering the buttons */
-.container {
-    text-align: center;
-}
+  header {
+      padding: 20px;
+      text-align: center;
+  }
+
+  nav {
+      margin-top: 30px;
+  }
+
+  nav a {
+      margin-right: 10px;
+      text-decoration: none;
+      color: #333;
+      padding: 8px 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+  }
+
+  nav a:hover {
+      background-color: #ddd;
+  }
 
 </style>

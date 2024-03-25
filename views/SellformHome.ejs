@@ -4,43 +4,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Animated Green Buttons</title>
+    <title>Seller Code</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
+<body>
+   
+    <header>
+        <h1>Welcome to Seller Code Data Page</h1>
+        <nav>
+            <a href="/Seller-form/get" class="button-20" role="button" style="display: none;">All Seller Forms in Json Form</a>
+            <a href="/Seller-form/Api/getAllSellerFormsRen" class="button-20" role="button">All Seller Code Forms</a>
+            <a href="/Seller-form/Api/delete" class="button-20" role="button">Delete Seller Code Details</a>
+        </nav>
+    </header>
+</body>
+
+</html>
 <style>
-    /* Basic button styling */
-.animated-button {
-    display: inline-block;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    font-family: sans-serif; /* Choose your preferred font */
-    cursor: pointer; /* Indicate clickable element */
-    text-decoration: none; /* Remove underline */
-    color: white;
-    background-color: #81c784; /* Green color */
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-    transition: all 0.2s ease-in-out; /* Smooth transitions */
-}
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f0f0f0;
+      padding: 0;
+  }
 
-/* Animation on hover */
-.animated-button:hover {
-    transform: translateY(-5px); /* Move down slightly */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
-}
+  header {
+      padding: 20px;
+      text-align: center;
+  }
 
-/* Centering the buttons */
-.container {
-    text-align: center;
-}
+  nav {
+      margin-top: 30px;
+  }
+
+  nav a {
+      margin-right: 10px;
+      text-decoration: none;
+      color: #333;
+      padding: 8px 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+  }
+
+  nav a:hover {
+      background-color: #ddd;
+  }
 
 </style>
-<body>
-    <div class="container">
-        <a href="/Seller-form/get" class="animated-button" role="button">All Seller Forms in Json Form</a>
-        <a href="/Seller-form/Api/getAllSellerFormsRen" class="animated-button" role="button">All Seller Forms</a>
-        <a href="/Seller-form/Api/delete" class="animated-button" role="button">Delete Business Details</a>
-    </div>
-</body>
-</html>

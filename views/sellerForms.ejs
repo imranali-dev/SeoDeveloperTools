@@ -1,57 +1,80 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>All Seller Forms</title>
+    <title>Seller Code Form</title>
+
 </head>
 <style>
-    table {
-      width: 100%;
+  body {
+      overflow: scroll;
+  }
+
+  a {
+      color: white;
+      text-decoration: none;
+      padding: 0.6rem;
+      border-radius: 0.3rem;
+      background-color: green;
+      position: relative;
+      top: 1rem;
+  }
+
+  h2 {
+      text-align: center;
+  }
+
+  input[type="search"] {
+      padding: 10px;
+      border-radius: 5px;
+      outline: none;
+      width: 250px;
+      position: relative;
+      left: 50%;
+      transform: translate(-50%);
+  }
+
+  table {
       border-collapse: collapse;
-      margin-top: 20px;
-    }
-  
-    th, td {
-      padding: 12px;
-      text-align: left;
+      width: 100%;
+      margin-top: 1rem;
+  }
+
+  th, td {
+      white-space: nowrap;
+      padding: 10px;
       border: 1px solid #ddd;
-    }
-  
-    th {
-      background-color: #f2f2f2;
-    }
-  
-    tr:hover {
-      background-color: #f5f5f5;
-    }
-  
-    .active-row {
-      background-color: #cce5ff;  /* Light blue for the active row */
-    }
-  </style>
+      text-align: center;
+  }
+</style>
 <body>
-   <h1>All Seller Forms</h1>
-<table>
+  <a
+  href="/admin/collection-ensureIndex/kira-yagami-082561-lira-Integrate-page-of-admin-931249/success"
+  style="text-decoration: none;">Go to Home</a>
+<h2></h2>
+<input type="search" id="searchInput" onkeyup="searchTable()"
+ placeholder="Enter userName | Email | Account id">
+<table id="userTable">
   <thead>
     <tr>
       <th>User Name</th>
+      <th>Buyer User Name</th>
       <th>Email</th>
       <th>Account Type</th>
-      <th>Buyer User Name</th>
-      <th>Account Payment Received From Buyer</th>
       <th> Account Id</th>
-      <th>Seller Form Main Buyer GCF Code</th> 
-      <th>Created At</th> 
+      <th>Payment From Buy</th>
+      <th>Eight Digit Code</th> 
+      <th>Date And Time</th> 
     </tr>
   </thead>
   <tbody>
     <% sellerForms.forEach(sellerForm => { %>
       <tr>
         <td><%= sellerForm.userInfo.username %></td>
+        <td><%= sellerForm.accountDetails.BuyeruserName %></td>
         <td><%= sellerForm.userInfo.email %></td>
         <td><%= sellerForm.accountDetails.accountType %></td>
-        <td><%= sellerForm.accountDetails.BuyeruserName %></td>
-        <td><%= sellerForm.accountDetails.accountPaymentReceivedFromBuyer %></td>
         <td><%= sellerForm.accountDetails.accountId %></td>
+        <td><%= sellerForm.accountDetails.accountPaymentReceivedFromBuyer %></td>
         <td><%= sellerForm.sellerFormMainBuyerGCFCode %></td>
         <td><%= sellerForm.createdAt %></td> 
       </tr>
@@ -59,7 +82,42 @@
   </tbody>
 </table>
 
-    
+<script>
+  function searchTable() {
+      const input = document.getElementById('searchInput');
+      const filter = input.value.toUpperCase();
+      const table = document.getElementById('userTable');
+      const trs = table.getElementsByTagName('tr');
+
+      for (let i = 0; i < trs.length; i++) {
+          let match = false;
+          const tds = trs[i].querySelectorAll('td:nth-child(1), td:nth-child(3) , td:nth-child(5)'); // Selecting username and email cells
+
+          for (let j = 0; j < tds.length; j++) {
+              const td = tds[j];
+              if (td) {
+                  if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                      match = true;
+                      break;
+                  }
+              }
+          }
+
+          if (match) {
+              trs[i].style.display = '';
+          } else {
+              trs[i].style.display = 'none';
+          }
+      }
+
+      // Count the total number of rows in the table
+    }
+    var totalAccounts = document.querySelectorAll('#userTable tbody tr').length;
+
+    // Update the content of the h2 element with the total count
+    document.querySelector('h2').innerText = 'Total Buyer Code Forms : ' + totalAccounts;
+
+</script>
     
 </body>
 </html>

@@ -3,21 +3,23 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>All Users</title>
+    <title>Buyer & Payment User history</title>
 </head>
 
 <body>
-    <h1>All Users</h1>
+    <a
+    href="/admin/collection-ensureIndex/kira-yagami-082561-lira-Integrate-page-of-admin-931249/success"
+    style="text-decoration: none;">Go to Home</a>
+  <h2></h2>
+  <input type="search" id="searchInput" onkeyup="searchTable()"
+   placeholder="Enter userName | Email | Transaction id">
 
     <% if (users.length> 0) { %>
-        <div class="search-container">
-            <input type="text" id="search-input" placeholder="Search users..." />
-          </div>
 
-        <table class="table">
+        <table id="userTable">
             <thead class="table__thead">
                 <tr class="table__head">
-                    <th class="table__th">Collection</th>
+                    <th class="table__th" style="display: none;">Collection</th>
                     <th class="table__th">Username</th>
                     <th class="table__th">Email</th>
                     <th class="table__th">Total Account Price</th>
@@ -32,8 +34,8 @@
             </thead>
             <tbody class="table__tbody">
                 <% for (const user of users) { %>
-                    <tr class="table__tr">
-                        <td class="table__td table__mobile-title">
+                    <tr class="table__tr" >
+                        <td class="table__td table__mobile-title" style="display: none;">
                             <%= user.collectionType %>
                         </td>
                         <td class="table__td table__mobile-title">
@@ -75,163 +77,81 @@
 
 </html>
 <style>
-    input[type="text"] {
-        width: 100%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        box-sizing: border-box;
-        border: 2px solid #04AA6D;
-        border-radius: 4px;
+    body {
+        overflow: scroll;
     }
-
-    .btn {
-        background-color: #04AA6D;
+  
+    a {
         color: white;
-        padding: 16px 32px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
+        text-decoration: none;
+        padding: 0.6rem;
+        border-radius: 0.3rem;
+        background-color: green;
+        position: relative;
+        top: 1rem;
     }
-</style>
-<style>
-    /* core styles for table */
-
-    .table {
-        width: 100%;
-        border-spacing: 0;
+  
+    h2 {
+        text-align: center;
+    }
+  
+    input[type="search"] {
+        padding: 10px;
+        border-radius: 5px;
+        outline: none;
+        width: 250px;
+        position: relative;
+        left: 50%;
+        transform: translate(-50%);
+    }
+  
+    table {
         border-collapse: collapse;
-        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 1px 2px 0 rgba(0, 0, 0, 0.24);
-        background-color: var(--tableBgColor, #fff);
+        width: 100%;
+        margin-top: 1rem;
     }
-
-    .table__thead {
-        background-color: var(--tableTitleBgColor);
-        color: var(--tableTitleTextColor);
+  
+    th, td {
+        white-space: nowrap;
+        padding: 10px;
+        border: 1px solid #ddd;
+        text-align: center;
     }
-
-    .table__mobile-caption {
-        display: none;
-    }
-
-    .table__td,
-    .table__th {
-        padding: var(--tableCellPadding, 20px);
-        box-sizing: border-box;
-    }
-
-    @media screen and (min-width: 769px) {
-        .table__tr:hover {
-            background-color: var(--tableRowBgColorHover);
-        }
-
-        .table__td:first-child,
-        .table__th:first-child {
-            width: 30%;
-            text-align: left;
-        }
-
-        .table__td,
-        .table__th {
-            text-align: center;
-        }
-    }
-
-    @media screen and (max-width: 768px) {
-
-        .table,
-        .table__thead,
-        .table__tbody,
-        .table__tr {
-            display: block;
-        }
-
-        .table__td {
-            display: flex;
-        }
-
-        .table__head {
-            display: none;
-        }
-
-        .table__mobile-title {
-            background-color: var(--tableTitleBgColor);
-            color: var(--tableTitleTextColor);
-        }
-
-        .table__td {
-            border-bottom: 1px solid var(--tableSeparatorColor);
-        }
-
-        .table__td:last-of-type {
-            border-bottom: none;
-        }
-
-        .table__mobile-caption,
-        .table__value {
-            display: block;
-            width: 50%;
-            box-sizing: border-box;
-        }
-
-        .table__mobile-caption {
-            padding-right: 2%;
-        }
-    }
-
-    /* demo styles for table */
-
-    .table {
-        --tableCellPadding: 2rem;
-        --tableTitleBgColor: #5668ca;
-        --tableTitleTextColor: #fff;
-        --tableRowBgColorHover: #f0f0f0;
-        --tableSeparatorColor: #eee;
-    }
-
-    /*
-* demo page
-*/
-
-    @media screen and (min-width: 768px) {
-        html {
-            font-size: 62.5%;
-        }
-    }
-
-    @media screen and (max-width: 767px) {
-        html {
-            font-size: 50%;
-        }
-    }
-</style>
+  </style>
 
 <script>
-    const searchInput = document.getElementById('search-input');
-    const tableBody = document.getElementsByClassName('table__tbody');
-  console.log(searchInput)
-    function debounce(func, delay) {
-      let timeout;
-      return function(...args) {
-        clearTimeout(timeout);
-        timeout = setTimeout(() => func.apply(this, args), delay);
-      };
-    }
+    function searchTable() {
+        const input = document.getElementById('searchInput');
+        const filter = input.value.toUpperCase();
+        const table = document.getElementById('userTable');
+        const trs = table.getElementsByTagName('tr');
   
-    const searchUsers = debounce(() => {
-      const searchTerm = searchInput.value.toLowerCase();
-      const filteredUsers = users.filter(user => {
-        const searchText = Object.values(user).join(' ').toLowerCase(); // Combine all user properties for search
-        return searchText.includes(searchTerm);
-      });
+        for (let i = 0; i < trs.length; i++) {
+            let match = false;
+            const tds = trs[i].querySelectorAll('td:nth-child(2), td:nth-child(3) , td:nth-child(5)'); // Selecting username and email cells
   
-      tableBody.innerHTML = '';
-      if (filteredUsers.length > 0) {
-        filteredUsers.forEach(user => {
-        });
-      } else {
-        tableBody.innerHTML = '<tr><td colspan="7">No users found based on your search.</td></tr>';
+            for (let j = 0; j < tds.length; j++) {
+                const td = tds[j];
+                if (td) {
+                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        match = true;
+                        break;
+                    }
+                }
+            }
+  
+            if (match) {
+                trs[i].style.display = '';
+            } else {
+                trs[i].style.display = 'none';
+            }
+        }
+  
+        // Count the total number of rows in the table
       }
-    }, 250); 
+      var totalAccounts = document.querySelectorAll('#userTable tbody tr').length;
   
-    searchInput.addEventListener('input', searchUsers);
+      // Update the content of the h2 element with the total count
+      document.querySelector('h2').innerText = 'Total Buy & sell Payment History Forms : ' + totalAccounts;
+  
   </script>

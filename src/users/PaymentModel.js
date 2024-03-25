@@ -8,7 +8,7 @@ const AccountSchema = new mongoose.Schema({
     type: String,
   },
   phone: {
-    type: Number,
+    type: String,
   },
   selectPaymentMethod: {
     type: String,

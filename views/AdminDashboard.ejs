@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html>
 
-<head>
+  <head>
     <title>Admin Panel</title>
 
-</head>
-<style>
+  </head>
+  <style>
   @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700");
 *, *:before, *:after {
   box-sizing: border-box;
 }
-
+.a{
+    color: white;
+    text-decoration: none;
+    padding: 0.6rem;
+    border-radius: 0.3rem;
+    background-color: green;
+    position: relative;
+    top: 1.3rem;
+    left: 0.5rem;
+}
 body {
   font-family: "Source Sans Pro", sans-serif;
   margin: 0;
@@ -25,9 +34,18 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 8rem;
+  margin-top: 5rem;
 }
-
+input[type="search"] {
+                padding: 10px;
+                border-radius: 5px;
+                outline: none;
+                width: 250px;
+                position: relative;
+                left: 50%;
+                top: 1rem;
+                transform: translate(-50%);
+              }
 .table {
   width: 100%;
   border: 1px solid #EEEEEE;
@@ -87,56 +105,90 @@ h1, h2, h3, h4, h5, h6 {
 }
 </style>
 
-<body>
+  <body>
     <div class="container1">
-    <a href="/admin/collection-ensureIndex/kira-yagami-082561-lira-Integrate-page-of-admin-931249/success" style="text-align: center; text-decoration: none; position: relative;
-     left: 47%;" role="button">Go tO Home</a>
-        <h2 style="text-align: center; margin-top: 2rem;">All User SignUp</h2>
-         </div>
-
-    <div class="container">
-        
-        <div class="table">
-            <div class="table-header">
-                <div class="header__item"><a id="name" class="filter__link" href="#">User Id</a></div>
-                <div class="header__item"><a id="draws" class="filter__link filter__link--number" href="#">First Name</a></div>
-                <div class="header__item"><a id="losses" class="filter__link filter__link--number" href="#">Last Name</a></div>
-                <div class="header__item"><a id="wins" class="filter__link filter__link--number" href="#">Email</a></div>
-                <div class="header__item"><a id="total" class="filter__link filter__link--number" href="#">Time&date</a></div>
-                <div class="header__item"><a id="total" class="filter__link filter__link--number" href="#">Email Activation</a></div>
-            </div>
-            <div class="table-content">	
-            <% users.forEach(function(user) { %>
-                <div class="table-row">		
-                  <h1 class="totalAccount"></h1>
-                    <div class="table-data">  <%= user.userId %></div>
-                    <div class="table-data">
-                        <%= user.firstName %>
-
-                    </div>
-                    <div class="table-data">
-                        <%= user.lastName %>
-
-                    </div>
-                    <div class="table-data">
-                        <%= user.email %>
-
-                    </div>
-                  
-                  
-                    <div class="table-data">
-                        <%= user.createdAt %>
-
-                    </div>
-                    <div class="table-data">
-                        <%= user.active %>
-                    </div>
-                </div>
-                <% }); %>
-            </div>	
-        </div>
+      <a class="a"
+        href="/admin/collection-ensureIndex/kira-yagami-082561-lira-Integrate-page-of-admin-931249/success"
+        role="button">Go tO Home</a>
+      <h2 style="text-align: center; margin-top: 2rem;">All User SignUp</h2>
+      <input type="search" id="searchInput" onkeyup="searchTable()"
+        placeholder="Enter firstName | lastName | Email">
     </div>
 
+    <div class="container">
+
+      <div class="table">
+        <div class="table-header">
+          <div class="header__item"><a id="name" class="filter__link"
+              href="#">User Id</a></div>
+          <div class="header__item"><a id="draws"
+              class="filter__link filter__link--number" href="#">First
+              Name</a></div>
+          <div class="header__item"><a id="losses"
+              class="filter__link filter__link--number" href="#">Last
+              Name</a></div>
+          <div class="header__item"><a id="wins"
+              class="filter__link filter__link--number" href="#">Email</a></div>
+          <div class="header__item"><a id="total"
+              class="filter__link filter__link--number"
+              href="#">Time&date</a></div>
+          <div class="header__item"><a id="total"
+              class="filter__link filter__link--number" href="#">Email
+              Activation</a></div>
+        </div>
+        <div class="table-content">
+          <% users.forEach(function(user) { %>
+          <div class="table-row">
+            <h1 class="totalAccount"></h1>
+            <div class="table-data"> <%= user.userId %></div>
+            <div class="table-data first">
+              <%= user.firstName %>
+
+            </div>
+            <div class="table-data last">
+              <%= user.lastName %>
+
+            </div>
+            <div class="table-dat email">
+              <%= user.email %>
+
+            </div>
+
+            <div class="table-data">
+              <%= user.createdAt %>
+
+            </div>
+            <div class="table-data">
+              <%= user.active %>
+            </div>
+          </div>
+          <% }); %>
+        </div>
+      </div>
+    </div>
+    <script>
+      function searchTable() {
+        const input = document.getElementById('searchInput');
+        const filter = input.value.trim().toUpperCase();
+        const table = document.querySelector('.table');
+        const rows = table.querySelectorAll('.table-row');
+    
+        rows.forEach(row => {
+          const firstName = row.querySelector('.first').textContent.toUpperCase();
+          const lastName = row.querySelector('.last').textContent.toUpperCase();
+          const email = row.querySelector('.email').textContent.toUpperCase();
+    
+          if (firstName.includes(filter) || lastName.includes(filter) || email.includes(filter)) {
+            row.style.display = '';
+          } else {
+            row.style.display = 'none';
+          }
+        });
+      }
+    </script>
+    
+    
+    
     <script>
       // Count the total number of rows in the table
       var totalAccounts = document.querySelectorAll('.table-row').length;
@@ -145,6 +197,5 @@ h1, h2, h3, h4, h5, h6 {
       document.querySelector('h1').innerText = 'Total Users : ' + totalAccounts;
   </script>
 
-
-</body>
+  </body>
 </html>

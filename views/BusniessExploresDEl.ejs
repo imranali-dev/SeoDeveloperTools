@@ -3,20 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Delete User Form</title>
+  <title>User Services Delete </title>
 </head>
 <body>
+  <a
+  href="/admin/collection-ensureIndex/kira-yagami-082561-lira-Integrate-page-of-admin-931249/success"
+  style="text-decoration: none;">Go to Home</a>
 
-  <h1>Delete User</h1>
+  <h1>Delete addFund User History</h1>
 
   <form id="deleteUserForm">
-    <label for="email">Enter User Email:</label>
+    <label for="email">Enter User addFund Email:</label>
     <input type="email" id="email" name="email" required>
     <button type="submit">Delete User</button>
   </form>
 
   <div id="resultMessage"></div>
   <style>
+    #resultMessage{
+      text-align: center;
+      color: red;
+      text-transform: capitalize;
+    }
+    
+    a {
+        color: white;
+        text-decoration: none;
+        padding: 0.6rem;
+        border-radius: 0.3rem;
+        background-color: green;
+        position: relative;
+        top: 1rem;
+        left: 1rem;
+    }
     body {
       margin: 0;
       padding: 0;
@@ -137,7 +156,7 @@
         if (data.error) {
           document.getElementById('resultMessage').innerText = `Error: ${data.error}`;
         } else {
-          document.getElementById('resultMessage').innerText = 'User deleted successfully.';
+          document.getElementById('resultMessage').innerText = 'addFund history User deleted successfully.';
         }
       })
       .catch(error => {

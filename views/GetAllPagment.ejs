@@ -4,110 +4,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account Details</title>
+    <title>addFundForm</title>
   
     
     <style>
-       .navbar{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-       }
-    
-        a {
-          text-decoration: none;
-          color: white;
-          padding: 10px 20px;
-          border-radius: 5px;
-          background-color: #0072ff;
-          transition: background-color 300ms ease;
-        }
-    
-        a:hover {
-          background-color: #00c6ff;
-        }
-  
-    
-        input[type="search"] {
-          padding: 10px;
-          border-radius: 5px;
-          outline: none;
-        }
-    
-        table {
-          border-collapse: collapse;
-          width: 100%;
-        }
-    
-        th, td {
-          border: 1px solid #ddd;
-          text-align: center;
-        }
-    
-   
-    
-        .account-image {
-          width: 100%;
-          height: 100px;
-          object-fit: cover;
-        }
 
-      </style>
-      <style>
-        /* Your existing CSS here */
-    
-        @media screen and (max-width: 600px) {
-          table, th, td {
-            width: 100%;
-            display: block;
+             .navbar{
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+             }
+             body{
+              overflow: scroll;
+             }
+          
+             a{
+          color: white;
+          text-decoration: none;
+          padding: 0.6rem;
+          border-radius: 0.3rem;
+          background-color: green;
+          position: relative;
+          top: 0rem;
+          left: 0.5rem;
+      }
+          
+        
+          
+              input[type="search"] {
+                padding: 10px;
+                border-radius: 5px;
+                outline: none;
+                width: 250px;
+              }
+          
+              table {
+                border-collapse: collapse;
+                width: 100%;
+              }
+              
+              th, td {
+                  white-space: nowrap;
+                  padding: 10px;
+                border: 1px solid #ddd;
+                text-align: center;
+              }
+          .width{
+              white-space: wrap;
           }
-    
-          th {
-            position: absolute;
-            top: -9999px;
-            left: -9999px;
+         
+          
+              .account-image {
+                width: 100%;
+                height: 100px;
+                object-fit: cover;
+              }
+      
+            </style>
+              <style>
+              @media (width < 1435px) {
+                  .width{
+              white-space: nowrap;
           }
-    
-          tr {
-            border: 1px solid #818181;
-            margin-bottom: 20px;
-          }
-    
-          td {
-            border: none;
-            position: relative;
-            padding-left: 50%;
-          }
-    
-          td:before {
-            position: absolute;
-            left: 6px;
-            width: 45%;
-            padding-right: 10px;
-            white-space: nowrap;
-          }
-    
-          td:nth-of-type(1):before { content: "Name"; }
-          td:nth-of-type(2):before { content: "Email"; }
-          td:nth-of-type(3):before { content: "Phone"; }
-          td:nth-of-type(4):before { content: "Payment"; }
-          td:nth-of-type(5):before { content: "Description"; }
-          td:nth-of-type(6):before { content: "Account Buy Check"; }
-          td:nth-of-type(7):before { content: "Earning Money Check"; }
-          td:nth-of-type(8):before { content: "Image"; }
-        }
-      </style>
+              }
+            </style>
     
 </head>
 
 <body>
     <div class="navbar">
-        <a href="/admin/" style="text-decoration: none;">Go to Home</a>
-        <h2>Payment Details</h2>
-        <input type="search" id="searchInput" onkeyup="searchTable()" placeholder="Search for accounts...">
+        <a href="/admin/collection-ensureIndex/kira-yagami-082561-lira-Integrate-page-of-admin-931249/success" style="text-decoration: none;">Go to Home</a>
+        <h2>Total Payment Details</h2>
+        <input type="search" id="searchInput" onkeyup="searchTable()" placeholder="Enter Name | UserName | Email">
       </div>
     
-      <div class="content">
        <table class="zigzag" id="userTable" >
         <thead>
             <br>
@@ -134,18 +104,18 @@
                   <td class="col col-8"><%- account.name || '' %></td>
 
                   <td class="col col-8"><%- account.userName || '' %></td>
-                  <td class="col col-2"><%- account.email || '' %></td>
+                  <td class="col col-2 width"><%- account.email || '' %></td>
                     <td class="col col-4"><%- account.phone || '' %></td>
-                    <td class="col col-5"><%- account.selectPaymentMethod || '' %></td>
-                    <td class="col col-6"><%- account.description || '' %></td>
+                    <td class="col col-5"><%- account.paymentMethod || '' %></td>
+                    <td class="col col-6 width"><%- account.description || '' %></td>
                     <!-- <td class="col col-6"><%- account.description || '' %></td> -->
 
                     <td class="col col-7"><%- account.transitionId || '' %></td>
                     <td class="col col-7"><%- account.totalAccountPrice || '' %></td>
 
-                    <td class="col col-7"><%- account.transactionDate || '' %></td>
+                    <td class="col col-7 width"><%- account.transactionDate || '' %></td>
 
-                    <td class="col col-9">
+                    <td class="col col-9 " >
                         <% if (account.image) { %>
                             <img src="/Account/image/<%- account.image %>" alt="Account Image" class="account-image">
                             <% } else { %>
@@ -156,35 +126,44 @@
         </tbody>
     </table>
 </body>
+
 <script>
-    function searchTable() {
+  function searchTable() {
       const input = document.getElementById('searchInput');
       const filter = input.value.toUpperCase();
       const table = document.getElementById('userTable');
       const trs = table.getElementsByTagName('tr');
 
       for (let i = 0; i < trs.length; i++) {
-        let match = false;
-        const tds = trs[i].getElementsByTagName('td');
+          let match = false;
+          const tds = trs[i].querySelectorAll('td:nth-child(1), td:nth-child(2), td:nth-child(3)'); // Selecting username and email cells
 
-        for (let j = 0; j < tds.length; j++) {
-          const td = tds[j];
-          if (td) {
-            if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-              match = true;
-              break;
-            }
+          for (let j = 0; j < tds.length; j++) {
+              const td = tds[j];
+              if (td) {
+                  if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                      match = true;
+                      break;
+                  }
+              }
           }
-        }
 
-        if (match) {
-          trs[i].style.display = '';
-        } else {
-          trs[i].style.display = 'none';
-        }
+          if (match) {
+              trs[i].style.display = '';
+          } else {
+              trs[i].style.display = 'none';
+          }
       }
-    }
-  </script>
+  }
+</script>
+
+<script>
+  // Count the total number of rows in the table
+  var totalAccounts = document.querySelectorAll('#userTable tbody tr').length;
+
+  // Update the content of the h2 element with the total count
+  document.querySelector('h2').innerText = 'Total Add Fund Payment Details: ' + totalAccounts;
+</script>
 
 
 

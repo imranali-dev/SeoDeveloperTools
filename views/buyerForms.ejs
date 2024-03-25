@@ -1,73 +1,134 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>All Buyer Forms</title>
+    <title>Buyer Code Form</title>
 </head>
 <style>
+    body {
+        overflow: scroll;
+    }
+
+    a {
+        color: white;
+        text-decoration: none;
+        padding: 0.6rem;
+        border-radius: 0.3rem;
+        background-color: green;
+        position: relative;
+        top: 1rem;
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    input[type="search"] {
+        padding: 10px;
+        border-radius: 5px;
+        outline: none;
+        width: 250px;
+        position: relative;
+        left: 50%;
+        transform: translate(-50%);
+    }
+
     table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 1rem;
     }
-  
+
     th, td {
-      padding: 12px;
-      text-align: left;
-      border: 1px solid #ddd;
+        white-space: nowrap;
+        padding: 10px;
+        border: 1px solid #ddd;
+        text-align: center;
     }
-  
-    th {
-      background-color: #f2f2f2;
+    .error{
+      text-align: center;
+      color: red;
+      text-transform: capitalize;
+      font-size: 16px;
     }
-  
-    tr:hover {
-      background-color: #f5f5f5;
-    }
-  
-    .active-row {
-      background-color: #cce5ff;  /* Light blue for the active row */
-    }
-  </style>
-  
+</style>
+
 <body>
-    <h1>All Buyer Forms</h1>
+<a
+        href="/admin/collection-ensureIndex/kira-yagami-082561-lira-Integrate-page-of-admin-931249/success"
+        style="text-decoration: none;">Go to Home</a>
+<h2></h2>
+<input type="search" id="searchInput" onkeyup="searchTable()"
+       placeholder="Enter userName | Email | Account id">
 
-    <% if (buyerForms.length > 0) { %>
-        <table>
-            <thead>
-                <tr>
-                    <th>Sr NO</th>
-                    <th>User Name</th>
-                    <th>Seller Username</th>
-                    <th>Email</th>
-                    <th>Total Account Type Available</th>
-                    <th>Total Account ID Available</th>
-                    <th>Eight Digit Code</th>
-                    <th> Date And Time</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% buyerForms.forEach((buyerForm, index) => { %>
-                    <tr class="<%= index === selectedRowIndex ? 'active-row' : '' %>">
-                        <td><%= index + 1 %></td>
-                        <td><%= buyerForm.userInfo.userName %></td>
-                        <td><%= buyerForm.sellerUserName %></td>
-                        <td><%= buyerForm.userInfo.email %></td>
-                        <td><%= buyerForm.totalAccountTypeAvailable %></td>
-                        <td><%= buyerForm.totalAccountIdAvailable %></td>
-                        <td><%= buyerForm.eightDigitCodeRandom %></td>
-                        <td><%= buyerForm.createdAt %></td>
+<% if (buyerForms.length > 0) { %>
+    <table id="userTable">
+        <thead>
+        <tr>
+            <th>Sr NO</th>
+            <th>User Name</th>
+            <th>Seller Username</th>
+            <th>Email</th>
+            <th>Account Type </th>
+            <th>Account ID </th>
+            <th>Eight Digit Code</th>
+            <th> Date And Time</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% buyerForms.forEach((buyerForm, index) => { %>
+            <tr class="<%= index === selectedRowIndex ? 'active-row' : '' %>">
+                <td><%= index + 1 %></td>
+                <td><%= buyerForm.userInfo.userName %></td>
+                <td><%= buyerForm.sellerUserName %></td>
+                <td><%= buyerForm.userInfo.email %></td>
+                <td><%= buyerForm.totalAccountTypeAvailable %></td>
+                <td><%= buyerForm.totalAccountIdAvailable %></td>
+                <td><%= buyerForm.eightDigitCodeRandom %></td>
+                <td style="white-space: wrap;"><%= buyerForm.createdAt %></td>
+            </tr>
+        <% }) %>
+        </tbody>
+    </table>
+<% } else { %>
+    <p class="error">No buyer forms found.</p>
+<% } %>
 
-                    </tr>
-                <% }) %>
-            </tbody>
-        </table>
-    <% } else { %>
-        <p>No buyer forms found.</p>
-    <% } %>
-        
-    
-    
-    <a href="/">Home</a>
+
+<script>
+    function searchTable() {
+        const input = document.getElementById('searchInput');
+        const filter = input.value.toUpperCase();
+        const table = document.getElementById('userTable');
+        const trs = table.getElementsByTagName('tr');
+
+        for (let i = 0; i < trs.length; i++) {
+            let match = false;
+            const tds = trs[i].querySelectorAll('td:nth-child(2), td:nth-child(4) , td:nth-child(6)'); // Selecting username and email cells
+
+            for (let j = 0; j < tds.length; j++) {
+                const td = tds[j];
+                if (td) {
+                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        match = true;
+                        break;
+                    }
+                }
+            }
+
+            if (match) {
+                trs[i].style.display = '';
+            } else {
+                trs[i].style.display = 'none';
+            }
+        }
+
+        // Count the total number of rows in the table
+      }
+      var totalAccounts = document.querySelectorAll('#userTable tbody tr').length;
+
+      // Update the content of the h2 element with the total count
+      document.querySelector('h2').innerText = 'Total Buyer Code Forms : ' + totalAccounts;
+
+</script>
 </body>
 </html>
