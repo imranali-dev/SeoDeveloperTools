@@ -32,6 +32,7 @@ const buyerPaymentRoutes = require('./src/buyerPayment/router/router.js');
 const SellerPayement = require('./src/Seller-payment/router/SellerPayment.js');
 const Searchusers = require('./src/aggregateforms/router/router.js');
 const Searchuserpayment = require('./src/aggregatepayments/router/router.js');
+const scamalert = require('./src/scamalert/router/scammer.router.js');
 
 // const ChatApp = require("./routes/livechatRoutes.js");
 const cloudinaryRouter = require("./middlewares/cloudnray/cloudinaryRouter.js");
@@ -103,8 +104,9 @@ const connectWithRetry = () => {
       app.use('/buyerPayment-form', buyerPaymentRoutes);
       app.use('/SellerPayment-form', SellerPayement);
       app.use("/cloudinaryupload", cloudinaryRouter);
-      app.use("/serachusers/email", Searchusers)
-      app.use("/users/payments", Searchuserpayment)
+      app.use("/serachusers/email", Searchusers);
+      app.use("/users/payments", Searchuserpayment);
+      app.use("/alert", scamalert);
 
       // Generic Error Handling Middleware
       app.use((err, req, res, next) => {
