@@ -1,10 +1,10 @@
 
 const express = require("express");
 const router = express.Router();
-const AdminController = require("../src/users/Admincontrller");
 const authenticateToken = require("../middlewares/authMiddleware");
-const AdminUserkeys = require("../src/users/adminkeys");
-const { Signup, Login, Activate, Logout, Allusers } = require("../src/users/adminsignup");
+const AdminUserkeys = require("../src/users/Admin/adminkeys");
+const { Signup, Login, Activate, Logout, Allusers } = require("../src/users/Admin/adminsignup");
+const AdminController = require("../src/users/Admin/Admincontrller");
 router.get('/',authenticateToken, AdminController.AdminHome);
 router.post('/admin/login', Login);
 router.get('/admin/userdata',authenticateToken, AdminController.Allusersd);

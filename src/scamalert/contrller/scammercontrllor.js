@@ -1,21 +1,20 @@
+
+const { uploadImages } = require("../../uploadService/uploadfinal");
 const Scammers = require("../model/scammermodel")
 // Create a new scammer
 exports.createScammer = async (req, res) => {
-    const { name, phoneNumber, country, accountDeal, dealingDateTime, screenshot } = req.body;
-        if (!name || !phoneNumber || !country || !accountDeal || !dealingDateTime) {
-        return res.status(400).json({
-            success: false,
-            error: 'Please provide all required fields'
-        });
-    }
+    const { name, phoneNumber, country, accountDeal, dealingDateTime, screenshot ,isAdmin } = req.body;
+
     try {
+        const imageUrlList = await uploadImages(req.files);
         const scammer = new Scammers({
             name,
             phoneNumber,
             country,
             accountDeal,
             dealingDateTime,
-            screenshot
+            screenshot:imageUrlList,
+            isAdmin 
         });
 
         await scammer.save();
@@ -31,12 +30,25 @@ exports.createScammer = async (req, res) => {
         });
     }
 };
+// is admin forms
+exports.getAdminScammers = async (req, res) => {
+    try {
+        const adminScammers = await Scammers.find({ isAdmin: true }).sort({ createdAt: -1 });
+        res.status(200).json({
+            success: true,
+            data: adminScammers
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+};
 
-
-// Get all scammers
 exports.getScammers = async (req, res) => {
     try {
-        const scammers = await Scammers.find().sort({ createdAt: -1 });;
+        const scammers = await Scammers.find({}).sort({ createdAt: -1 });
 
         res.status(200).json({
             success: true,
@@ -102,7 +114,7 @@ exports.deleteScammer = async (req, res) => {
 
 exports.getScammersPage = async (req, res) => {
     try {
-        const scammers = await Scammers.find();
+        const scammers = await Scammers.find().sort({ createdAt: -1 });
 
         res.render('scammers', { scammers });
     } catch (error) {
@@ -162,6 +174,18 @@ exports.updatedscammmerformRender = async (req, res) => {
     try {
       
         res.render('scammerUpdateform'); 
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            error: error.message
+        });
+    }
+};
+
+exports.ScammeralertHomepage = async (req, res) => {
+    try {
+      
+        res.render('ScammeralertHomepage'); 
     } catch (error) {
         res.status(400).json({
             success: false,

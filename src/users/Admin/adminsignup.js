@@ -3,13 +3,13 @@ require("dotenv").config();
 const { v4: uuid } = require("uuid");
 const { customAlphabet: generate } = require("nanoid");
 
-const { generateJwt } = require("./helpers/generateJwt");
+const { generateJwt } = require("../helpers/generateJwt");
 const User = require("./AdminModel");
 const cookie = require('cookie');
 const options = {
   expiresIn: "1h",
 };
-const sendMails = require("./helpers/AdminRigeter");
+const sendMails = require("../helpers/AdminRigeter");
 
 const CHARACTER_SET =
   "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
