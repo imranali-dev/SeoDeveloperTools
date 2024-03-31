@@ -15,11 +15,11 @@ const scammerSchema = new mongoose.Schema({
      
   },
   dealingDateTime: {
-    type: String,
+    type: Date,
      
   },
   screenshots: {
-    type: [String], // Array to store image URLs
+    type: [String],
   },
   isAdmin: {
     type: Boolean,

@@ -1,6 +1,4 @@
 
-const { uploadImages } = require("../../uploadService/uploadfinal");
-const { storeImageInDatabase } = require("../imageStorage");
 const Scammers = require("../model/scammermodel");
 const multer = require('multer');
 const path = require('path');
@@ -12,7 +10,7 @@ const storage = multer.diskStorage({
     },
 });
 
-const upload = multer({ storage }).array('screenshots', 5); // Adjust maxCount as needed
+const upload = multer({ storage }).array('screenshots', 5); 
 
 exports.createScammer = async (req, res) => {
     try {
@@ -158,7 +156,6 @@ exports.deleteScammerAndRender = async (req, res) => {
 
 
 exports.updateScammer = async (req, res) => {
-    const imageUrlList = await uploadImages(req.files);
     try {
         const { id } = req.params;
         const { name, phoneNumber, country, accountDeal, dealingDateTime, screenshot: imageUrlList, isAdmin } = req.body;
@@ -168,7 +165,6 @@ exports.updateScammer = async (req, res) => {
             {
                 name,
                 phoneNumber,
-                screenshot: imageUrlList,
                 country,
                 accountDeal,
                 dealingDateTime,

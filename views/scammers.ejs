@@ -91,9 +91,22 @@
                 <td class="col col-6 width">
                   <%= scammer.createdAt %>
                 </td>
-                <td class="col col-6 width" style="height: 60px;width: 60px; border-radius: 25%;">
-                  <img  style="height: 120px;width: 120px; border-radius: 25%;" src="<%= scammer.screenshot %>" alt="Scammer Screenshot">
+                <td class="col col-6 width">
+                  <div class="image-container">
+                    <button class="show-images">View Images (5)</button>
+                    <div class="images" style="display: none;">
+                      <% scammer.screenshots.forEach(function(imageUrl, index) { %>
+                        <div class="image-wrapper">
+                          <img class="image" src="<%= imageUrl %>" alt="Scammer Screenshot" data-full-src="<%= imageUrl %>">
+                          <button class="close-image">✕</button>
+                        </div>
+                      <% }); %>
+                    </div>
+                  </div>
                 </td>
+                
+                
+                
 
           </tr>
           <% } %>
@@ -144,3 +157,126 @@
 </body>
 
 </html>
+
+<style>
+  .image-container {
+  height: 60px;
+  width: 60px;
+  border-radius: 25%;
+  position: relative; }
+
+.show-images {
+  background-color: #4CAF50; 
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: block; 
+  cursor: pointer;
+}
+
+.images {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; 
+  overflow: hidden; 
+  display: flex; 
+  flex-wrap: wrap; 
+  justify-content: space-between; 
+  align-items: center; 
+}
+
+.images img {
+  display: block;
+  width: 23%; 
+  height: auto;
+  object-fit: cover; 
+  opacity: 0.8;
+  cursor: zoom-in; 
+  transition: opacity 0.2s ease-in-out; 
+  margin: 5px; 
+}
+
+.images img:hover {
+  opacity: 1; 
+}
+
+.close-image {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  opacity: 0.8; 
+  transition: opacity 0.2s ease-in-out; 
+}
+
+.close-image:hover {
+  opacity: 1; 
+}
+
+.image-wrapper {
+  position: relative; }
+
+.fullscreen-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; 
+}
+
+.fullscreen-image img {
+  max-width: 80%; 
+  max-height: 80%; 
+  object-fit: contain; 
+}
+
+</style>
+<script>
+const showImagesButton = document.querySelector('.show-images');
+const images = document.querySelector('.images');
+const closeButtons = document.querySelectorAll('.close-image');
+
+showImagesButton.addEventListener('click', () => {
+  images.style.display = images.style.display === 'none' ? 'block' : 'none';
+  showImagesButton.textContent = images.style.display === 'none' ? 'View Images (5)' : 'Hide Images';
+});
+
+images.addEventListener('click', (event) => {
+  if (event.target.classList.contains('image')) {
+    const fullScreenImage = document.createElement('img');
+    fullScreenImage.src = event.target.dataset.fullSrc;
+
+    const fullScreenImageContainer = document.createElement('div');
+    fullScreenImageContainer.classList.add('fullscreen-image');
+
+    fullScreenImageContainer.appendChild(fullScreenImage);
+
+    document.body.appendChild(fullScreenImageContainer);
+
+    fullScreenImageContainer.addEventListener('click', () => {
+      fullScreenImageContainer.remove();
+    });
+  }
+});
+closeButtons.forEach(closeButton => {
+  closeButton.addEventListener('click', () => {
+    const imageToClose = closeButton.previousElementSibling;
+    imageToClose.remove();
+  });
+});
+
+</script>
