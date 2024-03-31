@@ -1,35 +1,53 @@
 
 const { uploadImages } = require("../../uploadService/uploadfinal");
-const Scammers = require("../model/scammermodel")
-// Create a new scammer
+const { storeImageInDatabase } = require("../imageStorage");
+const Scammers = require("../model/scammermodel");
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs')
+const storage = multer.diskStorage({
+    filename: (req, file, cb) => {
+        const uniqueFileName = `${Date.now()}-${file.originalname}`;
+        cb(null, uniqueFileName);
+    },
+});
+
+const upload = multer({ storage }).array('screenshots', 5); // Adjust maxCount as needed
+
 exports.createScammer = async (req, res) => {
-    const { name, phoneNumber, country, accountDeal, dealingDateTime, screenshot ,isAdmin } = req.body;
-
     try {
-        const imageUrlList = await uploadImages(req.files);
-        const scammer = new Scammers({
-            name,
-            phoneNumber,
-            country,
-            accountDeal,
-            dealingDateTime,
-            screenshot:imageUrlList,
-            isAdmin 
-        });
+        // Process the uploaded files
+        upload(req, res, async (err) => {
+            if (err) {
+                return res.status(500).json({ error: 'Failed to store the files' });
+            }
 
-        await scammer.save();
+            // Extract the filenames from req.files
+            const screenshots = req.files.map((file) => `uploads/${file.filename}`);
 
-        res.status(201).json({
-            success: true,
-            data: scammer
+            // Create a new scammer instance
+            const scammer = new Scammers({
+                name: req.body.name,
+                phoneNumber: req.body.phoneNumber,
+                country: req.body.country,
+                accountDeal: req.body.accountDeal,
+                dealingDateTime: req.body.dealingDateTime,
+                screenshots, // Array of image URLs
+                isAdmin: req.body.isAdmin
+            });
+
+            // Save the scammer data to the database
+            await scammer.save();
+
+            res.status(201).json({ success: true, data: scammer });
         });
     } catch (error) {
-        res.status(400).json({
-            success: false,
-            error: error.message
-        });
+        res.status(500).json({ success: false, error: error.message });
     }
 };
+
+
+
 // is admin forms
 exports.getAdminScammers = async (req, res) => {
     try {
@@ -48,7 +66,7 @@ exports.getAdminScammers = async (req, res) => {
 
 exports.getScammers = async (req, res) => {
     try {
-        const scammers = await Scammers.find({}).sort({ createdAt: -1 });
+        const scammers = await Scammers.find(({ isAdmin: false })).sort({ createdAt: -1 });
 
         res.status(200).json({
             success: true,
@@ -128,8 +146,8 @@ exports.getScammersPage = async (req, res) => {
 // Delete a scammer and render a page
 exports.deleteScammerAndRender = async (req, res) => {
     try {
-      
-        res.render('scammerdelte'); 
+
+        res.render('scammerdelte');
     } catch (error) {
         res.status(400).json({
             success: false,
@@ -140,15 +158,23 @@ exports.deleteScammerAndRender = async (req, res) => {
 
 
 exports.updateScammer = async (req, res) => {
+    const imageUrlList = await uploadImages(req.files);
     try {
         const { id } = req.params;
-        const { name, phoneNumber, country, accountDeal, dealingDateTime } = req.body;
+        const { name, phoneNumber, country, accountDeal, dealingDateTime, screenshot: imageUrlList, isAdmin } = req.body;
 
-        // Find the scammer by ID and update the fields
         const updatedScammer = await Scammers.findByIdAndUpdate(
             id,
-            { name, phoneNumber, country, accountDeal, dealingDateTime },
-            { new: true } // Return the updated document
+            {
+                name,
+                phoneNumber,
+                screenshot: imageUrlList,
+                country,
+                accountDeal,
+                dealingDateTime,
+                isAdmin
+            },
+            { new: true }
         );
 
         if (!updatedScammer) {
@@ -172,8 +198,8 @@ exports.updateScammer = async (req, res) => {
 
 exports.updatedscammmerformRender = async (req, res) => {
     try {
-      
-        res.render('scammerUpdateform'); 
+
+        res.render('scammerUpdateform');
     } catch (error) {
         res.status(400).json({
             success: false,
@@ -184,8 +210,7 @@ exports.updatedscammmerformRender = async (req, res) => {
 
 exports.ScammeralertHomepage = async (req, res) => {
     try {
-      
-        res.render('ScammeralertHomepage'); 
+        res.render('ScammeralertHomepage');
     } catch (error) {
         res.status(400).json({
             success: false,

@@ -1,20 +1,18 @@
-// services/uploadService.js
-
 const uploadToCloudinary = require("./Cloudinary");
-const { upload } = require("./upload");
 
-
-const uploadImages = async (files) => {
-    upload.array("profile-files", 5), 
-	async (req, res, next) => { 
-    const imageUrlList = [];
-    for (let i = 0; i < files.length; i++) {
-        const localFilePath = files[i].path;
-        const result = await uploadToCloudinary(localFilePath);
-        imageUrlList.push(result.url);
+async function uploadImages(files) {
+    try {
+        const imageUrlList = [];
+        for (let i = 0; i < files.length; i++) {
+            const localFilePath = files[i].path;
+            const result = await uploadToCloudinary(localFilePath);
+            imageUrlList.push(result.url);
+        }
+        return imageUrlList;
+    } catch (error) {
+        console.error("Error uploading images to Cloudinary:", error);
+        throw error;
     }
-    return imageUrlList;
-};
 }
 
 module.exports = { uploadImages };

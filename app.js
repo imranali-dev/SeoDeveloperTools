@@ -15,6 +15,9 @@ const path = require('path');
 const bodyParser = require('body-parser');
 // viws engine 
 app.set("view engine", "ejs");
+const uploadPath = path.join(__dirname, 'uploads');
+app.use('/uploads/images', express.static(path.join(__dirname, 'uploads', 'images')));
+
 app.use(express.static('public'));
 app.set("views", path.join(__dirname, "./views"));
 // Routers
