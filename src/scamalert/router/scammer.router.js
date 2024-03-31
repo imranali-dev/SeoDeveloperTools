@@ -8,7 +8,6 @@ const { uploadImages } = require('../../uploadService/uploadfinal');
 require('dotenv').config();
 const cloudinary = require('cloudinary').v2;
 // Fetch it with POST to show images
-
 router.post('/scammers', uploadMiddleware, async (req, res) => {
     try {
         const files = req.files;
