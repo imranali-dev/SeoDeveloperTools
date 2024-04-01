@@ -4,7 +4,9 @@ const path = require('path');
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        const dir = 'uploads/'; 
+        // for windows khrki
+        const dir = path.join(__dirname, 'uploading');
+        // const dir = 'uploads/'; 
         if (!fs.existsSync(dir)) {
             fs.mkdirSync(dir, { recursive: true });
         }
@@ -21,11 +23,11 @@ const uploadMiddleware = (req, res, next) => {
             return res.status(400).json({ error: err.message });
         }
         const files = req.files;
-        console.log(req.files)
+        console.log(req.files);
         const errors = [];
         files.forEach((file) => {
             const allowedTypes = ['image/jpeg', 'image/png'];
-            const maxSize = 5 * 1024 * 1024; // 5MB
+            const maxSize = 5 * 1024 * 1024;
 
             if (!allowedTypes.includes(file.mimetype)) {
                 errors.push(`Invalid file type: ${file.originalname}`);

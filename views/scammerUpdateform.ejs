@@ -129,9 +129,7 @@
     <form id="updateScammerForm" method="PUT" action="/alert/scammers/:id">
         <h1>Update Scammer</h1>
         <label for="id">ID:</label>
-        <input type="text" id="id" name="id"><br><br>
-        
-        <label for="name">Name:</label>
+        <input type="text" id="id" name="id"><br><br> <label for="name">Name:</label>
         <input type="text" id="name" name="name"  ><br><br>
         
         <label for="phoneNumber">Phone Number:</label>
@@ -151,8 +149,9 @@
         
         <button type="submit">Update Scammer</button>
     </form>
-    <script>
-        document.getElementById('updateScammerForm').addEventListener('submit', async function(event) {
+
+ <script>
+    document.getElementById('updateScammerForm').addEventListener('submit', async function(event) {
             event.preventDefault(); 
             
             const id = document.getElementById('id').value; 
@@ -161,7 +160,6 @@
             const country = document.getElementById('country').value;
             const accountDeal = document.getElementById('accountDeal').value;
             const dealingDateTime = document.getElementById('dealingDateTime').value;
-            const screenshot = document.getElementById('screenshot').value;
             const isAdmin = document.getElementById('isAdmin').checked;
             
             try {
@@ -176,7 +174,6 @@
                         country,
                         accountDeal,
                         dealingDateTime,
-                        screenshot,
                         isAdmin
                     })
                 });
@@ -192,7 +189,8 @@
                 console.error('Error updating scammer:', error);
             }
         });
-    </script>
+
+ </script>
     
 </body>
 

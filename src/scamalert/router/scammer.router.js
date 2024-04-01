@@ -15,7 +15,6 @@ router.post('/scammers', uploadMiddleware, async (req, res) => {
             return res.status(400).json({ success: false, error: 'No files uploaded' });
         }
 
-        // Upload images to Cloudinary
         const imageUrlList = await uploadImages(files);
 
         // Create a scammer document
