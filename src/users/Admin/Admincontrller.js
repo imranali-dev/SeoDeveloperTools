@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs'); // Import bcrypt module
 const AdminUser = require('./AdminModel');
 const User = require('../user.model');
-const SellModel = require('../sellSchema');
+const SellModel = require('../Sells/sellSchema');
 const { generateTokens } = require('../../../middlewares/tokenGenerator');
 require("dotenv").config();
 const cookie = require('cookie');

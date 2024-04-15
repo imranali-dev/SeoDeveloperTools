@@ -27,7 +27,6 @@ exports.sell = async (req, res) => {
       data
     })
   } catch (error) {
-    // console.error("Error submitting form:", error);
     res.status(500).json({
       success: false,
       message: "your form couldn't submit successfuly",

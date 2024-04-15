@@ -1,5 +1,5 @@
 const nodemailer = require('nodemailer');
-const User = require('./user.model');
+const User = require('../user.model');
 
 const transport = nodemailer.createTransport({
     service: 'gmail',

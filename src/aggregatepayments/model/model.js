@@ -1,6 +1,6 @@
 const SellerPaymentModel = require('../../Seller-payment/model/Model');
 const PaymentModel = require('../../buyerPayment/Model/schma');
-const AccountModel = require("../../users/PaymentModel")
+const AccountModel = require("../../users/Payment/PaymentModel")
 async function searchByEmail(email, Semail, accountSerialNo, transitionId, transactionDate, userName, firstName) {
   try {
     const resultSeller = await SellerPaymentModel.aggregate([

@@ -5,7 +5,7 @@ const { GridFSBucket } = require('mongodb');
 const conn = mongoose.connection;
 let gfs;
 const upload = require('../Storage');
-const { uploadImage, readFiles, RenderALlDetails, deletAccount } = require('../src/users/PaymentControoler');
+const { uploadImage, readFiles, RenderALlDetails, deletAccount } = require('../src/users/Payment/PaymentControoler');
 const authenticateToken = require('../middlewares/authMiddleware');
 //this is the route for uploading the image like this is the route you need to fetch in front 
 router.post('/upload-image',upload.single('image'), uploadImage);

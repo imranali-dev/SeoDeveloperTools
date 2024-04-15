@@ -6,7 +6,7 @@ const { customAlphabet: generate } = require("nanoid");
 const { generateJwt } = require("./helpers/generateJwt");
 // const { sendEmail } = require("./helpers/mailer");
 const User = require("./user.model");
-const sendMail = require("./GoogleApp");
+const sendMail = require("./GoogleApp/GoogleApp");
 // const { sendEmail } = require("./helpers/mailer");
 
 const CHARACTER_SET =
