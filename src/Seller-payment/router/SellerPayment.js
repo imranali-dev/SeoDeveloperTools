@@ -5,6 +5,7 @@ const upload = require('../../../Storage');
 const mongoose = require('mongoose');
 const Grid = require('gridfs-stream');
 const authenticateToken = require('../../../middlewares/authMiddleware');
+const uploadMiddleware = require('../middlewares/Uploadingimages');
 const conn = mongoose.connection;
 let gfs;
 conn.once('open', () => {
@@ -33,8 +34,9 @@ router.get('/transitionScreenShot/:filename', (req, res) => {
 router.delete('/:emailAddress', authenticateToken,SellerPayment.deleteUserByEmail);
 router.get('/Delete/page', authenticateToken,SellerPayment.renderDeletePage);
 
-router.post('/seller/payment/add', upload.single('transitionScreenShot'), SellerPayment.createPayment);
+router.post('/seller/payment/add', upload.single('transitionScreenShotss'), SellerPayment.createPayment);
 
+router.post('/seller/payment/bycloud', uploadMiddleware,SellerPayment.createPaymentbycloud);
 
 router.get('/payments/Get/All/Users', SellerPayment.getAllPayments);
 router.get('/Seller-payments/Home/Pages', authenticateToken,SellerPayment.getAllPaymentsPages);

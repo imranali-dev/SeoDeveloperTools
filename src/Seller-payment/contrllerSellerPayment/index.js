@@ -6,6 +6,7 @@ const DUPLICATE_KEY_ERROR_CODE = 11000;
 const INTERNAL_SERVER_ERROR = 500;
 const BAD_REQUEST_ERROR = 400;
 const fs = require('fs');
+const { uploadImages } = require("../../uploadService/uploadfinal");
 // const generatePDF = (formData) => {
 //   const PDFDocument = require('pdfkit');
 //   const fs = require('fs');
@@ -74,7 +75,7 @@ exports.createPayment = async (req, res) => {
     selectPaymentMethod,
     buyerCode,
     sellerCode,
-    transitionScreenShot,
+    transitionScreenShotss,
   } = req.body;
   try {
     const newSellerPayment = new SellerPayment({
@@ -96,7 +97,7 @@ exports.createPayment = async (req, res) => {
       selectPaymentMethod,
       buyerCode,
       sellerCode,
-      transitionScreenShot,
+      transitionScreenShotss,
     });
     const savedSellerPayment = await newSellerPayment.save();
     const selectedFields = {
@@ -118,7 +119,7 @@ exports.createPayment = async (req, res) => {
       selectPaymentMethod:savedSellerPayment.selectPaymentMethod,
       selectPaymentMethod:savedSellerPayment.selectPaymentMethod,
       sellerCode:savedSellerPayment.sellerCode,
-      transitionScreenShot:savedSellerPayment.transitionScreenShot,
+      transitionScreenShotss:savedSellerPayment.transitionScreenShotss,
     };
     const userEmail = savedSellerPayment.emailAddress;
     const sellerEmail = savedSellerPayment.sellerEmailAddress;
@@ -146,6 +147,115 @@ exports.createPayment = async (req, res) => {
     }
   }
 };
+
+
+exports.createPaymentbycloud = async (req, res) => {
+  try {
+    const files = req.files;
+    if (!files || Object.keys(files).length === 0) {
+      return res.status(400).json({ success: false, error: 'No files uploaded' });
+    }
+
+    const imageUrlList = await uploadImages(files);
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ success: false, errors: errors.array() });
+    }
+
+    const {
+      firstName,
+      lastName,
+      userName,
+      uniquePin,
+      emailAddress,
+      sellerEmailAddress,
+      accountSerialNo,
+      accountType,
+      accountPrice,
+      accountTax,
+      totalAccountPrice,
+      transitionId,
+      transitionIdDate,
+      paymentAccountName,
+      paymentAccountAddress,
+      selectPaymentMethod,
+      buyerCode,
+      sellerCode,
+      transitionScreenShotss,
+    } = req.body;
+
+    const newSellerPayment = new SellerPayment({
+      firstName,
+      lastName,
+      userName,
+      uniquePin,
+      emailAddress,
+      sellerEmailAddress,
+      accountSerialNo,
+      accountType,
+      accountPrice,
+      accountTax,
+      totalAccountPrice,
+      transitionId,
+      transitionIdDate,
+      paymentAccountName,
+      paymentAccountAddress,
+      selectPaymentMethod,
+      buyerCode,
+      sellerCode,
+      transitionScreenShotss: imageUrlList,
+    });
+
+    const savedSellerPayment = await newSellerPayment.save();
+
+    const selectedFields = {
+      firstName: savedSellerPayment.firstName,
+      lastName: savedSellerPayment.lastName,
+      userName: savedSellerPayment.userName,
+      uniquePin: savedSellerPayment.uniquePin,
+      emailAddress: savedSellerPayment.emailAddress,
+      sellerEmailAddress: savedSellerPayment.sellerEmailAddress,
+      accountSerialNo: savedSellerPayment.accountSerialNo,
+      accountType: savedSellerPayment.accountType,
+      accountPrice: savedSellerPayment.accountPrice,
+      accountTax: savedSellerPayment.accountTax,
+      totalAccountPrice: savedSellerPayment.totalAccountPrice,
+      transitionId: savedSellerPayment.transitionId,
+      transitionIdDate: savedSellerPayment.transitionIdDate,
+      paymentAccountName: savedSellerPayment.paymentAccountName,
+      paymentAccountAddress: savedSellerPayment.paymentAccountAddress,
+      selectPaymentMethod: savedSellerPayment.selectPaymentMethod,
+      buyerCode: savedSellerPayment.buyerCode,
+      sellerCode: savedSellerPayment.sellerCode,
+      transitionScreenShotss: savedSellerPayment.transitionScreenShotss,
+    };
+
+    const userEmail = savedSellerPayment.emailAddress;
+    const sellerEmail = savedSellerPayment.sellerEmailAddress;
+
+    const { userResult, sellerResult } = await sendMail(selectedFields);
+
+    if (!userResult.success || !sellerResult.success) {
+      console.error('Error sending email(s).');
+    }
+
+    return res.status(201).json(savedSellerPayment);
+
+  } catch (error) {
+    console.error('Error creating payment:', error);
+    if (error.name === 'ValidationError') {
+      return res.status(400).json({ success: false, message: error.message });
+    } else if (error.name === 'MongoError' && error.code === 11000) {
+      const duplicateField = Object.keys(error.keyValue)[0];
+      return res.status(400).json({ success: false, message: `Duplicate key error for field: ${duplicateField}` });
+    } else {
+      return res.status(500).json({ success: false, message: 'Internal Server Error' });
+    }
+  }
+};
+
+
 
 
 
