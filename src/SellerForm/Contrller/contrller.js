@@ -88,19 +88,6 @@ exports.getSellers = async (req, rep) => {
     
 }
 
-// exports.getSellerFormByEmail = async (req, res) => {
-//     const { email } = req.params;
-//     try {
-//         const sellForm = await SellerForm.findOne({ 'userInfo.email': email });
-//         if (!sellForm) {
-//             return res.status(404).json({ message: 'sellForm not found' });
-//         }
-//         res.status(200).json(sellForm);
-//     } catch (error) {
-//         res.status(500).json({ error: 'Error fetching sellForm' });
-//     }
-// };
-
 exports.deleteSellerFormByEmail = async (req, res) => {
     const { email } = req.params;
     try {

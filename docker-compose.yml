@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  seotools:
+    container_name: SEOToolsers
+    build:
+      context: .
+    command: ["nodemon", "app.js"]
+    volumes:
+      - ./app.js:/app/app.js
+    ports:
+      - "3000:9895"
