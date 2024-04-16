@@ -29,10 +29,9 @@ function renderGetAllDeatils(req, res) {
 
 conn.once('open', () => {
   gfs = new GridFSBucket(conn.db, {
-    bucketName: 'uploads' // Your bucket name where images are stored
+    bucketName: 'uploads' 
   });
 });
-// here in this way the imagee is showing
 router.get('/image/:filename', (req, res) => {
   gfs.find({ filename: req.params.filename }).toArray((err, files) => {
     if (!files || files.length === 0) {
