@@ -99,6 +99,9 @@
             </tr>
         </thead>
         <tbody>
+
+
+            
             <% accounts.forEach(account=> { %>
                 <tr class="table-row">
                   <td class="col col-8"><%- account.name || '' %></td>
@@ -106,7 +109,9 @@
                   <td class="col col-8"><%- account.userName || '' %></td>
                   <td class="col col-2 width"><%- account.email || '' %></td>
                     <td class="col col-4"><%- account.phone || '' %></td>
-                    <td class="col col-5"><%- account.paymentMethod || '' %></td>
+
+
+                    <td class="col col-5"><%- account.selectPaymentMethod || '' %></td>
                     <td class="col col-6 width"><%- account.description || '' %></td>
                     <!-- <td class="col col-6"><%- account.description || '' %></td> -->
 

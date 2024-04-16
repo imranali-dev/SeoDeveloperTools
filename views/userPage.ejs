@@ -76,16 +76,16 @@
                       <%= user.selectPaymentMethod %>
                   </td>
                 
-                     <td class="table_td table_mobile-title">
-                        <% if (user.paymentScreenshot) { %>
-                            <img src="/buyerPayment-form/paymentScreenshot/<%= user.paymentScreenshot %>"
-                                alt="Payment Screenshot" class="payment-image"
-                                data-fullscreen-src="/buyerPayment-form/paymentScreenshot/<%= user.paymentScreenshot %>"
-                                width="100" />
-                            <% } else { %>
-                                No screenshot available
-                                <% } %>
-                    </td>
+                  <td class="table_td table_mobile-title">
+                    <% if (user.paymentScreenshot && user.paymentScreenshot.length > 0) { %>
+                      <% user.paymentScreenshot.forEach(function(imageUrl) { %>
+                        <img src="<%= imageUrl %>" alt="Payment Screenshot" class="payment-screenshot" style="width: 50px; height: 25px;" />
+                      <% }); %>
+                    <% } else { %>
+                      <p>No payment screenshots available</p>
+                    <% } %>
+                  </td>
+                  
 
                      <td class="table_td table_mobile-title">
                         <%= user.transitionId %>

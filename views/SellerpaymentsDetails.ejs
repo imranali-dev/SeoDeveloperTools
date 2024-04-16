@@ -1,141 +1,163 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Seller Payment Forms</title>
-    <style>
+
+<head>
+  <title>Seller Payment Forms</title>
+  <style>
     body {
-        overflow: scroll;
+      overflow: scroll;
     }
-  
+
     a {
-        color: white;
-        text-decoration: none;
-        padding: 0.6rem;
-        border-radius: 0.3rem;
-        background-color: green;
-        position: relative;
-        top: 1rem;
+      color: white;
+      text-decoration: none;
+      padding: 0.6rem;
+      border-radius: 0.3rem;
+      background-color: green;
+      position: relative;
+      top: 1rem;
     }
-  
+
     h2 {
-        text-align: center;
+      text-align: center;
     }
-  
+
     input[type="search"] {
-        padding: 10px;
-        border-radius: 5px;
-        outline: none;
-        width: 250px;
-        position: relative;
-        left: 50%;
-        transform: translate(-50%);
+      padding: 10px;
+      border-radius: 5px;
+      outline: none;
+      width: 250px;
+      position: relative;
+      left: 50%;
+      transform: translate(-50%);
     }
-  
+
     table {
-        border-collapse: collapse;
-        width: 100%;
-        margin-top: 1rem;
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 1rem;
     }
-  
-    th, td {
-        white-space: nowrap;
-        padding: 10px;
-        border: 1px solid #ddd;
-        text-align: center;
+
+    th,
+    td {
+      white-space: nowrap;
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: center;
     }
   </style>
 
-  </head>
-  <body>
-    <a
-      href="/admin/collection-ensureIndex/kira-yagami-082561-lira-Integrate-page-of-admin-931249/success"
-      role="button">Go tO Home</a>
-    <h2>Buyer Payment Users Forms</h2>
-    <input type="search" id="searchInput" onkeyup="searchTable()"
-      placeholder="Enter Name | userName | email ">
-    <h1 class="h1" style="text-align: center; margin-top: 1rem;"></h1>
+</head>
 
-    <table class="zigzag" id="userTable">
-      <thead >
-        <tr >
-          <th class="header">Name</th>
-          <th class="header">User Name</th>
-          <th class="header">Email Address</th>
-          <th class="header">Unique Pin</th>
-          <th class="header">Seller Email Address</th>
-          <th class="header">Account Serial No</th>
-          <th class="header">Account Type</th>
-          <th class="header">Account Price</th>
-          <th class="header">Account Tax</th>
-          <th class="header">Total Account Price</th>
-          <th class="header">Transition Id</th>
-          <th class="header">Transition Id Date</th>
-          <th class="header">Payment Account Name</th>
-          <th class="header">Payment Account Address</th>
-          <th class="header">Select Payment Method</th>
-          <th class="header">Buyer Code</th>
-          <th class="header">Seller Code</th>
-          <th class="header">Transition Screenshot</th>
-          <th class="header">Created At</th>
+<body>
+  <a href="/admin/collection-ensureIndex/kira-yagami-082561-lira-Integrate-page-of-admin-931249/success"
+    role="button">Go tO Home</a>
+  <h2>Buyer Payment Users Forms</h2>
+  <input type="search" id="searchInput" onkeyup="searchTable()" placeholder="Enter Name | userName | email ">
+  <h1 class="h1" style="text-align: center; margin-top: 1rem;"></h1>
 
-        </thead>
-      </tr>
-      <% payments.forEach(function(payment) { %>
+  <table class="zigzag" id="userTable">
+    <thead>
+      <tr>
+        <th class="header">Name</th>
+        <th class="header">User Name</th>
+        <th class="header">Email Address</th>
+        <th class="header">Unique Pin</th>
+        <th class="header">Seller Email Address</th>
+        <th class="header">Account Serial No</th>
+        <th class="header">Account Type</th>
+        <th class="header">Account Price</th>
+        <th class="header">Account Tax</th>
+        <th class="header">Total Account Price</th>
+        <th class="header">Transition Id</th>
+        <th class="header">Transition Id Date</th>
+        <th class="header">Payment Account Name</th>
+        <th class="header">Payment Account Address</th>
+        <th class="header">Select Payment Method</th>
+        <th class="header">Buyer Code</th>
+        <th class="header">Seller Code</th>
+        <th class="header">Transition Screenshot</th>
+        <th class="header">Created At</th>
+
+    </thead>
+    </tr>
+    <% payments.forEach(function(payment) { %>
       <tbody class="table__tbody">
         <tr class="table__tr">
-          <td class="table__td table__mobile-title"><%= payment.firstName
-            %> <%= payment.lastName %></td>
-          <td class="table__td table__mobile-title"><%= payment.userName %></td>
-          <td class="table__td table__mobile-title"><%= payment.emailAddress
-            %></td>
-          <td class="table__td table__mobile-title"><%= payment.uniquePin
-            %></td>
-        
-          <td class="table__td table__mobile-title"><%=
-            payment.sellerEmailAddress %></td>
-          <td class="table__td table__mobile-title"><%= payment.accountSerialNo
-            %></td>
-          <td class="table__td table__mobile-title"><%= payment.accountType
-            %></td>
-          <td class="table__td table__mobile-title"><%= payment.accountPrice
-            %></td>
-          <td class="table__td table__mobile-title"><%= payment.accountTax
-            %></td>
-          <td class="table__td table__mobile-title"><%=
-            payment.totalAccountPrice %></td>
-          <td class="table__td table__mobile-title"><%= payment.transitionId
-            %></td>
-          <td class="table__td table__mobile-title"><%= payment.transitionIdDate
-            %></td>
-          <td class="table__td table__mobile-title"><%=
-            payment.paymentAccountName %></td>
-          <td class="table__td table__mobile-title"><%=
-            payment.paymentAccountAddress %></td>
-          <td class="table__td table__mobile-title"><%=
-            payment.selectPaymentMethod %></td>
-          <td class="table__td table__mobile-title"><%= payment.buyerCode
-            %></td>
-          <td class="table__td table__mobile-title"><%= payment.sellerCode
-            %></td>
-
+          <td class="table__td table__mobile-title">
+            <%= payment.firstName %>
+              <%= payment.lastName %>
+          </td>
+          <td class="table__td table__mobile-title">
+            <%= payment.userName %>
+          </td>
+          <td class="table__td table__mobile-title">
+            <%= payment.emailAddress %>
+          </td>
+          <td class="table__td table__mobile-title">
+            <%= payment.uniquePin %>
+          </td>
+          <td class="table__td table__mobile-title">
+            <%= payment.sellerEmailAddress %>
+          </td>
+          <td class="table__td table__mobile-title">
+            <%= payment.accountSerialNo %>
+          </td>
+          <td class="table__td table__mobile-title">
+            <%= payment.accountType %>
+          </td>
+          <td class="table__td table__mobile-title">
+            <%= payment.accountPrice %>
+          </td>
+          <td class="table__td table__mobile-title">
+            <%= payment.accountTax %>
+          </td>
+          <td class="table__td table__mobile-title">
+            <%= payment.totalAccountPrice %>
+          </td>
+          <td class="table__td table__mobile-title">
+            <%= payment.transitionId %>
+          </td>
+          <td class="table__td table__mobile-title">
+            <%= payment.transitionIdDate %>
+          </td>
+          <td class="table__td table__mobile-title">
+            <%= payment.paymentAccountName %>
+          </td>
+          <td class="table__td table__mobile-title">
+            <%= payment.paymentAccountAddress %>
+          </td>
+          <td class="table__td table__mobile-title">
+            <%= payment.selectPaymentMethod %>
+          </td>
+          <td class="table__td table__mobile-title">
+            <%= payment.buyerCode %>
+          </td>
+          <td class="table__td table__mobile-title">
+            <%= payment.sellerCode %>
+          </td>
           <td>
-            <% if (payment.transitionScreenShot) { %>
-            <img src="/uploads/<%= payment.transitionScreenShot %>"
-              alt="Payment Screenshot" class="payment-image"
-              data-fullscreen-src="/uploads/<%= payment.transitionScreenShot %>"
-              width="100" />
+            <% if (payment.transitionScreenShot && payment.transitionScreenShot.length > 0) { %>
+              <% if (Array.isArray(payment.transitionScreenShot)) { %>
+                <% payment.transitionScreenShot.forEach(function(imageUrl) { %>
+                  <img src="<%= imageUrl %>" alt="Payment Screenshot" class="payment-image" data-fullscreen-src="<%= imageUrl %>" width="100" />
+                <% }); %>
+              <% } else { %>
+                <img src="/uploads/<%= payment.transitionScreenShot %>" alt="Payment Screenshot" class="payment-image" data-fullscreen-src="/uploads/<%= payment.transitionScreenShot %>" width="100" />
+              <% } %>
             <% } else { %>
-            No screenshot available
+              No screenshot available
             <% } %>
           </td>
-
-          <td><%= payment.createdAt %></td>
+          
+            <%= payment.createdAt %>
+          </td>
         </tr>
-        <% }); %>
       </tbody>
-    </table>
-  </body>
-  <script>
+      <% }); %>
+  </table>
+</body>
+<script>
   function showDetails(button) {
     const row = button.parentNode.parentNode;
     const cells = Array.from(row.children);
@@ -143,39 +165,39 @@
   }
 </script>
 
-  <script>
+<script>
   function searchTable() {
-      const input = document.getElementById('searchInput');
-      const filter = input.value.toUpperCase();
-      const table = document.getElementById('userTable');
-      const trs = table.getElementsByTagName('tr');
+    const input = document.getElementById('searchInput');
+    const filter = input.value.toUpperCase();
+    const table = document.getElementById('userTable');
+    const trs = table.getElementsByTagName('tr');
 
-      for (let i = 0; i < trs.length; i++) {
-          let match = false;
-          const tds = trs[i].querySelectorAll('td:nth-child(1), td:nth-child(2), td:nth-child(3)'); // Selecting username and email cells
+    for (let i = 0; i < trs.length; i++) {
+      let match = false;
+      const tds = trs[i].querySelectorAll('td:nth-child(1), td:nth-child(2), td:nth-child(3)'); // Selecting username and email cells
 
-          for (let j = 0; j < tds.length; j++) {
-              const td = tds[j];
-              if (td) {
-                  if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                      match = true;
-                      break;
-                  }
-              }
+      for (let j = 0; j < tds.length; j++) {
+        const td = tds[j];
+        if (td) {
+          if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            match = true;
+            break;
           }
-
-          if (match) {
-              trs[i].style.display = '';
-          } else {
-              trs[i].style.display = 'none';
-          }
+        }
       }
+
+      if (match) {
+        trs[i].style.display = '';
+      } else {
+        trs[i].style.display = 'none';
+      }
+    }
   }
 
   var totalAccounts = document.querySelectorAll('#userTable tbody tr').length;
 
-// Update the content of the h1 element with the total count
-document.querySelector('h1').innerText = 'Total Buyer Payment froms : ' + totalAccounts;
+  // Update the content of the h1 element with the total count
+  document.querySelector('h1').innerText = 'Total Buyer Payment froms : ' + totalAccounts;
 </script>
 
 </html>
