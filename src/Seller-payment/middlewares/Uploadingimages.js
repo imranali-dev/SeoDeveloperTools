@@ -18,7 +18,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 const uploadMiddleware = (req, res, next) => {
-    upload.array('transitionScreenShotss', 2)(req, res, (err) => {
+    upload.array('transitionScreenShot', 2)(req, res, (err) => {
         if (err) {
             return res.status(400).json({ error: err.message });
         }

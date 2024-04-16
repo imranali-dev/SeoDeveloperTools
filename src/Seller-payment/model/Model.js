@@ -21,7 +21,7 @@ const SellerPaymt = new Schema({
   paymentAccountAddress: { type: String, required: true },
   buyerCode: { type: String, required: true },
   sellerCode: { type: String, required: true },
-  transitionScreenShotss: [{ type: String, required: true }],
+  transitionScreenShot: [{ type: String, required: true }],
   createdAt: { type: Date, default: Date.now }
 });
 

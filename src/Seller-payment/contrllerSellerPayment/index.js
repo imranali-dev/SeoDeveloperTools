@@ -75,7 +75,7 @@ exports.createPayment = async (req, res) => {
     selectPaymentMethod,
     buyerCode,
     sellerCode,
-    transitionScreenShotss,
+    transitionScreenShot,
   } = req.body;
   try {
     const newSellerPayment = new SellerPayment({
@@ -97,7 +97,7 @@ exports.createPayment = async (req, res) => {
       selectPaymentMethod,
       buyerCode,
       sellerCode,
-      transitionScreenShotss,
+      transitionScreenShot,
     });
     const savedSellerPayment = await newSellerPayment.save();
     const selectedFields = {
@@ -119,7 +119,7 @@ exports.createPayment = async (req, res) => {
       selectPaymentMethod:savedSellerPayment.selectPaymentMethod,
       selectPaymentMethod:savedSellerPayment.selectPaymentMethod,
       sellerCode:savedSellerPayment.sellerCode,
-      transitionScreenShotss:savedSellerPayment.transitionScreenShotss,
+      transitionScreenShot:savedSellerPayment.transitionScreenShot,
     };
     const userEmail = savedSellerPayment.emailAddress;
     const sellerEmail = savedSellerPayment.sellerEmailAddress;
@@ -182,7 +182,7 @@ exports.createPaymentbycloud = async (req, res) => {
       selectPaymentMethod,
       buyerCode,
       sellerCode,
-      transitionScreenShotss,
+      
     } = req.body;
 
     const newSellerPayment = new SellerPayment({
@@ -204,7 +204,7 @@ exports.createPaymentbycloud = async (req, res) => {
       selectPaymentMethod,
       buyerCode,
       sellerCode,
-      transitionScreenShotss: imageUrlList,
+      transitionScreenShot: imageUrlList,
     });
 
     const savedSellerPayment = await newSellerPayment.save();
@@ -228,7 +228,7 @@ exports.createPaymentbycloud = async (req, res) => {
       selectPaymentMethod: savedSellerPayment.selectPaymentMethod,
       buyerCode: savedSellerPayment.buyerCode,
       sellerCode: savedSellerPayment.sellerCode,
-      transitionScreenShotss: savedSellerPayment.transitionScreenShotss,
+      transitionScreenShot: savedSellerPayment.transitionScreenShot,
     };
 
     const userEmail = savedSellerPayment.emailAddress;
