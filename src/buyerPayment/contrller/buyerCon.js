@@ -1,5 +1,7 @@
+const { uploadImages } = require("../../uploadService/uploadfinal");
 const Payment = require("../Model/schma");
 const sendMail = require("../middlewares/mailsending");
+const { validationResult } = require('express-validator');
 
 
 
@@ -34,7 +36,6 @@ exports.createPayment = async (req, res) => {
       accountPrice: savedPayment.accountPrice,
       accountTax: savedPayment.accountTax,
       totalAccountPrice: savedPayment.totalAccountPrice,
-
       paymentScreenshot: savedPayment.paymentScreenshot,
       transitionId: savedPayment.transitionId,
       transitionData: savedPayment.sellerEmail,
@@ -64,6 +65,81 @@ exports.createPayment = async (req, res) => {
     });
   }
 };
+
+
+exports.createPaymentbycloud = async (req, res) => {
+  try {
+    const files = req.files;
+    if (!files || Object.keys(files).length === 0) {
+      return res.status(400).json({ success: false, error: 'No files uploaded' });
+    }
+
+    const imageUrlList = await uploadImages(files);
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ success: false, errors: errors.array() });
+    }
+
+    const requiredFields = ['firstName', 'lastName', 'userName', 'email', 'accountType', 'accountPrice', 'selectPaymentMethod'];
+    for (const field of requiredFields) {
+      if (!req.body[field]) {
+        return res.status(400).json({
+          message: `${field} is required in the request body`
+        });
+      }
+    }
+
+    if (req.file) {
+      req.body.paymentScreenshot = req.file.filename;
+    }
+
+    const payment = new Payment({
+      ...req.body,
+      paymentScreenshot: imageUrlList
+    });
+
+    const savedPayment = await payment.save();
+
+    const selectedFields = {
+      firstName: savedPayment.firstName,
+      lastName: savedPayment.lastName,
+      uniquePin: savedPayment.uniquePin,
+      email: savedPayment.email,
+      sellerEmail: savedPayment.sellerEmail,
+      accountSerialNo: savedPayment.accountSerialNo,
+      accountType: savedPayment.accountType,
+      accountPrice: savedPayment.accountPrice,
+      accountTax: savedPayment.accountTax,
+      totalAccountPrice: savedPayment.totalAccountPrice,
+      paymentScreenshot: savedPayment.paymentScreenshot,
+      transitionId: savedPayment.transitionId,
+      transitionData: savedPayment.sellerEmail,
+      transactionDate: savedPayment.transitionId,
+      transactionTime: savedPayment.transactionTime
+    };
+
+    const { userResult, sellerResult } = await sendMail(selectedFields);
+
+    res.status(201).json({
+      message: 'Payment created successfully',
+    });
+  } catch (error) {
+    if (error.name === 'ValidationError') {
+      const validationErrors = Object.values(error.errors).map(err => err.message);
+      return res.status(400).json({
+        message: 'Validation error',
+        errors: validationErrors
+      });
+    }
+
+    res.status(500).json({
+      message: 'An error occurred while creating the payment',
+      error: error.message
+    });
+  }
+};
+
 
 
 

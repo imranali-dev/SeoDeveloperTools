@@ -16,7 +16,7 @@ const PaymentSchema = new Schema({
   accountType: String,
   accountPrice: Number,
   accountTax: { type: Number, default: 0.00 },
-  paymentScreenshot: String,
+  paymentScreenshot: [String],
   transitionData: String,
   transactionDate: { type: Date, default: Date.now },
   transactionTime: { type: String, default: () => new Date().toLocaleTimeString() }
