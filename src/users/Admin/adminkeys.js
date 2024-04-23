@@ -1,5 +1,5 @@
+const sendMails = require("../helpers/TrapMailer/AdminRigeter");
 const AdminUser = require("./AdminModel");
-const sendMails = require("../helpers/AdminRigeter");
 // const AdminUser = require("./models/AdminUser"); // Assuming this is your AdminUser model
 
 function generateSecurityCode() {
