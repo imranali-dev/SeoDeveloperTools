@@ -9,7 +9,6 @@ const cookie = require('cookie');
 const options = {
   expiresIn: "1h",
 };
-const sendMails = require("../helpers/AdminRigeter");
 
 const CHARACTER_SET =
   "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -18,6 +17,7 @@ const REFERRAL_CODE_LENGTH = 8;
 const referralCode = generate(CHARACTER_SET, REFERRAL_CODE_LENGTH);
 //Validate user schema
 const cron = require('node-cron');
+const sendMails = require("../helpers/TrapMailer/AdminRigeter");
 
 // Define a cron job to run every 30 seconds
 const userSchema = Joi.object().keys({
